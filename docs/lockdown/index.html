@@ -1,0 +1,198 @@
+ <!DOCTYPE html>
+<html>
+<head>
+	
+	<meta charset="UTF-8" />
+	
+	<title>
+        
+    Pandemic trade-offs
+
+    </title>
+	
+	<!-- JS -->
+	
+
+    
+
+    
+
+        
+
+
+
+	<!-- Styling -->
+	<link href="https://fonts.googleapis.com/css2?family=EB+Garamond&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/3142a8f83c.js" crossorigin="anonymous" SameSite=Lax></script>
+	<link rel="stylesheet" href="/css/main.css">
+
+	
+	<!--<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@1,900&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Laila:wght@700&display=swap" rel="stylesheet">-->
+
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Philosopher:wght@700&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+	
+
+    <main class="post">
+
+    <div class="frontmatter">
+
+        <div>
+        
+        <h1>Pandemic trade-offs</h1>
+
+        <div class="description">Restrictions stop the spread of SARS-CoV-2, but also cause other harms. Can we strike a balance?</div>
+
+        </div>
+
+    </div>
+
+    <article>
+    
+    
+        <h4>What is this work? Why is it useful?</h4>
+<p>Introduce the research.</p>
+<p>List side-effects of restrictions, to make concrete. Both negative and positive. Lost revenue, unemployment, depression, anxiety, suicide, domestic violence, alcohol consumption, road traffic crashes, work-life balance, lost education, deferred medical treatment / screening, family time, access to green space, …</p>
+<h4>What restriction levels are included in the modelling?</h4>
+<p>Clearly present the different stages. Probably in a table.</p>
+<ul>
+<li>No restrictions</li>
+<li>Stage 1</li>
+<li>Stage 2</li>
+<li>Stage 3</li>
+<li>Stage 4</li>
+</ul>
+<h4>What policy scenarios are modelled?</h4>
+<p>Clearly describe the different triggers for switching between levels.</p>
+<ul>
+<li>aggressive elimination</li>
+<li>moderate elimination</li>
+<li>tight suppression</li>
+<li>loose suppression</li>
+</ul>
+<p>Have a graph that shows where the thresholds are, present runs of the ABM in each case with the thresholds visible.</p>
+<p><img src="/img/lockdown1.png" alt=""></p>
+<h4>What non-COVID consequences are included in the model? How are they quantified?</h4>
+<p>Briefly describe which consequences are included.</p>
+<p>Introduce the concept of HALYs/DALYs, and how they are estimated.</p>
+<h4>Main tool</h4>
+<p>Provide dropdowns/sliders for key assumptions:</p>
+<ul>
+<li>Effect of restrictions on each consequence</li>
+<li>In each case, default to sensible values emerging from lit review.
+<ul>
+<li>Anxiety</li>
+<li>Depression</li>
+<li>Unemployment</li>
+<li>…</li>
+</ul>
+</li>
+<li>$/HALY</li>
+<li>Perspect (health system, partial-societal)</li>
+</ul>
+<p>As assumptions are updated, update main graph of the probability each policy scenario is optimal. Can choose what the x-axis is (though $/HALY by default).</p>
+<p><img src="/img/lockdown2.png" alt=""></p>
+<h4>Thorny Questions</h4>
+<ul>
+<li>What monetary value should be placed on a HALY?</li>
+</ul>
+<h4>Important considerations</h4>
+<ul>
+<li>Regardless of policy response, there is still a pandemic. Need to compare each scenario to other ways of responding to the pandemic, not to the pre-pandemic world.</li>
+</ul>
+<h4>Limitations</h4>
+<ul>
+<li>Difficulty in estimating impacts of different restriction levels.</li>
+<li>This is just one way of approaching decision-making. Implies a particular ethical framework (~utilitarianism), which may not be correct.</li>
+</ul>
+
+    
+
+    </article>
+
+    <div class="backmatter">
+        <div>
+            Acknowledgements, conflicts of interest, citations, errata...
+        </div>
+    </div>
+
+    </main>
+
+    <header>
+
+        <a href="/" class="title">
+            <h1>Buckley's</h1>
+            <div class="scene">
+                <div class="cube">
+                    <div class="cube__face cube__face--front">
+                        <div class="dots">
+                            <b class="sp"></b> <b class="sp"></b> <b class="sp"></b>
+                            <b class="sp"></b> <b class="dt"></b> <b class="sp"></b>
+                            <b class="sp"></b> <b class="sp"></b> <b class="sp"></b>
+                        </div>
+                    </div>
+                    <div class="cube__face cube__face--back">
+                        <div class="dots">
+                            <b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
+                            <b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
+                            <b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
+                        </div>
+                    </div>
+                    <div class="cube__face cube__face--right">
+                        <div class="dots">
+                            <b class="dt"></b> <b class="sp"></b> <b class="sp"></b>
+                            <b class="sp"></b> <b class="dt"></b> <b class="sp"></b>
+                            <b class="sp"></b> <b class="sp"></b> <b class="dt"></b>
+                        </div>
+                    </div>
+                    <div class="cube__face cube__face--left">
+                        <div class="dots">
+                            <b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
+                            <b class="sp"></b> <b class="sp"></b> <b class="sp"></b>
+                            <b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
+                        </div>
+                    </div>
+                    <div class="cube__face cube__face--top">
+                        <div class="dots">
+                            <b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
+                            <b class="sp"></b> <b class="dt"></b> <b class="sp"></b>
+                            <b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
+                        </div>
+                    </div>
+                    <div class="cube__face cube__face--bottom">
+                        <div class="dots">
+                            <b class="sp"></b> <b class="sp"></b> <b class="dt"></b>
+                            <b class="sp"></b> <b class="sp"></b> <b class="sp"></b>
+                            <b class="dt"></b> <b class="sp"></b> <b class="sp"></b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h1>Chance</h1>
+        </a>
+        
+        <nav>
+            <a href="#">About</a>
+            <a href="#">Support our work</a>
+            <a href="#">Contact us</a>
+            <a href="#" class="icon"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="icon"><i class="fas fa-rss"></i></a>
+        </nav>
+    </header>
+
+    
+
+
+
+</body>
+
+</html>

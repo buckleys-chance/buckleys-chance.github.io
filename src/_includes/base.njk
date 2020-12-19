@@ -1,0 +1,39 @@
+ <!DOCTYPE html>
+<html>
+<head>
+	
+	<meta charset="UTF-8" />
+	
+	<title>
+        {% block title %}
+            Buckley's Chance
+        {% endblock %}
+    </title>
+	
+	<!-- JS -->
+	{% block head %}{% endblock %}
+
+	<!-- Styling -->
+	<link href="https://fonts.googleapis.com/css2?family=EB+Garamond&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/3142a8f83c.js" crossorigin="anonymous" SameSite=Lax></script>
+	<link rel="stylesheet" href="/css/main.css">
+
+	
+	<!--<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@1,900&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Laila:wght@700&display=swap" rel="stylesheet">-->
+
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Philosopher:wght@700&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+	{% block content %}{% endblock %}
+
+</body>
+
+</html>

@@ -1,0 +1,94 @@
+{% extends 'base.njk' %}
+
+{% block content %}
+
+	<header>
+
+		<a href="/" class="title">
+			<h1>Buckley's</h1>
+			<div class="scene">
+				<div class="cube">
+					<div class="cube__face cube__face--front">
+						<div class="dots">
+							<b class="sp"></b> <b class="sp"></b> <b class="sp"></b>
+							<b class="sp"></b> <b class="dt"></b> <b class="sp"></b>
+							<b class="sp"></b> <b class="sp"></b> <b class="sp"></b>
+						</div>
+					</div>
+					<div class="cube__face cube__face--back">
+						<div class="dots">
+							<b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
+							<b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
+							<b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
+						</div>
+					</div>
+					<div class="cube__face cube__face--right">
+						<div class="dots">
+							<b class="dt"></b> <b class="sp"></b> <b class="sp"></b>
+							<b class="sp"></b> <b class="dt"></b> <b class="sp"></b>
+							<b class="sp"></b> <b class="sp"></b> <b class="dt"></b>
+						</div>
+					</div>
+					<div class="cube__face cube__face--left">
+						<div class="dots">
+							<b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
+							<b class="sp"></b> <b class="sp"></b> <b class="sp"></b>
+							<b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
+						</div>
+					</div>
+					<div class="cube__face cube__face--top">
+						<div class="dots">
+							<b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
+							<b class="sp"></b> <b class="dt"></b> <b class="sp"></b>
+							<b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
+						</div>
+					</div>
+					<div class="cube__face cube__face--bottom">
+						<div class="dots">
+							<b class="sp"></b> <b class="sp"></b> <b class="dt"></b>
+							<b class="sp"></b> <b class="sp"></b> <b class="sp"></b>
+							<b class="dt"></b> <b class="sp"></b> <b class="sp"></b>
+						</div>
+					</div>
+				</div>
+			</div>
+			<h1>Chance</h1>
+		</a>
+		
+		<nav>
+			<a href="#">About</a>
+			<a href="#">Support our work</a>
+			<a href="#">Contact us</a>
+			<a href="#" class="icon"><i class="fab fa-twitter"></i></a>
+			<a href="#" class="icon"><i class="fas fa-rss"></i></a>
+		</nav>
+	</header>
+
+
+	<main class="post-list">
+
+		<div class="card blurb">
+			Data-driven explorable explanations, with a focus on topics relevant to Australia.
+
+			<div>
+				<a href="#">Subscribe for updates</a>
+				<a href="#">About</a>
+			</div>
+		</div>
+
+		{% for post in collections.post | removeHiddenPosts | reverse %}
+		
+		<a href="/{{ post.data.slug }}/" class="card">
+			<strong>{{ post.data.title }}</strong>
+
+			<img src="{{ post.data.cover }}" />
+			
+			{{ post.data.description }}
+
+		</a>		
+
+		{% endfor %}
+
+	</main>
+
+{% endblock %}

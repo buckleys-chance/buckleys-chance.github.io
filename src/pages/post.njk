@@ -1,0 +1,149 @@
+---
+pagination:
+  data: collections.post
+  size: 1
+  alias: post
+permalink: /{{ post.data.slug }}/
+---
+
+{% extends 'base.njk' %}
+
+{% block title %}
+    {{ post.data.title }}
+{% endblock %}
+
+{% block head %}
+
+    {% if post.data.mathjax %}
+        <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_SVG"></script>
+    {% endif %}
+
+    {% if post.data.d3 %}
+        <meta charset="utf-8">
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+    {% endif %}
+
+    {% if post.data.hidden %}
+        <meta name="robots" content="noindex">
+        <meta name="googlebot" content="noindex">
+    {% endif %}    
+
+{% endblock %}
+
+{% block content %}
+
+    <main class="post">
+
+    <div class="frontmatter">
+
+        <div>
+        
+        <h1>{{ post.data.title }}</h1>
+
+        <div class="description">{{ post.data.description }}</div>
+
+        </div>
+
+    </div>
+
+    <article>
+    
+    {% if post.data.noMarkdown %}
+        {{ post.templateContent | safe }}
+    {% else %}
+        {{ post.templateContent | markdown | safe }}
+    {% endif %}
+
+    </article>
+
+    <div class="backmatter">
+        <div>
+            Acknowledgements, conflicts of interest, citations, errata...
+        </div>
+    </div>
+
+    </main>
+
+    <header>
+
+        <a href="/" class="title">
+            <h1>Buckley's</h1>
+            <div class="scene">
+                <div class="cube">
+                    <div class="cube__face cube__face--front">
+                        <div class="dots">
+                            <b class="sp"></b> <b class="sp"></b> <b class="sp"></b>
+                            <b class="sp"></b> <b class="dt"></b> <b class="sp"></b>
+                            <b class="sp"></b> <b class="sp"></b> <b class="sp"></b>
+                        </div>
+                    </div>
+                    <div class="cube__face cube__face--back">
+                        <div class="dots">
+                            <b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
+                            <b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
+                            <b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
+                        </div>
+                    </div>
+                    <div class="cube__face cube__face--right">
+                        <div class="dots">
+                            <b class="dt"></b> <b class="sp"></b> <b class="sp"></b>
+                            <b class="sp"></b> <b class="dt"></b> <b class="sp"></b>
+                            <b class="sp"></b> <b class="sp"></b> <b class="dt"></b>
+                        </div>
+                    </div>
+                    <div class="cube__face cube__face--left">
+                        <div class="dots">
+                            <b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
+                            <b class="sp"></b> <b class="sp"></b> <b class="sp"></b>
+                            <b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
+                        </div>
+                    </div>
+                    <div class="cube__face cube__face--top">
+                        <div class="dots">
+                            <b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
+                            <b class="sp"></b> <b class="dt"></b> <b class="sp"></b>
+                            <b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
+                        </div>
+                    </div>
+                    <div class="cube__face cube__face--bottom">
+                        <div class="dots">
+                            <b class="sp"></b> <b class="sp"></b> <b class="dt"></b>
+                            <b class="sp"></b> <b class="sp"></b> <b class="sp"></b>
+                            <b class="dt"></b> <b class="sp"></b> <b class="sp"></b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h1>Chance</h1>
+        </a>
+        
+        <nav>
+            <a href="#">About</a>
+            <a href="#">Support our work</a>
+            <a href="#">Contact us</a>
+            <a href="#" class="icon"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="icon"><i class="fas fa-rss"></i></a>
+        </nav>
+    </header>
+
+    {# <footer>
+        <main>
+        
+            {% for post in collections.post | removeHiddenPosts | reverse %}
+
+            <a href="/{{ post.data.slug }}/" class="card">
+                <strong>{{ post.data.title }}</strong>
+
+                <img src="{{ post.data.cover }}" />
+                
+                {{ post.data.description }}
+
+            </a>
+
+            {% endfor %}
+
+        </main>
+
+    </footer> #}
+
+{% endblock %}
