@@ -1,49 +1,51 @@
 {% extends 'base.njk' %}
 
+{% block body_class %}home{% endblock %}
+
 {% block content %}
 
-	<header>
+	<header class="home">
 
-		<a href="/" class="title">
-			<h1>Buckley's</h1>
+		<a href="/" class="logotype">
+			<span>Buckley's</span>
 			<div class="scene">
 				<div class="cube">
-					<div class="cube__face cube__face--front">
+					<div class="face front">
 						<div class="dots">
 							<b class="sp"></b> <b class="sp"></b> <b class="sp"></b>
 							<b class="sp"></b> <b class="dt"></b> <b class="sp"></b>
 							<b class="sp"></b> <b class="sp"></b> <b class="sp"></b>
 						</div>
 					</div>
-					<div class="cube__face cube__face--back">
+					<div class="face back">
 						<div class="dots">
 							<b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
 							<b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
 							<b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
 						</div>
 					</div>
-					<div class="cube__face cube__face--right">
+					<div class="face right">
 						<div class="dots">
 							<b class="dt"></b> <b class="sp"></b> <b class="sp"></b>
 							<b class="sp"></b> <b class="dt"></b> <b class="sp"></b>
 							<b class="sp"></b> <b class="sp"></b> <b class="dt"></b>
 						</div>
 					</div>
-					<div class="cube__face cube__face--left">
+					<div class="face left">
 						<div class="dots">
 							<b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
 							<b class="sp"></b> <b class="sp"></b> <b class="sp"></b>
 							<b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
 						</div>
 					</div>
-					<div class="cube__face cube__face--top">
+					<div class="face top">
 						<div class="dots">
 							<b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
 							<b class="sp"></b> <b class="dt"></b> <b class="sp"></b>
 							<b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
 						</div>
 					</div>
-					<div class="cube__face cube__face--bottom">
+					<div class="face bottom">
 						<div class="dots">
 							<b class="sp"></b> <b class="sp"></b> <b class="dt"></b>
 							<b class="sp"></b> <b class="sp"></b> <b class="sp"></b>
@@ -52,26 +54,26 @@
 					</div>
 				</div>
 			</div>
-			<h1>Chance</h1>
+			<span>Chance</span>
 		</a>
 		
 		<nav>
 			<a href="#">About</a>
 			<a href="#">Support our work</a>
 			<a href="#">Contact us</a>
-			<a href="#" class="icon"><i class="fab fa-twitter"></i></a>
+			<a href="https://twitter.com/BuckleysPub" class="icon"><i class="fab fa-twitter"></i></a>
 			<a href="#" class="icon"><i class="fas fa-rss"></i></a>
 		</nav>
 	</header>
 
 
-	<main class="post-list">
+	<main class="home">
 
 		<div class="card blurb">
-			Data-driven explorable explanations, with a focus on topics relevant to Australia.
+			Data-driven explorable explanations, with a focus on topics relevant to Australians.
 
 			<div>
-				<a href="#">Subscribe for updates</a>
+				<a href="https://twitter.com/BuckleysPub">Subscribe for updates</a>
 				<a href="#">About</a>
 			</div>
 		</div>
@@ -79,7 +81,7 @@
 		{% for post in collections.post | removeHiddenPosts | reverse %}
 		
 		<a href="/{{ post.data.slug }}/" class="card">
-			<strong>{{ post.data.title }}</strong>
+			<h1>{{ post.data.title }}</h1>
 
 			<img src="{{ post.data.cover }}" />
 			

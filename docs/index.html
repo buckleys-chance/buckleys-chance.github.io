@@ -14,68 +14,62 @@
 	
 
 	<!-- Styling -->
-	<link href="https://fonts.googleapis.com/css2?family=EB+Garamond&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
 	<script src="https://kit.fontawesome.com/3142a8f83c.js" crossorigin="anonymous" SameSite=Lax></script>
 	<link rel="stylesheet" href="/css/main.css">
-
-	
-	<!--<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@1,900&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Laila:wght@700&display=swap" rel="stylesheet">-->
 
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
 
 	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link href="https://fonts.googleapis.com/css2?family=Philosopher:wght@700&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Philosopher:wght@700&family=Roboto+Mono:wght@300;400;500;700&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
 
 </head>
 
-<body>
+<body class="home">
 
 	
 
-	<header>
+	<header class="home">
 
-		<a href="/" class="title">
-			<h1>Buckley's</h1>
+		<a href="/" class="logotype">
+			<span>Buckley's</span>
 			<div class="scene">
 				<div class="cube">
-					<div class="cube__face cube__face--front">
+					<div class="face front">
 						<div class="dots">
 							<b class="sp"></b> <b class="sp"></b> <b class="sp"></b>
 							<b class="sp"></b> <b class="dt"></b> <b class="sp"></b>
 							<b class="sp"></b> <b class="sp"></b> <b class="sp"></b>
 						</div>
 					</div>
-					<div class="cube__face cube__face--back">
+					<div class="face back">
 						<div class="dots">
 							<b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
 							<b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
 							<b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
 						</div>
 					</div>
-					<div class="cube__face cube__face--right">
+					<div class="face right">
 						<div class="dots">
 							<b class="dt"></b> <b class="sp"></b> <b class="sp"></b>
 							<b class="sp"></b> <b class="dt"></b> <b class="sp"></b>
 							<b class="sp"></b> <b class="sp"></b> <b class="dt"></b>
 						</div>
 					</div>
-					<div class="cube__face cube__face--left">
+					<div class="face left">
 						<div class="dots">
 							<b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
 							<b class="sp"></b> <b class="sp"></b> <b class="sp"></b>
 							<b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
 						</div>
 					</div>
-					<div class="cube__face cube__face--top">
+					<div class="face top">
 						<div class="dots">
 							<b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
 							<b class="sp"></b> <b class="dt"></b> <b class="sp"></b>
 							<b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
 						</div>
 					</div>
-					<div class="cube__face cube__face--bottom">
+					<div class="face bottom">
 						<div class="dots">
 							<b class="sp"></b> <b class="sp"></b> <b class="dt"></b>
 							<b class="sp"></b> <b class="sp"></b> <b class="sp"></b>
@@ -84,34 +78,45 @@
 					</div>
 				</div>
 			</div>
-			<h1>Chance</h1>
+			<span>Chance</span>
 		</a>
 		
 		<nav>
 			<a href="#">About</a>
 			<a href="#">Support our work</a>
 			<a href="#">Contact us</a>
-			<a href="#" class="icon"><i class="fab fa-twitter"></i></a>
+			<a href="https://twitter.com/BuckleysPub" class="icon"><i class="fab fa-twitter"></i></a>
 			<a href="#" class="icon"><i class="fas fa-rss"></i></a>
 		</nav>
 	</header>
 
 
-	<main class="post-list">
+	<main class="home">
 
 		<div class="card blurb">
-			Data-driven explorable explanations, with a focus on topics relevant to Australia.
+			Data-driven explorable explanations, with a focus on topics relevant to Australians.
 
 			<div>
-				<a href="#">Subscribe for updates</a>
+				<a href="https://twitter.com/BuckleysPub">Subscribe for updates</a>
 				<a href="#">About</a>
 			</div>
 		</div>
 
 		
 		
+		<a href="/template/" class="card">
+			<h1>Generic template post</h1>
+
+			<img src="/img/placeholder.png" />
+			
+			This is a template post, with which to refine the stylesheets for posts in general.
+
+		</a>		
+
+		
+		
 		<a href="/lockdown/" class="card">
-			<strong>Pandemic trade-offs</strong>
+			<h1>Pandemic trade-offs</h1>
 
 			<img src="/img/eg1.png" />
 			
@@ -122,7 +127,7 @@
 		
 		
 		<a href="/literacy/" class="card">
-			<strong>Literacy in Australia</strong>
+			<h1>Literacy in Australia</h1>
 
 			<img src="/img/eg2.png" />
 			
@@ -133,7 +138,7 @@
 		
 		
 		<a href="/income-inequality/" class="card">
-			<strong>Income inequality</strong>
+			<h1>Income inequality</h1>
 
 			<img src="/img/eg3.png" />
 			
@@ -144,7 +149,7 @@
 		
 		
 		<a href="/immigration/" class="card">
-			<strong>Breakdown of Australian immigration</strong>
+			<h1>Breakdown of Australian immigration</h1>
 
 			<img src="/img/eg4.png" />
 			
@@ -155,7 +160,7 @@
 		
 		
 		<a href="/indigenous-youth-incarceration/" class="card">
-			<strong>Indigenous youth incarceration</strong>
+			<h1>Indigenous youth incarceration</h1>
 
 			<img src="/img/eg5.png" />
 			
@@ -166,7 +171,7 @@
 		
 		
 		<a href="/corporate-tax/" class="card">
-			<strong>Income tax</strong>
+			<h1>Income tax</h1>
 
 			<img src="/img/eg6.png" />
 			
@@ -179,6 +184,80 @@
 	</main>
 
 
+
+	<footer>
+
+		<div>
+			<a href="/" class="logotype footer">
+				<div class="scene">
+					<div class="cube">
+						<div class="face front">
+							<div class="dots">
+								<b class="sp"></b> <b class="sp"></b> <b class="sp"></b>
+								<b class="sp"></b> <b class="dt"></b> <b class="sp"></b>
+								<b class="sp"></b> <b class="sp"></b> <b class="sp"></b>
+							</div>
+						</div>
+						<div class="face back">
+							<div class="dots">
+								<b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
+								<b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
+								<b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
+							</div>
+						</div>
+						<div class="face right">
+							<div class="dots">
+								<b class="dt"></b> <b class="sp"></b> <b class="sp"></b>
+								<b class="sp"></b> <b class="dt"></b> <b class="sp"></b>
+								<b class="sp"></b> <b class="sp"></b> <b class="dt"></b>
+							</div>
+						</div>
+						<div class="face left">
+							<div class="dots">
+								<b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
+								<b class="sp"></b> <b class="sp"></b> <b class="sp"></b>
+								<b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
+							</div>
+						</div>
+						<div class="face top">
+							<div class="dots">
+								<b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
+								<b class="sp"></b> <b class="dt"></b> <b class="sp"></b>
+								<b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
+							</div>
+						</div>
+						<div class="face bottom">
+							<div class="dots">
+								<b class="sp"></b> <b class="sp"></b> <b class="dt"></b>
+								<b class="sp"></b> <b class="sp"></b> <b class="sp"></b>
+								<b class="dt"></b> <b class="sp"></b> <b class="sp"></b>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</a>
+
+			<span class="tagline">Data-driven explorable explanations, on topics relevant to Australians.</span>
+
+			<nav>
+				<a href="/">Home</a>
+				<a href="/">About</a>
+				<a href="/">Support our work</a>
+				<a href="/">Contact us</a>
+
+				<div class="icons">
+					<a href="https://twitter.com/BuckleysPub"><i class="fab fa-twitter"></i></a>
+					<a href="#"><i class="fas fa-rss"></i></a>
+				</div>
+			</nav>
+
+			<div class="colophon">
+				<p>ISSN: 1234-5678. All our work is made available under a Creative Commons xyz-123 license.</p>
+			</div>
+		</div> 
+
+	</footer>
 
 </body>
 

@@ -9,141 +9,183 @@ permalink: /{{ post.data.slug }}/
 {% extends 'base.njk' %}
 
 {% block title %}
-    {{ post.data.title }}
+	{{ post.data.title }}
 {% endblock %}
 
 {% block head %}
 
-    {% if post.data.mathjax %}
-        <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_SVG"></script>
-    {% endif %}
+	{% if post.data.katex %}
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+		<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+		<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"
+	        onload="renderMathInElement(document.body);"></script>
+	{% endif %}
 
-    {% if post.data.d3 %}
-        <meta charset="utf-8">
-        <script src="https://d3js.org/d3.v4.min.js"></script>
-    {% endif %}
+	{% if post.data.d3 %}
+		<meta charset="utf-8">
+		<script src="https://d3js.org/d3.v4.min.js"></script>
+	{% endif %}
 
-    {% if post.data.hidden %}
-        <meta name="robots" content="noindex">
-        <meta name="googlebot" content="noindex">
-    {% endif %}    
+	{% if post.data.hidden %}
+		<meta name="robots" content="noindex">
+		<meta name="googlebot" content="noindex">
+	{% endif %}    
 
 {% endblock %}
 
+{% block body_class %}post{% endblock %}
+
 {% block content %}
 
-    <main class="post">
+	{# <header class="post">
 
-    <div class="frontmatter">
+	</header> #}
 
-        <div>
-        
-        <h1>{{ post.data.title }}</h1>
+	<div class="frontmatter">
 
-        <div class="description">{{ post.data.description }}</div>
+		<h1>{{ post.data.title }}</h1>
 
-        </div>
+		<h2>{{ post.data.description }}</h2>
 
-    </div>
+		<hr />
 
-    <article>
-    
-    {% if post.data.noMarkdown %}
-        {{ post.templateContent | safe }}
-    {% else %}
-        {{ post.templateContent | markdown | safe }}
-    {% endif %}
+		<div class="attributes">
 
-    </article>
+			<h3 class="authors">Authors</h3>
 
-    <div class="backmatter">
-        <div>
-            Acknowledgements, conflicts of interest, citations, errata...
-        </div>
-    </div>
+			<div class="author-list">
+				{% for a in post.data.authors %}
+					<a {% if a.name.url %}href="{{ a.name.url }}"{% endif %}>{{ a.name.first }} {{ a.name.last }}</a>
+				{% endfor %}
+			</div>
 
-    </main>
+			<h3 class="affiliations">Affiliations</h3>
 
-    <header>
+			<div class="affiliation-list">
+				{% for a in post.data.authors %}
+					<a {% if a.affiliation.url %}href="{{ a.affiliation.url }}"{% endif %}>{{ a.affiliation.text }}</a>
+				{% endfor %}
+			</div>
 
-        <a href="/" class="title">
-            <h1>Buckley's</h1>
-            <div class="scene">
-                <div class="cube">
-                    <div class="cube__face cube__face--front">
-                        <div class="dots">
-                            <b class="sp"></b> <b class="sp"></b> <b class="sp"></b>
-                            <b class="sp"></b> <b class="dt"></b> <b class="sp"></b>
-                            <b class="sp"></b> <b class="sp"></b> <b class="sp"></b>
-                        </div>
-                    </div>
-                    <div class="cube__face cube__face--back">
-                        <div class="dots">
-                            <b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
-                            <b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
-                            <b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
-                        </div>
-                    </div>
-                    <div class="cube__face cube__face--right">
-                        <div class="dots">
-                            <b class="dt"></b> <b class="sp"></b> <b class="sp"></b>
-                            <b class="sp"></b> <b class="dt"></b> <b class="sp"></b>
-                            <b class="sp"></b> <b class="sp"></b> <b class="dt"></b>
-                        </div>
-                    </div>
-                    <div class="cube__face cube__face--left">
-                        <div class="dots">
-                            <b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
-                            <b class="sp"></b> <b class="sp"></b> <b class="sp"></b>
-                            <b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
-                        </div>
-                    </div>
-                    <div class="cube__face cube__face--top">
-                        <div class="dots">
-                            <b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
-                            <b class="sp"></b> <b class="dt"></b> <b class="sp"></b>
-                            <b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
-                        </div>
-                    </div>
-                    <div class="cube__face cube__face--bottom">
-                        <div class="dots">
-                            <b class="sp"></b> <b class="sp"></b> <b class="dt"></b>
-                            <b class="sp"></b> <b class="sp"></b> <b class="sp"></b>
-                            <b class="dt"></b> <b class="sp"></b> <b class="sp"></b>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <h1>Chance</h1>
-        </a>
-        
-        <nav>
-            <a href="#">About</a>
-            <a href="#">Support our work</a>
-            <a href="#">Contact us</a>
-            <a href="#" class="icon"><i class="fab fa-twitter"></i></a>
-            <a href="#" class="icon"><i class="fas fa-rss"></i></a>
-        </nav>
-    </header>
+			<h3 class="published">Published</h3>
+			
+			<time class="published">{{ post.data.date | readable_date }}</time>
 
-    {# <footer>
-        <main>
-        
-            {% for post in collections.post | removeHiddenPosts | reverse %}
+			{% if post.data.date_updated %}
 
-            <a href="/{{ post.data.slug }}/" class="card">
-                <strong>{{ post.data.title }}</strong>
+				<h3 class="updated">Last&nbsp;Updated</h3>
 
-                <img src="{{ post.data.cover }}" />
-                
-                {{ post.data.description }}
+				<time class="updated">{{ post.data.date_updated | readable_date }}</time>
 
-            </a>
+			{% endif %}
 
-            {% endfor %}
+		</div>
 
-        </main>
+	</div>
 
-    </footer> #}
+	<article>
+	
+		{% if post.data.noMarkdown %}
+			{{ post.templateContent | safe }}
+		{% else %}
+			{{ post.templateContent | markdown | footnotes_to_sidenotes | citations | safe }}
+		{% endif %}
+
+	</article>
+
+	<div class="backmatter">
+
+		{% if post.data.acknowledgements %}
+			<h1>Acknowledgements</h1>
+			{{ post.data.acknowledgements | markdown | safe }}
+		{% endif %}
+
+		<h1>Data + Code</h1>
+		<p>...</p>
+		
+		{{ post.templateContent | markdown | get_footnotes | safe }}
+		
+
+		{% if post.data.references %}
+			<h1>References</h1>
+			{{ post.data.references | bibliography | safe }}
+		{% endif %}
+		
+		<h1>Corrections</h1>
+		{% if post.data.corrections %}
+			<ul>
+			{% for c in post.data.corrections %}
+			<li>{{ c | markdown | safe }}</li>
+			{% endfor %}
+			</ul>
+		{% else %}
+			<p>No corrections have been made to this article.</p>
+		{% endif %}
+
+		<h1>Reuse</h1>
+		<p>...</p>
+
+		<h1>Citation</h1>
+		<p>In academic contexts, please cite this work using a citation similar to the following.</p>
+		<pre class="wrap">{{ post.data.authors | citation_authors }}, "{{ post.data.title }}", Buckley's Chance, {{ post.data.date | get_year }}.</pre>
+		<p>Here is the BibTeX entry.</p>
+<pre>@article{ {{- post.data.slug }}{{ post.data.date | get_year }},
+  author = { {{- post.data.authors | bibtex_authors -}} },
+  title = { {{- post.data.title -}} },
+  journal = {Buckley's Chance},
+  year = { {{- post.data.date | get_year -}} },
+  url = {https://buckleys.pub/{{ post.data.slug }}}
+}</pre>
+
+	</div>
+
+	<script>
+		var mouseOverModal = false;
+
+		function create_modal_ref(el, id) {
+			
+			let bibref = document.querySelector(`#bib-${id}`),
+				text_column = document.querySelector('article > p').getBoundingClientRect();
+
+			let ref = document.createElement("div");
+			ref.setAttribute('class', 'hover-ref');
+			ref.setAttribute('style', `top: ${el.getBoundingClientRect().bottom + 10}px; left: ${text_column.left}px; width: ${text_column.right - text_column.left}px;`)
+			ref.setAttribute('onmouseenter', 'hovering()');
+			ref.setAttribute('onmouseleave', 'unhovering()');
+			ref.innerHTML = bibref.innerHTML;
+
+			document.querySelector('article').appendChild(ref); 
+
+			mouseOverModal = true;
+		}
+
+		function destroy_modal_ref() {
+			mouseOverModal = false;
+			setTimeout(() => {
+				if (!mouseOverModal) {
+					let refs = document.querySelectorAll('.hover-ref');
+					for (let ref of refs) {
+						ref.remove();
+					}
+				}
+			}, 500);
+		}
+
+		function hovering() {
+			mouseOverModal = true;
+		}
+
+		function unhovering() {
+			mouseOverModal = false;
+			setTimeout(() => {
+				if (!mouseOverModal) {
+					let refs = document.querySelectorAll('.hover-ref');
+					for (let ref of refs) {
+						ref.remove();
+					}
+				}
+			}, 500);
+		}
+	</script>
 
 {% endblock %}
