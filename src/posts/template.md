@@ -148,3 +148,5 @@ To insert a citation inline, use the syntax `[@xyz]` where `xyz` is the citation
 This will generate a fairly generic looking inline citation that looks like this [@ausdata]. The details of the citation will appear on hover, and clicking on the citation will scroll down to the relevant entry in the bibliography.
 
 This leaves it up to the author to decide exactly how to describe the citation in the text, be it author-date or something more organic. We might want a convention, but can figure it out as we go. Probably don't want anything too intimidatingly formal.
+
+Here's another citation for the fun of it, on custom vs. in-house tools in data journalism [@outofbox].
