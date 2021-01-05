@@ -817,6 +817,19 @@ body.post article {
 		}
 	}
 
+	span.katex-display {
+		display: block;
+		overflow-x: scroll;
+		overflow-y: hidden;
+
+		&::-webkit-scrollbar {
+			height: 2px;
+		}
+		 
+		&::-webkit-scrollbar-thumb {
+			background-color: $c1-dark;
+		}
+	}
 
 	.fig {
 		@include mpb(0 auto #{1 * $p} auto);

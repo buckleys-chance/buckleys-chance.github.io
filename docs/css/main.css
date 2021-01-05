@@ -587,6 +587,17 @@ body.post article ol li::before {
   left: 0;
   color: #33691e;
 }
+body.post article span.katex-display {
+  display: block;
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+body.post article span.katex-display::-webkit-scrollbar {
+  height: 2px;
+}
+body.post article span.katex-display::-webkit-scrollbar-thumb {
+  background-color: #33691e;
+}
 body.post article .fig {
   margin: 0 auto 1.4rem auto;
   padding: 0;
