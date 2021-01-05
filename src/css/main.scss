@@ -24,6 +24,8 @@ $c1-dark-text: #fff;
 $c1-light: #f1f8e9;
 $c1-light-tone: #e6f2d8;
 
+$c2-dark: #fdd835;
+
 // SPACING
 
 $p: 1.4rem;
@@ -92,6 +94,13 @@ body {
 	// background-color: #85bb5c;
 }
 
+div.banner {
+	width: 100%;
+	padding: $h;
+	text-align: center;
+	background-color: $c2-dark;
+}
+
 // ============================================================================== //
 // ============================================================================== //
 // LOGO ========================================================================= //
@@ -103,17 +112,31 @@ a.logotype {
 	align-items: center;
 	
 	text-decoration: none;
-	width: auto;		
+	width: 600px;
+	max-width: calc(100% - #{1 * $p});
+	@include mpb(0 auto #{2 * $p} auto);
 	
 	--die-side: 25px;
 	--die-background: #{$default-background};
 	--die-face: #{$c1-dark};
-	--die-dots: #fdd835;
+	--die-dots: #{$c2-dark};
 	--die-r: 25%;
 
 	--border: #{$c1-dark};
 	--text: #{$c1-dark};
 	--border: 2px;
+
+	&.masthead {
+		--die-side: 22px;
+
+		span {
+			font-size: 1.6rem;
+		}
+
+		.scene {
+			margin: 0 16px 0 19px;
+		}
+	}
 
 	&.footer {
 		--die-background: #{$c1-dark};
@@ -239,6 +262,7 @@ a.logotype {
 		flex-direction: column;
 		align-items: flex-start;
 
+		width: auto;
 		padding: 20px;
 		margin: -20px 0 0 -20px;
 		justify-self: start;
@@ -266,6 +290,20 @@ a.logotype {
 	}
 }
 
+@media (max-width: 580px) {
+	body.home a.logotype {
+		--die-side: 22px;
+
+		span {
+			font-size: 1.6rem;
+		}
+
+		.scene {
+			margin: 0 16px 0 19px;
+		}
+	}	
+}
+
 
 // ============================================================================== //
 // ============================================================================== //
@@ -279,39 +317,61 @@ header, main, footer {
 }
 
 header.home {
-	background-color: $default-background;
-	// background-color: blue;
-
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+	padding: #{2 * $p} 0 #{1 * $p} 0;
+	background-color: $c1-light;
 
 	nav {
-		display: block;
-		font-size: 1rem;
+		width: 600px;
+		max-width: calc(100% - #{1 * $p});
+		@include mpb(#{-1 * $p} auto #{1 * $p} auto);
+
+		// background-color: red;
+		// display: block;
+		// font-size: 1rem;
 		display: flex;
-		
-		a {
-			display: block;
-			margin: 0 0 0 20px;
-			
-			font-family: $sans-serif-stack;
-			font-weight: 300;
-			
-			color: $default-text;
-			
-			text-decoration: none;
-			/*text-decoration-color: $c1-light;*/
-			border-bottom: 1px solid $c1-light;
+		justify-content: center;
 
-			&.icon {
+		div {
+			display: flex;
+
+			margin: 0 $h;
+			
+			a {
+				display: block;
+				margin: 0 $p 0 0;
+
+				&:last-of-type {
+					margin-right: 0;
+				}
+				
+				font-family: $sans-serif-stack;
+				font-weight: 400;
+				
 				color: $c1-dark;
-				border-bottom: none;
-			}
+				
+				text-decoration: none;
+				// text-decoration-color: $c1-light;
 
-			&:hover {
-				/*text-decoration-color: $c1-dark;*/
-				border-bottom-color: $c1-dark;
+				&.icon {
+					color: $c1-dark;
+					border-bottom: none;
+				}
+
+				&:hover {
+					text-decoration: underline;
+				}
+			}
+		}
+		
+	}
+
+	@media (max-width: 580px) {
+		nav {
+			flex-direction: column;
+			align-items: center;
+
+			div:first-of-type {
+				margin-bottom: $h;
 			}
 		}
 	}
@@ -319,63 +379,53 @@ header.home {
 
 
 :root {
-	--gap: 0px;
-	--n-columns: 6;
-	--n-gaps: 5;
+	--card-width: 10;
 }
 
 @media only screen and (max-width: 1700px) {
 	:root {
-		--n-columns: 5;
-		--n-gaps: 4;
+		--card-width: 12;
 	}
 }
 
 @media only screen and (max-width: 1500px) {
 	:root {
-		--n-columns: 4;
-		--n-gaps: 3;
+		--card-width: 15;
 	}
 }
 
 @media only screen and (max-width: 1200px) {
 	:root {
-		--n-columns: 3;
-		--n-gaps: 2;
+		--card-width: 20;
 	}
 }
 
 @media only screen and (max-width: 900px) {
 	:root {
-		--n-columns: 2;
-		--n-gaps: 1;
+		--card-width: 30;
 	}
 }
 
 @media only screen and (max-width: 600px) {
 	:root {
-		--n-columns: 1;
-		--n-gaps: 0;
+		--card-width: 60;
 	}
 }
 
 main.home {
 	display: grid;
 
-	grid-template-rows: repeat(50, auto);
 	grid-template-columns: repeat(
-		var(--n-columns),
-		calc((100% - var(--n-gaps)*var(--gap)) / var(--n-columns))
+		60,
+		calc(100% / 60)
 	);
-
-	grid-column-gap: var(--gap);
-	grid-row-gap: var(--gap);
 	
-	justify-content: start;
-	
-	padding-top: 0;
+	// justify-content: start;
 	
 	.card {
+		grid-column-end: span var(--card-width);
+		grid-row-end: span 12;
+
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
@@ -524,7 +574,7 @@ body.post {
 	figure,
 	ul, ol,
 	pre,
-	.attributes,
+	div.attributes,
 	.csl-bib-body {
 		display: block;
 		width: 600px;
@@ -1042,6 +1092,10 @@ body.post article {
 		}
 	}
 
+	a.ref {
+		cursor: pointer;
+	}
+
 	div.hover-ref {
 		background-color: $c1-light;
 		border: 1px solid $c1-dark;
@@ -1053,6 +1107,8 @@ body.post article {
 
 		font-size: .9rem;
 		font-weight: 300;
+
+		z-index: 99;
 
 		.title {
 			font-weight: 500;

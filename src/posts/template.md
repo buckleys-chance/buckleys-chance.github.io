@@ -145,7 +145,7 @@ Reference data can be included via a BibTeX file in the `/_data/` directory, wit
 
 To insert a citation inline, use the syntax `[@xyz]` where `xyz` is the citation reference used in the BibTeX file.
 
-This will generate a fairly generic looking inline citation that looks like this [@ausdata]. The details of the citation will appear on hover, and clicking on the citation will scroll down to the relevant entry in the bibliography.
+This will generate a fairly generic looking inline citation that looks like this [@ausdata]. The details of the citation will appear on hover.
 
 This leaves it up to the author to decide exactly how to describe the citation in the text, be it author-date or something more organic. We might want a convention, but can figure it out as we go. Probably don't want anything too intimidatingly formal.
 

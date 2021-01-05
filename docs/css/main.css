@@ -26,12 +26,23 @@ body {
   border: 0;
 }
 
+div.banner {
+  width: 100%;
+  padding: 0.7rem;
+  text-align: center;
+  background-color: #fdd835;
+}
+
 a.logotype {
   display: flex;
   justify-content: center;
   align-items: center;
   text-decoration: none;
-  width: auto;
+  width: 600px;
+  max-width: calc(100% - 1.4rem);
+  margin: 0 auto 2.8rem auto;
+  padding: 0;
+  border: 0;
   --die-side: 25px;
   --die-background: #fff;
   --die-face: #33691e;
@@ -40,6 +51,15 @@ a.logotype {
   --border: #33691e;
   --text: #33691e;
   --border: 2px;
+}
+a.logotype.masthead {
+  --die-side: 22px;
+}
+a.logotype.masthead span {
+  font-size: 1.6rem;
+}
+a.logotype.masthead .scene {
+  margin: 0 16px 0 19px;
 }
 a.logotype.footer {
   --die-background: #33691e;
@@ -137,6 +157,7 @@ a.logotype .scene .cube .face.bottom .dots {
 a.logotype.footer {
   flex-direction: column;
   align-items: flex-start;
+  width: auto;
   padding: 20px;
   margin: -20px 0 0 -20px;
   justify-self: start;
@@ -152,6 +173,17 @@ a.logotype:hover .cube {
   transform: translateZ(calc(-0.5 * var(--die-side))) rotateY(10deg) rotateX(240deg) rotateZ(225deg);
 }
 
+@media (max-width: 580px) {
+  body.home a.logotype {
+    --die-side: 22px;
+  }
+  body.home a.logotype span {
+    font-size: 1.6rem;
+  }
+  body.home a.logotype .scene {
+    margin: 0 16px 0 19px;
+  }
+}
 header, main, footer {
   display: block;
   box-sizing: border-box;
@@ -159,81 +191,86 @@ header, main, footer {
 }
 
 header.home {
-  background-color: #fff;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  padding: 2.8rem 0 1.4rem 0;
+  background-color: #f1f8e9;
 }
 header.home nav {
-  display: block;
-  font-size: 1rem;
+  width: 600px;
+  max-width: calc(100% - 1.4rem);
+  margin: -1.4rem auto 1.4rem auto;
+  padding: 0;
+  border: 0;
   display: flex;
+  justify-content: center;
 }
-header.home nav a {
+header.home nav div {
+  display: flex;
+  margin: 0 0.7rem;
+}
+header.home nav div a {
   display: block;
-  margin: 0 0 0 20px;
+  margin: 0 1.4rem 0 0;
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-  font-weight: 300;
-  color: #141414;
+  font-weight: 400;
+  color: #33691e;
   text-decoration: none;
-  /*text-decoration-color: $c1-light;*/
-  border-bottom: 1px solid #f1f8e9;
 }
-header.home nav a.icon {
+header.home nav div a:last-of-type {
+  margin-right: 0;
+}
+header.home nav div a.icon {
   color: #33691e;
   border-bottom: none;
 }
-header.home nav a:hover {
-  /*text-decoration-color: $c1-dark;*/
-  border-bottom-color: #33691e;
+header.home nav div a:hover {
+  text-decoration: underline;
+}
+@media (max-width: 580px) {
+  header.home nav {
+    flex-direction: column;
+    align-items: center;
+  }
+  header.home nav div:first-of-type {
+    margin-bottom: 0.7rem;
+  }
 }
 
 :root {
-  --gap: 0px;
-  --n-columns: 6;
-  --n-gaps: 5;
+  --card-width: 10;
 }
 
 @media only screen and (max-width: 1700px) {
   :root {
-    --n-columns: 5;
-    --n-gaps: 4;
+    --card-width: 12;
   }
 }
 @media only screen and (max-width: 1500px) {
   :root {
-    --n-columns: 4;
-    --n-gaps: 3;
+    --card-width: 15;
   }
 }
 @media only screen and (max-width: 1200px) {
   :root {
-    --n-columns: 3;
-    --n-gaps: 2;
+    --card-width: 20;
   }
 }
 @media only screen and (max-width: 900px) {
   :root {
-    --n-columns: 2;
-    --n-gaps: 1;
+    --card-width: 30;
   }
 }
 @media only screen and (max-width: 600px) {
   :root {
-    --n-columns: 1;
-    --n-gaps: 0;
+    --card-width: 60;
   }
 }
 main.home {
   display: grid;
-  grid-template-rows: repeat(50, auto);
-  grid-template-columns: repeat(var(--n-columns), calc((100% - var(--n-gaps)*var(--gap)) / var(--n-columns)));
-  grid-column-gap: var(--gap);
-  grid-row-gap: var(--gap);
-  justify-content: start;
-  padding-top: 0;
+  grid-template-columns: repeat(60, calc(100% / 60));
 }
 main.home .card {
+  grid-column-end: span var(--card-width);
+  grid-row-end: span 12;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -345,7 +382,7 @@ body.post blockquote,
 body.post figure,
 body.post ul, body.post ol,
 body.post pre,
-body.post .attributes,
+body.post div.attributes,
 body.post .csl-bib-body {
   display: block;
   width: 600px;
@@ -765,6 +802,9 @@ body.post article .sidenote-number:hover ~ .sidenote {
     position: relative;
   }
 }
+body.post article a.ref {
+  cursor: pointer;
+}
 body.post article div.hover-ref {
   background-color: #f1f8e9;
   border: 1px solid #33691e;
@@ -772,6 +812,7 @@ body.post article div.hover-ref {
   position: fixed;
   font-size: 0.9rem;
   font-weight: 300;
+  z-index: 99;
 }
 body.post article div.hover-ref .title {
   font-weight: 500;

@@ -180,7 +180,7 @@ module.exports = function(eleventyConfig) {
 
 				new_html = new_html.replace(
 					regex,
-					`<a href="#bib-${id}" onmouseenter="create_modal_ref(this, '${id}')" onmouseleave="destroy_modal_ref()"><i class="fad fa-file-alt"></i></a>`
+					`<a class="ref" onmouseenter="create_modal_ref(this, '${id}')" onmouseleave="destroy_modal_ref()"><i class="fad fa-file-alt"></i></a>`
 				)
 
 			}
@@ -188,8 +188,6 @@ module.exports = function(eleventyConfig) {
 			return new_html;
 
 		}
-
-		console.log(citations);
 
 	})
 

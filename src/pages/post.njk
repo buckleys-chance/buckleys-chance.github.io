@@ -9,7 +9,7 @@ permalink: /{{ post.data.slug }}/
 {% extends 'base.njk' %}
 
 {% block title %}
-	{{ post.data.title }}
+	{{ post.data.title }} | Buckley's Chance
 {% endblock %}
 
 {% block head %}
@@ -37,15 +37,63 @@ permalink: /{{ post.data.slug }}/
 
 {% block content %}
 
-	{# <header class="post">
-
-	</header> #}
-
 	<div class="frontmatter">
 
+		<a href="/" class="logotype masthead">
+			<span>Buckley's</span>
+			<div class="scene">
+				<div class="cube">
+					<div class="face front">
+						<div class="dots">
+							<b class="sp"></b> <b class="sp"></b> <b class="sp"></b>
+							<b class="sp"></b> <b class="dt"></b> <b class="sp"></b>
+							<b class="sp"></b> <b class="sp"></b> <b class="sp"></b>
+						</div>
+					</div>
+					<div class="face back">
+						<div class="dots">
+							<b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
+							<b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
+							<b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
+						</div>
+					</div>
+					<div class="face right">
+						<div class="dots">
+							<b class="dt"></b> <b class="sp"></b> <b class="sp"></b>
+							<b class="sp"></b> <b class="dt"></b> <b class="sp"></b>
+							<b class="sp"></b> <b class="sp"></b> <b class="dt"></b>
+						</div>
+					</div>
+					<div class="face left">
+						<div class="dots">
+							<b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
+							<b class="sp"></b> <b class="sp"></b> <b class="sp"></b>
+							<b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
+						</div>
+					</div>
+					<div class="face top">
+						<div class="dots">
+							<b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
+							<b class="sp"></b> <b class="dt"></b> <b class="sp"></b>
+							<b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
+						</div>
+					</div>
+					<div class="face bottom">
+						<div class="dots">
+							<b class="sp"></b> <b class="sp"></b> <b class="dt"></b>
+							<b class="sp"></b> <b class="sp"></b> <b class="sp"></b>
+							<b class="dt"></b> <b class="sp"></b> <b class="sp"></b>
+						</div>
+					</div>
+				</div>
+			</div>
+			<span>Chance</span>
+		</a>
+		
 		<h1>{{ post.data.title }}</h1>
 
 		<h2>{{ post.data.description }}</h2>
+
 
 		<hr />
 
@@ -140,6 +188,8 @@ permalink: /{{ post.data.slug }}/
 	</div>
 
 	<script>
+		// UTILITY FUNCTIONS FOR CITATION POPUPS.
+
 		var mouseOverModal = false;
 
 		function create_modal_ref(el, id) {

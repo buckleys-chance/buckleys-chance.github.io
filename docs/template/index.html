@@ -6,12 +6,12 @@
 	
 	<title>
         
-	Generic template post
+	Generic template post | Buckley's Chance
 
     </title>
 	
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	
+
 	<!-- JS -->
 	
 
@@ -41,15 +41,69 @@
 
 <body class="post">
 
-	
+	<div class="banner">
+		This site is a work-in-progress and has not yet launched. All content is provisional.
+	</div>
 
 	
 
 	<div class="frontmatter">
 
+		<a href="/" class="logotype masthead">
+			<span>Buckley's</span>
+			<div class="scene">
+				<div class="cube">
+					<div class="face front">
+						<div class="dots">
+							<b class="sp"></b> <b class="sp"></b> <b class="sp"></b>
+							<b class="sp"></b> <b class="dt"></b> <b class="sp"></b>
+							<b class="sp"></b> <b class="sp"></b> <b class="sp"></b>
+						</div>
+					</div>
+					<div class="face back">
+						<div class="dots">
+							<b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
+							<b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
+							<b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
+						</div>
+					</div>
+					<div class="face right">
+						<div class="dots">
+							<b class="dt"></b> <b class="sp"></b> <b class="sp"></b>
+							<b class="sp"></b> <b class="dt"></b> <b class="sp"></b>
+							<b class="sp"></b> <b class="sp"></b> <b class="dt"></b>
+						</div>
+					</div>
+					<div class="face left">
+						<div class="dots">
+							<b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
+							<b class="sp"></b> <b class="sp"></b> <b class="sp"></b>
+							<b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
+						</div>
+					</div>
+					<div class="face top">
+						<div class="dots">
+							<b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
+							<b class="sp"></b> <b class="dt"></b> <b class="sp"></b>
+							<b class="dt"></b> <b class="sp"></b> <b class="dt"></b>
+						</div>
+					</div>
+					<div class="face bottom">
+						<div class="dots">
+							<b class="sp"></b> <b class="sp"></b> <b class="dt"></b>
+							<b class="sp"></b> <b class="sp"></b> <b class="sp"></b>
+							<b class="dt"></b> <b class="sp"></b> <b class="sp"></b>
+						</div>
+					</div>
+				</div>
+			</div>
+			<span>Chance</span>
+		</a>
+		
 		<h1>Generic template post</h1>
 
 		<h2>This is a template post, with which to refine the stylesheets for posts in general.</h2>
+
 
 		<hr />
 
@@ -172,9 +226,9 @@ That’s one small step for [a] man, one giant leap for mankind.</p>
 <h1>Citations</h1>
 <p>Reference data can be included via a BibTeX file in the <code>/_data/</code> directory, with the filename referenced in the post metadata. A bibliography will then be generated and included using all the references in the BibTeX file.</p>
 <p>To insert a citation inline, use the syntax <code>[@xyz]</code> where <code>xyz</code> is the citation reference used in the BibTeX file.</p>
-<p>This will generate a fairly generic looking inline citation that looks like this <a href="#bib-ausdata" onmouseenter="create_modal_ref(this, 'ausdata')" onmouseleave="destroy_modal_ref()"><i class="fad fa-file-alt"></i></a>. The details of the citation will appear on hover, and clicking on the citation will scroll down to the relevant entry in the bibliography.</p>
+<p>This will generate a fairly generic looking inline citation that looks like this <a class="ref" onmouseenter="create_modal_ref(this, 'ausdata')" onmouseleave="destroy_modal_ref()"><i class="fad fa-file-alt"></i></a>. The details of the citation will appear on hover.</p>
 <p>This leaves it up to the author to decide exactly how to describe the citation in the text, be it author-date or something more organic. We might want a convention, but can figure it out as we go. Probably don’t want anything too intimidatingly formal.</p>
-<p>Here’s another citation for the fun of it, on custom vs. in-house tools in data journalism <a href="#bib-outofbox" onmouseenter="create_modal_ref(this, 'outofbox')" onmouseleave="destroy_modal_ref()"><i class="fad fa-file-alt"></i></a>.</p>
+<p>Here’s another citation for the fun of it, on custom vs. in-house tools in data journalism <a class="ref" onmouseenter="create_modal_ref(this, 'outofbox')" onmouseleave="destroy_modal_ref()"><i class="fad fa-file-alt"></i></a>.</p>
 
 
 		
@@ -238,6 +292,8 @@ That’s one small step for [a] man, one giant leap for mankind.</p>
 	</div>
 
 	<script>
+		// UTILITY FUNCTIONS FOR CITATION POPUPS.
+
 		var mouseOverModal = false;
 
 		function create_modal_ref(el, id) {
@@ -346,11 +402,11 @@ That’s one small step for [a] man, one giant leap for mankind.</p>
 			<nav>
 				<a href="/">Home</a>
 				<a href="/">About</a>
-				<a href="/">Support our work</a>
 				<a href="/">Contact us</a>
 
 				<div class="icons">
 					<a href="https://twitter.com/BuckleysPub"><i class="fab fa-twitter"></i></a>
+					<a href="https://github.com/buckleys-chance"><i class="fab fa-github"></i></a>
 					<a href="#"><i class="fas fa-rss"></i></a>
 				</div>
 			</nav>
