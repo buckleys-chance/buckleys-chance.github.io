@@ -26,7 +26,7 @@ $c1-light-tone: #e6f2d8;
 
 // SPACING
 
-$p: 20px;
+$p: 1.4rem;
 $h: #{$p / 2};
 
 // TODO - Refactor these.
@@ -526,12 +526,12 @@ body.post {
 	.csl-bib-body {
 		display: block;
 		width: 600px;
-		max-width: calc(100% - #{1.5 * $p});
+		max-width: calc(100% - #{1 * $p});
 		@include mpb(0 auto #{1 * $p} auto);
 	}
 }
 
-.frontmatter {
+body.post .frontmatter {
 	padding: #{2 * $p} 0 #{1 * $p} 0;
 	background-color: $c1-light;
 
@@ -562,6 +562,7 @@ body.post {
 		display: grid;
 		grid-template-columns: repeat(4, auto);
 		grid-template-rows: repeat(4, auto);
+		grid-column-gap: $p;
 
 		margin-bottom: 0;
 
@@ -582,7 +583,7 @@ body.post {
 				grid-column: 1 / 2;
 				grid-row: 1 / 2;
 			}
-			&.affiliation {
+			&.affiliations {
 				grid-column: 2 / 3;
 				grid-row: 1 / 2;
 			}
@@ -631,6 +632,65 @@ body.post {
 		}
 	}
 	
+
+}
+
+@media (max-width: 600px) {
+
+	body.post .frontmatter div.attributes {
+		grid-template-columns: .5fr auto auto .5fr;
+		grid-column-gap: 0;
+
+		h3 {
+			width: auto;
+			display: inline;
+
+			&.authors {
+				grid-column: 2 / 3;
+				grid-row: 1 / 2;
+				margin-right: $p;
+			}
+			&.affiliations {
+				grid-column: 3 / 5;
+				grid-row: 1 / 2;
+			}
+			&.published {
+				grid-column: 2 / 3;
+				grid-row: 3 / 4;
+				margin-right: $p;
+			}
+			&.updated {
+				grid-column: 3 / 4;
+				grid-row: 3 / 4;
+			}
+		}
+
+		.author-list {
+			grid-column: 2 / 3;
+			grid-row: 2 / 3;
+			margin-bottom: $h;
+			margin-right: $p;
+		}
+
+		.affiliation-list {
+			grid-column: 3 / 4;
+			grid-row: 2 / 3;
+			margin-bottom: $h;
+		}
+
+		time {
+			&.published {
+				grid-column: 2 / 3;
+				grid-row: 4 / 5;
+				margin-right: $p;
+			}
+			&.updated {
+				grid-column: 3 / 4;
+				grid-row: 4 / 5;
+			}
+		}
+
+	}
 }
 
 body.post article {
@@ -813,6 +873,42 @@ body.post article {
 			width: 400px;
 		}
 	}
+
+	@media (max-width: 650px) {
+
+		.fig {
+			&.side-1 {
+				clear: both;
+				float: none;
+				margin: 0 auto $p auto;
+				width: 200px;
+			}
+		}
+	}
+
+	@media (max-width: 860px) {
+
+		.fig {
+			&.side-2 {
+				clear: both;
+				float: none;
+				margin: 0 auto $p auto;
+				width: 300px;
+			}
+		}
+	}
+
+	@media (max-width: 1100px) {
+
+		.fig {
+			&.side-3 {
+				clear: both;
+				float: none;
+				margin: 0 auto $p auto;
+				width: 400px;
+			}
+		}
+	}
 	
 	div.placeholder {
 		background-color: $c1-light;
@@ -965,6 +1061,16 @@ body.post .backmatter {
 		margin-left: calc((100% - 600px) / 2 - 200px);
 		margin-right: 0;
 		color: $c1-dark;
+	}
+
+	@media (max-width: 1100px) {
+
+		h1 {
+			float: none;
+			width: 600px;
+			max-width: calc(100% - #{1 * $p});
+			margin: 0 auto $p auto;
+		}
 	}
 
 	a {
