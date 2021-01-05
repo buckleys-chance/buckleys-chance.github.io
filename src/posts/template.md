@@ -22,7 +22,8 @@
 	"acknowledgements": "Thanks to Joe Blow and Mary Doe.",
 	"references": "template.bib",
 	"katex": true,
-	"sidenotes": true
+	"flag": "BIT BORING",
+	"hidden": false
 }
 ---
 

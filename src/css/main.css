@@ -26,6 +26,16 @@ body {
   border: 0;
 }
 
+html, body {
+  min-height: 100vh;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 div.banner {
   width: 100%;
   padding: 0.7rem;
@@ -239,84 +249,65 @@ header.home nav div a:hover {
   --card-width: 10;
 }
 
-@media only screen and (max-width: 1700px) {
-  :root {
-    --card-width: 12;
-  }
-}
-@media only screen and (max-width: 1500px) {
-  :root {
-    --card-width: 15;
-  }
-}
-@media only screen and (max-width: 1200px) {
-  :root {
-    --card-width: 20;
-  }
-}
-@media only screen and (max-width: 900px) {
-  :root {
-    --card-width: 30;
-  }
-}
-@media only screen and (max-width: 600px) {
-  :root {
-    --card-width: 60;
-  }
-}
 main.home {
-  display: grid;
-  grid-template-columns: repeat(60, calc(100% / 60));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 1.4rem 0.35rem;
 }
 main.home .card {
-  grid-column-end: span var(--card-width);
-  grid-row-end: span 12;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   box-sizing: border-box;
-  padding: 20px;
-  border: 1px solid #f1f8e9;
-}
-main.home .card:hover {
-  background-color: #f1f8e9;
+  border: 1px solid #fdd835;
+  margin: 0.7rem;
+  padding: 1.4rem;
+  max-width: 100%;
 }
 main.home .card.blurb {
   background-color: #33691e;
-  border-color: #33691e;
+  border: none;
   color: #fff;
   font-size: 1.3rem;
   font-weight: 300;
   line-height: 1.7rem;
+  padding-bottom: calc(1.5* 1.4rem);
 }
-main.home .card.blurb a {
+main.home .card .flag {
   display: block;
-  color: #fff;
-  text-decoration-color: #558b2f;
-  text-align: right;
-  padding-top: 5px;
-}
-main.home .card.blurb a:hover {
-  text-decoration-color: #fff;
+  position: absolute;
+  top: -2.1rem;
+  right: -2.1rem;
+  padding: 0 0.7rem;
+  border-radius: 0.7rem;
+  background-color: #fdd835;
+  font-size: 0.8rem;
+  color: #141414;
 }
 main.home a.card {
-  cursor: pointer;
   text-decoration: none;
-  color: #141414;
-  font-weight: 400;
 }
-main.home a.card h1 {
+main.home a.card .content {
   display: block;
-  margin: 0 0 20px 0;
-  font-size: 1.5rem;
-  line-height: 1.75rem;
-  font-weight: 700;
+  position: relative;
+}
+main.home a.card .content h1 {
+  margin: 0 0 0.35rem 0;
+  font-size: 1.3rem;
+  line-height: 1.6rem;
   color: #33691e;
 }
-main.home a.card img {
-  display: block;
-  max-width: 100%;
-  margin: 0 0 20px 0;
+main.home a.card .content .description {
+  margin: 0 0 0.35rem 0;
+  line-height: 1.2rem;
+  color: #141414;
+}
+main.home a.card .content .metadata {
+  color: #141414;
+  font-size: 0.8rem;
+  font-weight: 300;
+  line-height: 1rem;
+}
+main.home a.card:hover .content h1 {
+  text-decoration: underline;
 }
 
 footer {

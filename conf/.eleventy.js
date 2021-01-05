@@ -14,11 +14,13 @@ module.exports = function(eleventyConfig) {
 
 
 	// Add filter to remove hidden posts from collections.post.
-	eleventyConfig.addFilter("removeHiddenPosts", function(collection) {
+	eleventyConfig.addFilter("removeHiddenPostsAndPages", function(collection) {
 		let rval = [];
 		for (let p of collection) {
 			if (!p.data.hasOwnProperty('hidden') || !p.data.hidden) {
-				rval.push(p);
+				if (!p.data.tags.includes('page')) {
+					rval.push(p);
+				}
 			}
 		}
 		return rval;
@@ -49,7 +51,7 @@ module.exports = function(eleventyConfig) {
 
 		var date = d.getDate();
 
-		return(`${date} ${months[d.getMonth()].substr(0,3)} ${d.getFullYear()}`);
+		return(`${date}&nbsp;${months[d.getMonth()].substr(0,3)}&nbsp;${d.getFullYear()}`);
 	});
 
 	// Add year filter for dates.
@@ -87,6 +89,24 @@ module.exports = function(eleventyConfig) {
 				txt += `${authors[k].name.last} and `;
 			} else if (k == authors.length - 1) {
 				txt += `${authors[k].name.last}`;
+			}
+		}
+		return txt;
+	});
+
+	eleventyConfig.addFilter("homepage_authors", function(authors) {
+		if (authors === undefined) {
+			return '';
+		}
+
+		let txt = '';
+		for (let k = 0; k < authors.length; k++) {
+			if (k < authors.length - 2) {
+				txt += `${authors[k].name.first}&nbsp;${authors[k].name.last}, `;
+			} else if (k == authors.length - 2) {
+				txt += `${authors[k].name.first}&nbsp;${authors[k].name.last} &amp; `;
+			} else if (k == authors.length - 1) {
+				txt += `${authors[k].name.first}&nbsp;${authors[k].name.last}`;
 			}
 		}
 		return txt;
@@ -188,6 +208,20 @@ module.exports = function(eleventyConfig) {
 			return new_html;
 
 		}
+
+	})
+
+	// Add filter to compute card width.
+
+	eleventyConfig.addFilter("card_width", function(postdata) {
+
+		let { title, description } = postdata;
+
+		title = title.split('').length;
+		description = description.split('').length;
+
+		// return description * 4.4;
+		return Math.max(title * 12, description * 4.4);
 
 	})
 

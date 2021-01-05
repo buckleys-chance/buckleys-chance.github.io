@@ -59,8 +59,8 @@
 		
 		<nav>
 			<div>
-				<a href="#">About</a>
-				<a href="#">Contact us</a>
+				<a href="/about/">About</a>
+				<a href="/subscribe/">Subscribe</a>
 			</div>
 			<div>
 				<a href="https://twitter.com/BuckleysPub" class="icon"><i class="fab fa-twitter"></i></a>
@@ -73,25 +73,40 @@
 
 	<main class="home">
 
-		{# <div class="card blurb">
-			Data-driven explorable explanations, with a focus on topics relevant to Australians.
+		<div class="card blurb" style="width: 390px;">
+			Data-driven explorable explanations, on topics relevant to Australians.
 
-			<div>
+			{# <div>
 				<a href="https://twitter.com/BuckleysPub">Subscribe for updates</a>
 				<a href="#">About</a>
-			</div>
-		</div> #}
+			</div> #}
+		</div>
 
-		{% for post in collections.post | removeHiddenPosts | reverse %}
+		{% for post in collections.post | removeHiddenPostsAndPages | reverse %}
 		
-		<a href="/{{ post.data.slug }}/" class="card">
-			<h1>{{ post.data.title }}</h1>
-
-			<img src="{{ post.data.cover }}" />
+		<a href="/{{ post.data.slug }}/" class="card" style="width: {{ post.data | card_width }}px;">
 			
-			{{ post.data.description }}
+			<div class="content">
+				<h1>{{ post.data.title }}</h1>
+				
+				<div class="description">
+					{{ post.data.description }}
+				</div>
 
-		</a>		
+				<div class="metadata">
+					{{ post.data.authors | homepage_authors | safe }}&nbsp;&bull;&nbsp;{{ post.data.date | readable_date | safe }}
+				</div>
+				
+				{% if post.data.flag %}
+					<div class="flag">{{ post.data.flag }}</div>
+				{% endif %}
+			</div>
+
+
+			
+			{# <img src="{{ post.data.cover }}" /> #}
+
+		</a>
 
 		{% endfor %}
 

@@ -89,45 +89,47 @@ permalink: /{{ post.data.slug }}/
 			</div>
 			<span>Chance</span>
 		</a>
-		
+
 		<h1>{{ post.data.title }}</h1>
 
 		<h2>{{ post.data.description }}</h2>
 
 
-		<hr />
+		{% if not post.data.tags.includes('page') %}
+			<hr />
 
-		<div class="attributes">
+			<div class="attributes">
 
-			<h3 class="authors">Authors</h3>
+				<h3 class="authors">Authors</h3>
 
-			<div class="author-list">
-				{% for a in post.data.authors %}
-					<a {% if a.name.url %}href="{{ a.name.url }}"{% endif %}>{{ a.name.first }} {{ a.name.last }}</a>
-				{% endfor %}
+				<div class="author-list">
+					{% for a in post.data.authors %}
+						<a {% if a.name.url %}href="{{ a.name.url }}"{% endif %}>{{ a.name.first }} {{ a.name.last }}</a>
+					{% endfor %}
+				</div>
+
+				<h3 class="affiliations">Affiliations</h3>
+
+				<div class="affiliation-list">
+					{% for a in post.data.authors %}
+						<a {% if a.affiliation.url %}href="{{ a.affiliation.url }}"{% endif %}>{{ a.affiliation.text }}</a>
+					{% endfor %}
+				</div>
+
+				<h3 class="published">Published</h3>
+				
+				<time class="published">{{ post.data.date | readable_date }}</time>
+
+				{% if post.data.date_updated %}
+
+					<h3 class="updated">Last&nbsp;Updated</h3>
+
+					<time class="updated">{{ post.data.date_updated | readable_date }}</time>
+
+				{% endif %}
+
 			</div>
-
-			<h3 class="affiliations">Affiliations</h3>
-
-			<div class="affiliation-list">
-				{% for a in post.data.authors %}
-					<a {% if a.affiliation.url %}href="{{ a.affiliation.url }}"{% endif %}>{{ a.affiliation.text }}</a>
-				{% endfor %}
-			</div>
-
-			<h3 class="published">Published</h3>
-			
-			<time class="published">{{ post.data.date | readable_date }}</time>
-
-			{% if post.data.date_updated %}
-
-				<h3 class="updated">Last&nbsp;Updated</h3>
-
-				<time class="updated">{{ post.data.date_updated | readable_date }}</time>
-
-			{% endif %}
-
-		</div>
+		{% endif %}
 
 	</div>
 
@@ -141,6 +143,8 @@ permalink: /{{ post.data.slug }}/
 
 	</article>
 
+
+	{% if not post.data.tags.includes('page') %}
 	<div class="backmatter">
 
 		{% if post.data.acknowledgements %}
@@ -186,6 +190,7 @@ permalink: /{{ post.data.slug }}/
 }</pre>
 
 	</div>
+	{% endif %}
 
 	<script>
 		// UTILITY FUNCTIONS FOR CITATION POPUPS.

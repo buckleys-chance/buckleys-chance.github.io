@@ -19,8 +19,6 @@
 	<script src="https://kit.fontawesome.com/3142a8f83c.js" crossorigin="anonymous" SameSite=Lax></script>
 	<link rel="stylesheet" href="/css/main.css">
 
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
-
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Philosopher:wght@700&family=Roboto+Mono:wght@300;400;500;700&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
 
@@ -28,11 +26,15 @@
 
 <body class="{% block body_class %}{% endblock %}">
 
+	<div>
+
 	<div class="banner">
 		This site is a work-in-progress and has not yet launched. All content is provisional.
 	</div>
 
 	{% block content %}{% endblock %}
+
+	</div>
 
 	<footer>
 
@@ -92,8 +94,9 @@
 
 			<nav>
 				<a href="/">Home</a>
-				<a href="/">About</a>
-				<a href="/">Contact us</a>
+				<a href="/about/">About</a>
+				<a href="/subscribe/">Subscribe</a>
+				<a href="/contact/">Contact</a>
 
 				<div class="icons">
 					<a href="https://twitter.com/BuckleysPub"><i class="fab fa-twitter"></i></a>
