@@ -68,8 +68,10 @@ html {
 	scroll-behavior: smooth;
 
 	background-color: $default-background;
-	font: 400 100%/1.5rem $sans-serif-stack;
+	font: 400 16px/1.5rem $sans-serif-stack;
 	color: $default-text;
+
+	text-size-adjust: none;
 	
 	overflow-x: hidden;
 	overflow-y: scroll;

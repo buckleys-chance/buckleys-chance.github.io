@@ -8,8 +8,9 @@ html {
   text-rendering: optimizeLegibility;
   scroll-behavior: smooth;
   background-color: #fff;
-  font: 400 100%/1.5rem "Roboto", "Helvetica", "Arial", sans-serif;
+  font: 400 16px/1.5rem "Roboto", "Helvetica", "Arial", sans-serif;
   color: #141414;
+  text-size-adjust: none;
   overflow-x: hidden;
   overflow-y: scroll;
   min-height: 100vh;
