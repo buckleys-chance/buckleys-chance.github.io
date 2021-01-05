@@ -118,13 +118,13 @@ permalink: /{{ post.data.slug }}/
 
 				<h3 class="published">Published</h3>
 				
-				<time class="published">{{ post.data.date | readable_date }}</time>
+				<time class="published">{{ post.data.date | readable_date | safe }}</time>
 
 				{% if post.data.date_updated %}
 
 					<h3 class="updated">Last&nbsp;Updated</h3>
 
-					<time class="updated">{{ post.data.date_updated | readable_date }}</time>
+					<time class="updated">{{ post.data.date_updated | readable_date | safe }}</time>
 
 				{% endif %}
 
