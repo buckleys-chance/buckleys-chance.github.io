@@ -126,6 +126,10 @@ module.exports = function(eleventyConfig) {
 			html;
 
 		refs = JSON.parse(refs);
+
+		if (refs.length == 0) {
+			return '';
+		}
 		
 		// Sort refs alphabetically by first author.
 		refs.sort((a, b) => {
@@ -163,7 +167,7 @@ module.exports = function(eleventyConfig) {
 			return ref.issued['date-parts'][0][0];
 		}
 
-		html = `<div class="csl-bib-body">`;
+		html = `<h1>References</h1><div class="csl-bib-body">`;
 		for (let ref of refs) {
 			html += `
 				<div id="bib-${ref.id}" data-csl-entry-id="${ref.id}" class="csl-entry">
@@ -232,6 +236,7 @@ module.exports = function(eleventyConfig) {
 	};
 	var md = require('markdown-it')(options)
 		.use(require('markdown-it-footnote'))
+		.use(require('markdown-it-deflist'))
 		.use(require('markdown-it-attribution'));
 		// .use(require("markdown-it-anchor"))
 		// .use(require("markdown-it-toc-done-right"));
@@ -321,6 +326,7 @@ module.exports = function(eleventyConfig) {
 		typographer: true
 	};
 	var markdownLib = markdownIt(options)
+		.use(require('markdown-it-deflist'))
 		.use(markdownItFootnote);
 		// .use(markdownItAnchor);
 		// .use(markdownItTOC, {

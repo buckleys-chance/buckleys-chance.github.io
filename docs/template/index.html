@@ -24,6 +24,11 @@
 
 	
 
+	
+
+	
+		<meta name="robots" content="noindex">
+		<meta name="googlebot" content="noindex">
 	    
 
 
@@ -167,12 +172,21 @@
 <li>The Markup</li>
 <li>Guardian Datablog</li>
 </ol>
-<p>… and unordered lists look like this.</p>
+<p>… and unordered lists look like this…</p>
 <ul>
 <li>The Pudding</li>
 <li>Distil</li>
 <li>Stubborn Mule</li>
 </ul>
+<p>… and definition lists look like this.</p>
+<dl>
+<dt>First concept</dt>
+<dd>Definition of first concept.</dd>
+<dt>Concept #2</dt>
+<dd>Definition of second concept.</dd>
+<dt>Another concept</dt>
+<dd>Explanation for third concept.</dd>
+</dl>
 <hr>
 <h1>Blockquotes</h1>
 <p>Quotes can be uncited …</p>
@@ -228,7 +242,7 @@ That’s one small step for [a] man, one giant leap for mankind.</p>
 <h1>Citations</h1>
 <p>Reference data can be included via a BibTeX file in the <code>/_data/</code> directory, with the filename referenced in the post metadata. A bibliography will then be generated and included using all the references in the BibTeX file.</p>
 <p>To insert a citation inline, use the syntax <code>[@xyz]</code> where <code>xyz</code> is the citation reference used in the BibTeX file.</p>
-<p>This will generate a fairly generic looking inline citation that looks like this <a class="ref" onmouseenter="create_modal_ref(this, 'ausdata')" onmouseleave="destroy_modal_ref()"><i class="fad fa-file-alt"></i></a>. The details of the citation will appear on hover.</p>
+<p>{# This will generate a fairly generic looking inline citation that looks like this <a class="ref" onmouseenter="create_modal_ref(this, 'ausdata')" onmouseleave="destroy_modal_ref()"><i class="fad fa-file-alt"></i></a>. The details of the citation will appear on hover. #}</p>
 <p>This leaves it up to the author to decide exactly how to describe the citation in the text, be it author-date or something more organic. We might want a convention, but can figure it out as we go. Probably don’t want anything too intimidatingly formal.</p>
 <p>Here’s another citation for the fun of it, on custom vs. in-house tools in data journalism <a class="ref" onmouseenter="create_modal_ref(this, 'outofbox')" onmouseleave="destroy_modal_ref()"><i class="fad fa-file-alt"></i></a>.</p>
 
@@ -259,8 +273,7 @@ That’s one small step for [a] man, one giant leap for mankind.</p>
 		
 
 		
-			<h1>References</h1>
-			<div class="csl-bib-body">
+			<h1>References</h1><div class="csl-bib-body">
 				<div id="bib-outofbox" data-csl-entry-id="outofbox" class="csl-entry">
 					<span class="title">Out-of-the-box vs. in-house tools: how do they affect data journalism in Australia?</span> <a href="https://doi.org/10.1177/1329878X20961569">[link]</a> <br />
 					de-Lima-Santos, M., Schapals, A. and Bruns, A., 2020. Media International Australia.
@@ -346,6 +359,8 @@ That’s one small step for [a] man, one giant leap for mankind.</p>
 			}, 150);
 		}
 	</script>
+
+	
 
 
 

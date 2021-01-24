@@ -1,4 +1,12 @@
 @charset "UTF-8";
+:root {
+  --p: 1.4rem;
+  --h: 0.7rem;
+  --q: 0.35rem;
+  --c1-dark: #33691e;
+  --c1-light: #f1f8e9;
+}
+
 html {
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
@@ -371,7 +379,7 @@ body.post h1, body.post h2, body.post h3, body.post h4, body.post h5, body.post 
 body.post p,
 body.post blockquote,
 body.post figure,
-body.post ul, body.post ol,
+body.post ul, body.post ol, body.post dl,
 body.post pre,
 body.post div.attributes,
 body.post .csl-bib-body {
@@ -615,6 +623,15 @@ body.post article ol li::before {
   left: 0;
   color: #33691e;
 }
+body.post article dl dt {
+  color: #33691e;
+  font-style: italic;
+  padding-bottom: 0.7rem;
+}
+body.post article dl dd {
+  margin: 0;
+  padding: 0 0 0.7rem 2.1rem;
+}
 body.post article span.katex-display {
   display: block;
   overflow-x: scroll;
@@ -674,6 +691,55 @@ body.post article .fig.side-3 {
   margin-left: 1.4rem;
   margin-right: calc((100% - 600px) / 2 - 200px);
   width: 400px;
+}
+body.post article .fig.more-margin-1 {
+  margin-top: 2.8rem;
+  margin-bottom: 2.8rem;
+}
+body.post article .fig.more-margin-2 {
+  margin-top: 5.6rem;
+  margin-bottom: 5.6rem;
+}
+body.post article .fig.more-margin-3 {
+  margin-top: 11.2rem;
+  margin-bottom: 11.2rem;
+}
+body.post article .fig img {
+  width: 100%;
+  max-width: 100%;
+}
+body.post article .fig svg {
+  width: 100%;
+  overflow: visible;
+}
+body.post article .fig table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  --bcol: #33691e;
+  font-size: 0.9rem;
+}
+body.post article .fig table tr {
+  border-bottom: 1px solid #f1f8e9;
+}
+body.post article .fig table tr td, body.post article .fig table tr th {
+  border-right: 1px solid var(--bcol);
+  padding: calc(0.35rem / 2) 0.35rem;
+}
+body.post article .fig table tr td:last-of-type, body.post article .fig table tr th:last-of-type {
+  border: none;
+}
+body.post article .fig table tr td.shade, body.post article .fig table tr th.shade {
+  background-color: #f1f8e9;
+}
+body.post article .fig table thead {
+  border-top: 3px double var(--bcol);
+  border-bottom: 3px double var(--bcol);
+  color: #33691e;
+}
+body.post article .fig table tbody {
+  border-top: 3px double var(--bcol);
+  border-bottom: 3px double var(--bcol);
 }
 @media (max-width: 650px) {
   body.post article .fig.side-1 {

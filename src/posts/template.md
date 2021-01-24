@@ -23,11 +23,9 @@
 	"references": "template.bib",
 	"katex": true,
 	"flag": "BIT BORING",
-	"hidden": false
+	"hidden": true
 }
 ---
-
-
 
 Articles usually start with an introduction, in the form of a paragraph like this. Then, they might be broken up into sections, using titles like the one below.
 
@@ -57,11 +55,22 @@ Ordered lists look this ...
 2. The Markup
 3. Guardian Datablog
 
-... and unordered lists look like this.
+... and unordered lists look like this...
 
 - The Pudding
 - Distil
 - Stubborn Mule
+
+... and definition lists look like this.
+
+First concept
+: Definition of first concept.
+
+Concept #2
+: Definition of second concept.
+
+Another concept
+: Explanation for third concept.
 
 ---
 
@@ -146,7 +155,7 @@ Reference data can be included via a BibTeX file in the `/_data/` directory, wit
 
 To insert a citation inline, use the syntax `[@xyz]` where `xyz` is the citation reference used in the BibTeX file.
 
-This will generate a fairly generic looking inline citation that looks like this [@ausdata]. The details of the citation will appear on hover.
+{# This will generate a fairly generic looking inline citation that looks like this [@ausdata]. The details of the citation will appear on hover. #}
 
 This leaves it up to the author to decide exactly how to describe the citation in the text, be it author-date or something more organic. We might want a convention, but can figure it out as we go. Probably don't want anything too intimidatingly formal.
 

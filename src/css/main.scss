@@ -64,6 +64,15 @@ $margin: 60px;
 // Replaces standard box model with one where width/height are the actual
 // visable width/height. Padding & border cut into the box.
 
+:root {
+	--p: #{$p};
+	--h: #{$h};
+	--q: #{$q};
+
+	--c1-dark: #{$c1-dark};
+	--c1-light: #{$c1-light};
+}
+
 html {
 	box-sizing: border-box;
 	@include cross-browser('font-smoothing', antialiased);
@@ -632,7 +641,7 @@ body.post {
 	p,
 	blockquote,
 	figure,
-	ul, ol,
+	ul, ol, dl,
 	pre,
 	div.attributes,
 	.csl-bib-body {
@@ -927,6 +936,21 @@ body.post article {
 		}
 	}
 
+	dl {
+		dt {
+			color: $c1-dark;
+			font-style: italic;
+			padding-bottom: #{$h};
+			// font-weight: 300;
+		}
+
+		dd {
+			margin: 0;
+			padding: 0 0 #{$h} #{1.5 * $p};
+
+		}
+	}
+
 	span.katex-display {
 		display: block;
 		overflow-x: scroll;
@@ -996,6 +1020,82 @@ body.post article {
 			margin-left: $p;
 			margin-right: calc((100% - 600px) / 2 - 200px);
 			width: 400px;
+		}
+
+		&.more-margin-1 {
+			margin-top: #{2 * $p};
+			margin-bottom: #{2 * $p};
+		}
+
+		&.more-margin-2 {
+			margin-top: #{4 * $p};
+			margin-bottom: #{4 * $p};
+		}
+
+		&.more-margin-3 {
+			margin-top: #{8 * $p};
+			margin-bottom: #{8 * $p};
+		}
+
+		img {
+			width: 100%;
+			max-width: 100%;
+		}
+
+		svg {
+			width: 100%;
+			overflow: visible;
+
+			// background-color: #fedb4a;
+
+		}
+
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			text-align: left;
+
+
+			--bcol: #{$c1-dark};
+			
+			// font-family: $monospace-stack;
+			font-size: .9rem;
+
+			tr {
+
+				border-bottom: 1px solid $c1-light;
+
+				td, th {
+					border-right: 1px solid var(--bcol);
+					padding: calc(#{$q} / 2) $q;
+
+					&:first-of-type {
+						// padding-left: 0;
+					}
+
+					&:last-of-type {
+						border: none;
+						// padding-right: 0;
+					}
+
+					&.shade {
+						background-color: $c1-light;
+					}
+				}
+			}
+
+			thead {
+				border-top: 3px double var(--bcol);
+				border-bottom: 3px double var(--bcol);
+
+				color: $c1-dark;
+			}
+
+			tbody {
+				border-top: 3px double var(--bcol);
+				border-bottom: 3px double var(--bcol);
+				
+			}
 		}
 	}
 

@@ -26,6 +26,12 @@ permalink: /{{ post.data.slug }}/
 		<script src="https://d3js.org/d3.v4.min.js"></script>
 	{% endif %}
 
+	{% if post.data.css %}
+		{% for file in post.data.css %}
+			<link rel="stylesheet" type="text/css" href="/posts/{{ post.data.slug }}/{{ file }}" />
+		{% endfor %}
+	{% endif %}
+
 	{% if post.data.hidden %}
 		<meta name="robots" content="noindex">
 		<meta name="googlebot" content="noindex">
@@ -159,7 +165,6 @@ permalink: /{{ post.data.slug }}/
 		
 
 		{% if post.data.references %}
-			<h1>References</h1>
 			{{ post.data.references | bibliography | safe }}
 		{% endif %}
 		
@@ -242,5 +247,11 @@ permalink: /{{ post.data.slug }}/
 			}, 150);
 		}
 	</script>
+
+	{% if post.data.js %}
+		{% for file in post.data.js %}
+			<script src="/posts/{{ post.data.slug }}/{{ file }}"></script>
+		{% endfor %}
+	{% endif %}
 
 {% endblock %}
