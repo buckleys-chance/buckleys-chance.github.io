@@ -33,7 +33,7 @@ We aim for our work to be...
 : We seek to write articles that are true and accurately convey the uncertainty and limitations of the analysis they describe. Often, we will collaborate with experts to help ensure this is the case. Any errors discovered after publication will be promptly corrected, and a record of corrections made will appear below each post.
 
 ...insightful
-: We aim to provide new perspectives or ways of thinking about a topic.
+: We aim to provide new perspectives or ways of thinking about the topics we cover.
 
 ...evergreen
 : We want our work to be relevant for many years. In some cases, this means we periodically update articles as new data becomes available.
