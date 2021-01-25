@@ -42,6 +42,17 @@
 				"text": "University of Melbourne",
 				"url": "https://unimelb.edu.au"
 			}
+		},
+		{
+			"name": {
+				"first": "...",
+				"last": "...",
+				"url": "#"
+			},
+			"affiliation": {
+				"text": "...",
+				"url": "#"
+			}
 		}
 		
 	],
@@ -55,21 +66,13 @@
 }
 ---
 
-#### What is this work? Why is it useful?
-
 Introduce the research.
 
 List side-effects of restrictions, to make concrete. Both negative and positive. Lost revenue, unemployment, depression, anxiety, suicide, domestic violence, alcohol consumption, road traffic crashes, work-life balance, lost education, deferred medical treatment / screening, family time, access to green space, ...
 
-#### What restriction levels are included in the modelling?
+---
 
-Clearly present the different stages. Probably in a table.
-
-- No restrictions
-- Stage 1
-- Stage 2
-- Stage 3
-- Stage 4
+# Stages and Strategies
 
 <div class="fig outset-3">
 <table>
@@ -94,24 +97,25 @@ Clearly present the different stages. Probably in a table.
 </table>
 </div>
 
-#### What policy scenarios are modelled?
-
-Clearly describe the different triggers for switching between levels.    
-
-- aggressive elimination
-- moderate elimination
-- tight suppression
-- loose suppression
-
-The following table is for aggressive elimination. Will create toggle to go between each policy regime.
 
 <div class="fig full-width-inset more-margin-3">
 	<nav class="strategies">
-		<span>Strategies:</span>
-		<button class="active">aggressive elimination</button>
-		<button>moderate elimination</button>
-		<button>tight suppression</button>
-		<button>loose suppression</button>
+		<button class="active">
+			<h1>Aggressive Elimination</h1>
+			<p>Aim for no community transmission, quickly.</p>
+		</button>
+		<button>
+			<h1>Moderate Elimination</h1>
+			<p>Aim for no community transmission, less quickly.</p>
+		</button>
+		<button>
+			<h1>Tight Suppression</h1>
+			<p>Aim for 1-5 new cases per million people per day.</p>
+		</button>
+		<button>
+			<h1>Loose Suppression</h1>
+			<p>Aim for 5-25 new cases per million people per day.</p>
+		</button>
 	</nav>
 	<svg id="fig-strategies">
 		<defs>

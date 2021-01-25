@@ -3,7 +3,7 @@
 	"permalink": false,
 	"templateEngineOverride": false,
 	"tags": ["post", "page"],
-	"title": "About Us",
+	"title": "About",
 	"date": "2021-01-02",
 	"date_updated": "2021-01-02",
 	"slug": "about",
@@ -49,7 +49,7 @@ We aim for our work to be...
 	<img src="/img/luke.jpg" />
 </div>-->
 
-**Luke Thorburn** is a co-founder of Buckley's Chance and a researcher at the University of Melbourne in artificial intelligence and collective reasoning. [<i class="fad fa-home"></i>](https://lukethorburn.com/) [<i class="fab fa-twitter"></i>](https://twitter.com/lcthorburn) [<i class="fad fa-envelope"></i>](mailto:luke@buckleys.pub)
+**Luke Thorburn** is a co-founder of Buckley's Chance and a researcher at the University of Melbourne in artificial intelligence and collective reasoning. [<i class="fad fa-home"></i>](https://lukethorburn.com/)&nbsp;[<i class="fab fa-twitter"></i>](https://twitter.com/lcthorburn)&nbsp;[<i class="fad fa-envelope"></i>](mailto:luke@buckleys.pub)
 
 <!--<div class="fig side-1">
 	<img src="/img/luke.jpg" />

@@ -9,7 +9,7 @@
 var width = document.querySelector("#fig-strategies").clientWidth,
 	ratio = .75,
 	height = 300, //ratio * width,
-	m = [25, 0, 0, 120],
+	m = [0, 0, 40, 120],
 	w = width - m[1] - m[3],
 	h = height - m[0] - m[2];
 
@@ -42,7 +42,7 @@ var xScale, yScale;
 // DRAW ========================================================================= //
 // ============================================================================== //
 
-var stages = ["1", "1b", "2", "3", "4", "TRIGGER"],
+var stages = ["TRIGGER", "1", "1b", "2", "3", "4"],
 	transitions = [];
 
 for (let s1 of stages) {
@@ -164,7 +164,6 @@ var stageCols = {
 // grad.append('stop').attr('offset', '0%').attr('stop-color', stageCols["1"]);
 // grad.append('stop').attr('offset', '100%').attr('stop-color', stageCols["4"]);
 
-
 function draw() {
 
 	yScale = d3.scaleBand()
@@ -194,8 +193,8 @@ function draw() {
 	}
 
 
-	let brB = yScale.range()[0] - 3,
-		brT = yScale.range()[0] - m[0]/2;
+	let brB = yScale.range()[1] + 10,
+		brT = yScale.range()[1] + m[2]/2;
 
 	bracketL = svg.append("path")
 		.attr("class", "alt-view")
@@ -212,7 +211,7 @@ function draw() {
 	bracketTextL = svg.append("text")
 		.attr("class","alt-view")
 		.attr("x", xScaleGroup("C"))
-		.attr("y", yScale.range()[0] - m[0]/2)
+		.attr("y", yScale.range()[1] + m[2]/2)
 		.text("TIGHTENING")
 		.attr("alignment-baseline", "middle")
 		.attr("text-anchor", "middle")
@@ -223,7 +222,7 @@ function draw() {
 	bracketTextL = svg.append("text")
 		.attr("class","alt-view")
 		.attr("x", xScaleGroup("C"))
-		.attr("y", yScale.range()[0] - m[0]/2)
+		.attr("y", yScale.range()[1] + m[2]/2)
 		.text("TIGHTENING")
 		.attr("alignment-baseline", "middle")
 		.attr("text-anchor", "middle")
@@ -232,7 +231,7 @@ function draw() {
 	bracketTextR = svg.append("text")
 		.attr("class","alt-view")
 		.attr("x", xScaleGroup("G"))
-		.attr("y", yScale.range()[0] - m[0]/2)
+		.attr("y", yScale.range()[1] + m[2]/2)
 		.text("EASING")
 		.attr("alignment-baseline", "middle")
 		.attr("text-anchor", "middle")
@@ -243,7 +242,7 @@ function draw() {
 	bracketTextR = svg.append("text")
 		.attr("class","alt-view")
 		.attr("x", xScaleGroup("G"))
-		.attr("y", yScale.range()[0] - m[0]/2)
+		.attr("y", yScale.range()[1] + m[2]/2)
 		.text("EASING")
 		.attr("alignment-baseline", "middle")
 		.attr("text-anchor", "middle")
@@ -378,6 +377,61 @@ function draw() {
 		// .attr("fill", d => stageCols[d.from]);
 		// .attr("fill", "#ffffff");
 	
+	directions = svg.append("g")
+		.attr("class", "directions alt-view")
+		.selectAll("path");
+	directions
+		.data(As.filter(d => d.hasOwnProperty("from")))
+		.enter()
+		.append("path")
+		.attr("class", d => `alt-view direction direction-from-${d.from}`)
+		.attr("d", d => {
+
+			let isTightening = stages.indexOf(d.from) < stages.indexOf(d.to);
+
+			let y = 4,
+				z = ybw + 15,
+				a = 2*y,
+				o = 10 + (ybw/2) - (y/2)
+				r = 4*y,
+				ra = (r + y) * (1 - (1/Math.sqrt(2))) + 2, // TODO - use an SVG arc then remove the +2 kluge
+				v = 10,
+				s = (isTightening ? 1 : -1);
+			
+			let x0 = xScaleGroup(d.group) + aScales[1](0) + aScales[4].bandwidth()*.15 + aw - ybw - 10,
+				y0 = yScale(d.from) + yScale.bandwidth()/2,
+				pth = `M ${x0} ${y0} `;
+
+			pth = pth +
+					`L ${x0} ${y0 - s*(y/2)} ` +
+					`L ${x0 + z} ${y0 - s*(y/2)} ` +
+					`L ${x0 + z} ${y0 - s*(y/2) - s*y} ` +
+					`L ${x0 + z + a} ${y0} ` +
+					`L ${x0 + z} ${y0 + s*(y/2) + s*y} ` +
+					`L ${x0 + z} ${y0 + s*(y/2)} ` +
+					`L ${x0 + o + y - ra} ${y0  - s*(y/2) + s*y} ` + // v1
+					`Q ${x0 + o + y} ${y0 - s*(y/2) + s*y}, ${x0 + o + y} ${y0 - s*(y/2) + s*y + s*r} ` + // v2
+					`L ${x0 + o + y} ${y0 - s*(y/2) + s*y + s*r + s*v} ` + // v3
+					`L ${x0 + o + 2*y} ${y0 - s*(y/2) + s*y + s*r + s*v} ` + // v4
+					`L ${x0 + o + (y/2)} ${y0 - s*(y/2) + s*y + s*r + s*v + s*a} ` + // v5
+					`L ${x0 + o - y} ${y0 - s*(y/2) + s*y + s*r + s*v} ` + // v6
+					`L ${x0 + o} ${y0 - s*(y/2) + s*y + s*r + s*v} ` + // v7
+					`L ${x0 + o} ${y0 - s*(y/2) + s*y + s*r} ` + // v8
+					`Q ${x0 + o} ${y0 - s*(y/2) + s*y}, ${x0 + o - r} ${y0 - s*(y/2) + s*y} ` + // v9
+					`L ${x0} ${y0 -s*(y/2) + s*y} ` +
+					`Z`;
+
+			console.log(pth);
+			
+			return pth;
+		})
+		.attr("stroke", "#000000")
+		.attr("fill", "#ffffff")
+		.attr("opacity", d => {
+			return (d.from == "1") ? 1 : 0;
+		});
+		
+
 	hoverRows = svg.append("g")
 		.attr("class","hover-rows alt-view")
 		.selectAll("path");
@@ -400,6 +454,9 @@ function draw() {
 
 			d3.selectAll(`.arrow`).attr('opacity', 0);
 			d3.selectAll(`.arrow-from-${d}`).attr('opacity', 1);
+
+			d3.selectAll(`.direction`).attr('opacity', 0);
+			d3.selectAll(`.direction-from-${d}`).attr('opacity', 1);
 		});
 
 
