@@ -123,6 +123,13 @@
 	
 
 	<script>
+		// UTILITY FUNCTIONS FOR COLLAPSIBLE SECTIONS
+
+		document.querySelector('.collapsible')
+			.addEventListener("click", function(ev) {
+				ev.target.classList.toggle('collapsed');
+			})
+
 		// UTILITY FUNCTIONS FOR CITATION POPUPS.
 
 		var mouseOverModal = false;
@@ -248,7 +255,7 @@
 			</nav>
 
 			<div class="colophon">
-				<p>ISSN: 1234-5678. All our work is made available under a Creative Commons xyz-123 license.</p>
+				<p>Distributed under a Creative Commons license (<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>).</p>
 			</div>
 		</div> 
 

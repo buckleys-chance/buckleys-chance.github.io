@@ -120,8 +120,14 @@ Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
 
 Example graphs using `d3.js` and either `Vega` or `Vegalite` will be placed here.
 
+<div class="collapsible collapsed"
+	data-text="Click to reveal a collapsible section.">
 
----
+# Collapsible Sections
+
+It can be helpful to have more technical sections collapsed by default so that they don't deter more casual readers. This is one such section.
+
+</div>
 
 # Formulae
 
@@ -155,7 +161,7 @@ Reference data can be included via a BibTeX file in the `/_data/` directory, wit
 
 To insert a citation inline, use the syntax `[@xyz]` where `xyz` is the citation reference used in the BibTeX file.
 
-{# This will generate a fairly generic looking inline citation that looks like this [@ausdata]. The details of the citation will appear on hover. #}
+This will generate a fairly generic looking inline citation that looks like this [@ausdata]. The details of the citation will appear on hover.
 
 This leaves it up to the author to decide exactly how to describe the citation in the text, be it author-date or something more organic. We might want a convention, but can figure it out as we go. Probably don't want anything too intimidatingly formal.
 

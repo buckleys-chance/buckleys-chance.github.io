@@ -375,6 +375,9 @@ footer > div .colophon {
 footer > div .colophon p {
   margin: 5px 0 0 0;
 }
+footer > div .colophon p a {
+  color: #558b2f;
+}
 
 body.post h1, body.post h2, body.post h3, body.post h4, body.post h5, body.post h6,
 body.post p,
@@ -643,6 +646,26 @@ body.post article span.katex-display::-webkit-scrollbar {
 }
 body.post article span.katex-display::-webkit-scrollbar-thumb {
   background-color: #33691e;
+}
+body.post article .collapsible {
+  background-color: #f6f6f6;
+  margin: 2.8rem 0;
+  padding: 1.4rem 0 0.1px 0;
+}
+body.post article .collapsible.collapsed {
+  cursor: pointer;
+}
+body.post article .collapsible.collapsed > * {
+  display: none;
+}
+body.post article .collapsible.collapsed::before {
+  display: block;
+  width: 600px;
+  max-width: calc(100% - 1.4rem);
+  margin: 0 auto 1.4rem auto;
+  padding: 0;
+  border: 0;
+  content: attr(data-text);
 }
 body.post article .fig {
   margin: 0 auto 1.4rem auto;

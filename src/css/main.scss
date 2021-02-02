@@ -628,6 +628,10 @@ footer {
 
 			p {
 				margin: 5px 0 0 0;
+
+				a {
+					color: $c1-dark-tint;
+				}
 			}
 		}
 	}
@@ -964,6 +968,30 @@ body.post article {
 		 
 		&::-webkit-scrollbar-thumb {
 			background-color: $c1-dark;
+		}
+	}
+
+	.collapsible {
+		background-color: #f6f6f6;
+		margin: #{2 * $p} 0;
+		padding: $p 0 .1px 0;
+
+		&.collapsed {
+
+			cursor: pointer;
+
+			& > * {
+				display: none;
+			}
+
+			&::before {
+				display: block;
+				width: 600px;
+				max-width: calc(100% - #{1 * $p});
+				@include mpb(0 auto #{1 * $p} auto);
+				content: attr(data-text);
+			}
+
 		}
 	}
 

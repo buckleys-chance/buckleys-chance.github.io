@@ -225,7 +225,11 @@ That’s one small step for [a] man, one giant leap for mankind.</p>
 <p>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vestibulum vitae nisi dui. Praesent tellus mauris, pellentesque eget lorem non, laoreet condimentum velit. Sed sagittis enim enim, non tincidunt nunc tempor eget. Morbi lacus nisi, accumsan ac augue ac, rhoncus mollis orci. Nullam nec imperdiet ipsum. Etiam fringilla volutpat lobortis. Ut et diam efficitur, facilisis urna in, iaculis erat. Morbi et molestie purus. Mauris interdum, mauris sed euismod cursus, ex dolor vehicula neque, at egestas dui libero tempus magna.</p>
 <h2>Graphing libraries</h2>
 <p>Example graphs using <code>d3.js</code> and either <code>Vega</code> or <code>Vegalite</code> will be placed here.</p>
-<hr>
+<div class="collapsible collapsed"
+	data-text="Click to reveal a collapsible section.">
+<h1>Collapsible Sections</h1>
+<p>It can be helpful to have more technical sections collapsed by default so that they don’t deter more casual readers. This is one such section.</p>
+</div>
 <h1>Formulae</h1>
 <p>You can include formulae using LaTeX notation. We use the <a href="https://katex.org/">KaTeX</a> library to render equations.</p>
 <p>$$ \frac{1}{\Bigl(\sqrt{\phi \sqrt{5}}-\phi\Bigr) e^{\frac25 \pi}} = 1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}} {1+\frac{e^{-8\pi}} {1+\cdots} } } } $$</p>
@@ -246,7 +250,7 @@ That’s one small step for [a] man, one giant leap for mankind.</p>
 <h1>Citations</h1>
 <p>Reference data can be included via a BibTeX file in the <code>/_data/</code> directory, with the filename referenced in the post metadata. A bibliography will then be generated and included using all the references in the BibTeX file.</p>
 <p>To insert a citation inline, use the syntax <code>[@xyz]</code> where <code>xyz</code> is the citation reference used in the BibTeX file.</p>
-<p>{# This will generate a fairly generic looking inline citation that looks like this <a class="ref" onmouseenter="create_modal_ref(this, 'ausdata')" onmouseleave="destroy_modal_ref()"><i class="fad fa-file-alt"></i></a>. The details of the citation will appear on hover. #}</p>
+<p>This will generate a fairly generic looking inline citation that looks like this <a class="ref" onmouseenter="create_modal_ref(this, 'ausdata')" onmouseleave="destroy_modal_ref()"><i class="fad fa-file-alt"></i></a>. The details of the citation will appear on hover.</p>
 <p>This leaves it up to the author to decide exactly how to describe the citation in the text, be it author-date or something more organic. We might want a convention, but can figure it out as we go. Probably don’t want anything too intimidatingly formal.</p>
 <p>Here’s another citation for the fun of it, on custom vs. in-house tools in data journalism <a class="ref" onmouseenter="create_modal_ref(this, 'outofbox')" onmouseleave="destroy_modal_ref()"><i class="fad fa-file-alt"></i></a>.</p>
 
@@ -314,6 +318,13 @@ That’s one small step for [a] man, one giant leap for mankind.</p>
 	
 
 	<script>
+		// UTILITY FUNCTIONS FOR COLLAPSIBLE SECTIONS
+
+		document.querySelector('.collapsible')
+			.addEventListener("click", function(ev) {
+				ev.target.classList.toggle('collapsed');
+			})
+
 		// UTILITY FUNCTIONS FOR CITATION POPUPS.
 
 		var mouseOverModal = false;
@@ -439,7 +450,7 @@ That’s one small step for [a] man, one giant leap for mankind.</p>
 			</nav>
 
 			<div class="colophon">
-				<p>ISSN: 1234-5678. All our work is made available under a Creative Commons xyz-123 license.</p>
+				<p>Distributed under a Creative Commons license (<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>).</p>
 			</div>
 		</div> 
 
