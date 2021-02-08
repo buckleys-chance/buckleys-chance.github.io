@@ -15,7 +15,7 @@
 We'll send you a link to each new post.
 
 <div id="revue-embed" class="newsletter-signup">
-	<form action="https://newsletter.buckleys.pub/add_subscriber" method="post" id="revue-form" name="revue-form"  target="_blank">
+	<form action="https://www.getrevue.co/profile/buckleys-chance/add_subscriber" method="post" id="revue-form" name="revue-form"  target="_blank">
 		<div class="revue-form-group">
 			<label for="member_email">Email address</label>
 			<input class="revue-form-field" placeholder="Your email address" type="email" name="member[email]" id="member_email">
