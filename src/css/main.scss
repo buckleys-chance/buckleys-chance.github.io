@@ -1374,6 +1374,10 @@ body.post article {
 						background-color: $c2-dark;
 						color: $c1-dark;
 					}
+
+					&:focus {
+						outline: none;
+					}
 				}
 			}
 

@@ -957,6 +957,9 @@ body.post article .newsletter-signup form .revue-form-actions input[type=submit]
   background-color: #fdd835;
   color: #33691e;
 }
+body.post article .newsletter-signup form .revue-form-actions input[type=submit]:focus {
+  outline: none;
+}
 body.post article .newsletter-signup form .revue-form-footer {
   grid-column: 1/3;
   grid-row: 2/3;
