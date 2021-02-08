@@ -27,9 +27,13 @@ We'll send you a link to each new post.
 	</form>
 </div>
 
+---
+
 ### Follow us on Twitter
 
 We are [@BuckleysPub](https://twitter.com/BuckleysPub). You should follow us.
+
+---
 
 ### Subscribe via RSS
 
