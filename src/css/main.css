@@ -386,7 +386,8 @@ body.post figure,
 body.post ul, body.post ol, body.post dl,
 body.post pre,
 body.post div.attributes,
-body.post .csl-bib-body {
+body.post .csl-bib-body,
+body.post .newsletter-signup {
   display: block;
   width: 600px;
   max-width: calc(100% - 1.4rem);
@@ -897,6 +898,74 @@ body.post article div.hover-ref {
 }
 body.post article div.hover-ref .title {
   font-weight: 500;
+}
+body.post article .newsletter-signup {
+  background-color: #33691e;
+  color: #fff;
+  padding: 1.4rem;
+}
+body.post article .newsletter-signup form {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: repeat(auto, 2);
+  grid-row-gap: 0.7rem;
+  grid-column-gap: 0.7rem;
+}
+body.post article .newsletter-signup form label {
+  display: none;
+}
+body.post article .newsletter-signup form .revue-form-group {
+  grid-column: 1/2;
+  grid-row: 1/2;
+}
+body.post article .newsletter-signup form .revue-form-group input[type=email] {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-bottom: 2px solid #fdd835;
+  padding: 0;
+  font-size: 1.2rem;
+  background-color: transparent;
+  color: #fff;
+  font-family: "Roboto Mono", monospace;
+}
+body.post article .newsletter-signup form .revue-form-group input[type=email]:focus {
+  outline: none;
+}
+body.post article .newsletter-signup form .revue-form-group input[type=email]::placeholder {
+  color: #fff;
+}
+body.post article .newsletter-signup form .revue-form-actions {
+  grid-column: 2/3;
+  grid-row: 1/2;
+}
+body.post article .newsletter-signup form .revue-form-actions input[type=submit] {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 2px solid #fdd835;
+  padding: 0 0.7rem;
+  font-size: 1rem;
+  line-height: 2.4rem;
+  background-color: transparent;
+  color: #fdd835;
+  font-weight: 700;
+  cursor: pointer;
+}
+body.post article .newsletter-signup form .revue-form-actions input[type=submit]:hover {
+  background-color: #fdd835;
+  color: #33691e;
+}
+body.post article .newsletter-signup form .revue-form-footer {
+  grid-column: 1/3;
+  grid-row: 2/3;
+  font-size: 0.85rem;
+  line-height: 1rem;
+}
+body.post article .newsletter-signup form .revue-form-footer a {
+  color: #fff;
+  text-decoration: underline;
 }
 
 body.post .backmatter {
