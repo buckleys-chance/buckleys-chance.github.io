@@ -43,7 +43,13 @@ permalink: /{{ post.data.slug }}/
 
 {% block content %}
 
-	<div class="frontmatter">
+	{% if post.data.hidden %}
+		<div class="banner">
+			This page is a public draft. All content is provisional.
+		</div>
+	{% endif %}
+
+	<header>
 
 		<a href="/" class="logotype masthead">
 			<span>Buckley's</span>
@@ -96,6 +102,20 @@ permalink: /{{ post.data.slug }}/
 			<span>Chance</span>
 		</a>
 
+		{% if post.data.tags.includes('page') %}
+			<nav>
+				<div>
+					<a href="/about/">About</a>
+					<a href="/subscribe/">Subscribe</a>
+				</div>
+				<div>
+					<a href="https://twitter.com/BuckleysPub" class="icon"><i class="fab fa-twitter"></i></a>
+					<a href="https://github.com/buckleys-chance" class="icon"><i class="fab fa-github"></i></a>
+					<a href="/rss.xml" class="icon"><i class="fas fa-rss"></i></a>
+				</div>
+			</nav>
+		{% endif %}
+
 		<h1>{{ post.data.title }}</h1>
 
 		<h2>{{ post.data.description }}</h2>
@@ -145,7 +165,7 @@ permalink: /{{ post.data.slug }}/
 			</div>
 		{% endif %}
 
-	</div>
+	</header>
 
 	<article>
 	

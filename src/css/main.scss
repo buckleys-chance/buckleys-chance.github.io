@@ -432,10 +432,7 @@ header, main, footer {
 	padding: $padding;
 }
 
-header.home {
-	padding: #{2 * $p} 0 #{1 * $p} 0;
-	background-color: $c1-light;
-
+header {
 	nav {
 		width: 600px;
 		max-width: calc(100% - #{1 * $p});
@@ -491,6 +488,11 @@ header.home {
 			}
 		}
 	}
+}
+
+header.home {
+	padding: #{2 * $p} 0 #{1 * $p} 0;
+	background-color: $c1-light;
 }
 
 
@@ -752,9 +754,13 @@ body.post {
 	}
 }
 
-body.post .frontmatter {
+body.post header {
 	padding: #{2 * $p} 0 #{1 * $p} 0;
 	background-color: $c1-light;
+
+	nav {
+		margin-bottom: #{2 * $p};
+	}
 
 	h1 {
 		font-size: 2rem;
@@ -858,7 +864,7 @@ body.post .frontmatter {
 
 @media (max-width: 600px) {
 
-	body.post .frontmatter div.attributes {
+	body.post header div.attributes {
 		grid-template-columns: .5fr auto auto .5fr;
 		grid-column-gap: 0;
 
