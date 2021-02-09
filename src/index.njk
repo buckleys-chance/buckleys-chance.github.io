@@ -110,6 +110,19 @@
 
 		{% endfor %}
 
+		<div id="revue-embed" class="card blurb newsletter-signup" style="width: 500px;">
+			<form action="https://www.getrevue.co/profile/buckleys-chance/add_subscriber" method="post" id="revue-form" name="revue-form"  target="_blank">
+				<div class="revue-form-group">
+					<label for="member_email">Email address</label>
+					<input class="revue-form-field" placeholder="Email address" type="email" name="member[email]" id="member_email">
+				</div>
+				<div class="revue-form-actions">
+					<input type="submit" value="Subscribe" name="member[subscribe]" id="member_submit">
+				</div>
+				<div class="revue-form-footer">We use Revue, which is owned by Twitter, to deliver our email notifications. By subscribing, you agree with their <a target="_blank" href="https://www.getrevue.co/terms">Terms</a> and <a target="_blank" href="https://www.getrevue.co/privacy">Privacy Policy</a>.</div>
+			</form>
+		</div>
+
 	</main>
 
 {% endblock %}

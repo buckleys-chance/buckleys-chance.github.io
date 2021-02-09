@@ -23,13 +23,13 @@ We'll send you a link to each new post.
 		<div class="revue-form-actions">
 			<input type="submit" value="Subscribe" name="member[subscribe]" id="member_submit">
 		</div>
-		<div class="revue-form-footer">We use Revue, which is owned by Twitter, to deliver our email notifications.<br />By subscribing, you agree with their <a target="_blank" href="https://www.getrevue.co/terms">Terms</a> and <a target="_blank" href="https://www.getrevue.co/privacy">Privacy Policy</a>.</div>
+		<div class="revue-form-footer">We use Revue, which is owned by Twitter, to deliver our email notifications. By subscribing, you agree with their <a target="_blank" href="https://www.getrevue.co/terms">Terms</a> and <a target="_blank" href="https://www.getrevue.co/privacy">Privacy Policy</a>.</div>
 	</form>
 </div>
 
 ---
 
-### Follow us on Twitter
+### Subscribe via Twitter
 
 We are [@BuckleysPub](https://twitter.com/BuckleysPub). You should follow us.
 

@@ -23,7 +23,7 @@
 	"references": "template.bib",
 	"katex": true,
 	"flag": "BIT BORING",
-	"hidden": false
+	"hidden": true
 }
 ---
 
