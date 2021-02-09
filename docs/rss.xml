@@ -24,10 +24,10 @@
                 <link>https://buckleys.pub/template/</link>
                 <pubDate>Sat, 02 Jan 2021 07:00:00 +1000</pubDate>
                 <description>This is a template post, with which to refine the stylesheets for posts in general.</description>
-                <content:encoded>
+                <content:encoded><![CDATA[
                     <p>This is a template post, with which to refine the stylesheets for posts in general.</p>
-                    <p>Read at <a href="https://buckleys.pub/template/">buckleys.pub/template/</a>.</p>
-                </content:encoded>
+                    <p>Read in full at <a href="https://buckleys.pub/template/">buckleys.pub/template/</a>.</p>
+                ]]></content:encoded>
             </item>
         
 

@@ -28,10 +28,10 @@ eleventyExcludeFromCollections: true
                 <link>https://buckleys.pub/{{ post.data.slug }}/</link>
                 <pubDate>{{ post.date | RSSdate }}</pubDate>
                 <description>{{ post.data.description }}</description>
-                <content:encoded>
+                <content:encoded><![CDATA[
                     <p>{{ post.data.description }}</p>
-                    <p>Read at <a href="https://buckleys.pub/{{ post.data.slug }}/">buckleys.pub/{{ post.data.slug }}/</a>.</p>
-                </content:encoded>
+                    <p>Read in full at <a href="https://buckleys.pub/{{ post.data.slug }}/">buckleys.pub/{{ post.data.slug }}/</a>.</p>
+                ]]></content:encoded>
             </item>
         {% endfor %}
 
