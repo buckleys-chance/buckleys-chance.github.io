@@ -1,0 +1,39 @@
+---
+permalink: /rss.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/">
+
+    <channel>
+
+        <title>Buckley's Chance</title>
+        <link>https://buckleys.pub/</link>
+        <description>Data-driven explorable explanations, on topics relevant to Australians.</description>
+
+        <lastBuildDate>Tue, 09 Feb 2021 07:28:52 +0000</lastBuildDate>
+        <language>en-au</language>
+        <sy:updatePeriod>monthly</sy:updatePeriod>
+        <sy:updateFrequency>1</sy:updateFrequency>
+
+        <image>
+            <title>Buckley's Chance</title>
+            <link>https://buckleys.pub/</link>
+            <url>https://buckleys.pub/img/open_graph_placeholder.png</url>
+        </image>
+
+        {% for post in collections.post | removeHiddenPostsAndPages | reverse %}
+            <item>
+                <title>{{ post.data.title }}</title>
+                <link>https://buckleys.pub/{{ post.data.slug }}/</link>
+                <pubDate>{{ post.date | RSSdate }}</pubDate>
+                <description>{{ post.data.description }}</description>
+                <content:encoded>
+                    <p>{{ post.data.description }}</p>
+                    <p>Read at <a href="https://buckleys.pub/{{ post.data.slug }}/">buckleys.pub/{{ post.data.slug }}/</a>.</p>
+                </content:encoded>
+            </item>
+        {% endfor %}
+
+    </channel>
+</rss>

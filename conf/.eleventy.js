@@ -12,6 +12,40 @@ module.exports = function(eleventyConfig) {
 		return md.render(rawString);
 	});
 
+	// Add RSS date format filter.
+	eleventyConfig.addFilter("RSSdate", function(value) {
+		var d = (new Date(value)),
+			months = [
+				"Jan",
+				"Feb",
+				"Mar",
+				"Apr",
+				"May",
+				"Jun",
+				"Jul",
+				"Aug",
+				"Sep",
+				"Oct",
+				"Nov",
+				"Dec"
+			],
+			days = [
+				"Sun",
+				"Mon",
+				"Tue",
+				"Wed",
+				"Thu",
+				"Fri",
+				"Sat"
+			];
+
+		var date = d.getDate();
+		if (String(date).length == 1) {
+			date = '0' + date;
+		}
+
+		return(days[d.getDay()] + ', ' + date + ' ' + months[d.getMonth()] + ' ' + d.getFullYear() + ' 07:00:00 +1000');
+	});
 
 	// Add filter to remove hidden posts from collections.post.
 	eleventyConfig.addFilter("removeHiddenPostsAndPages", function(collection) {

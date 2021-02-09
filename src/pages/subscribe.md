@@ -37,4 +37,6 @@ We are [@BuckleysPub](https://twitter.com/BuckleysPub). You should follow us.
 
 ### Subscribe via RSS
 
-Coming soon.
+Our feed is located at [buckleys.pub/rss.xml](/rss.xml).
+
+Much of what we publish contains interactive graphics that don't work in RSS feed readers, so the feed just includes a description of each post, with a link to the full version.

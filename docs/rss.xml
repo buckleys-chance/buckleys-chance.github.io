@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/">
+
+    <channel>
+
+        <title>Buckley's Chance</title>
+        <link>https://buckleys.pub/</link>
+        <description>Data-driven explorable explanations, on topics relevant to Australians.</description>
+
+        <lastBuildDate>Tue, 09 Feb 2021 07:28:52 +0000</lastBuildDate>
+        <language>en-au</language>
+        <sy:updatePeriod>monthly</sy:updatePeriod>
+        <sy:updateFrequency>1</sy:updateFrequency>
+
+        <image>
+            <title>Buckley's Chance</title>
+            <link>https://buckleys.pub/</link>
+            <url>https://buckleys.pub/img/open_graph_placeholder.png</url>
+        </image>
+
+        
+            <item>
+                <title>Generic template post</title>
+                <link>https://buckleys.pub/template/</link>
+                <pubDate>Sat, 02 Jan 2021 07:00:00 +1000</pubDate>
+                <description>This is a template post, with which to refine the stylesheets for posts in general.</description>
+                <content:encoded>
+                    <p>This is a template post, with which to refine the stylesheets for posts in general.</p>
+                    <p>Read at <a href="https://buckleys.pub/template/">buckleys.pub/template/</a>.</p>
+                </content:encoded>
+            </item>
+        
+
+    </channel>
+</rss>

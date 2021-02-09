@@ -16,7 +16,7 @@ Buckley's Chance publishes data-driven commentary, visual essays and [explorable
 
 Mathematical and statistical thinking is increasingly crucial to understanding society and current affairs. But in Australia, there are relatively few sources of high-quality data journalism. Our goal is to help fill this gap.
 
-Initially, we will be publishing 4 major articles each year (quality \\(\gtrapprox\\) quantity).
+Initially, we will be publishing 4 major articles each year (quality \\(>\\) quantity).
 
 Here's [how to subscribe](/subscribe/).
 
