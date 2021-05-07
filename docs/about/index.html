@@ -16,15 +16,22 @@
 	
 
 	
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
-		<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
-		<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"
-	        onload="renderMathInElement(document.body);"></script>
-	
 
 	
 
 	
+
+	<script type="text/javascript">
+		function loadCSS(path) { 
+			let file = document.createElement("link");
+			file.setAttribute("rel", "stylesheet");
+			file.setAttribute("type", "text/css");
+			file.setAttribute("href", path);
+			document.head.appendChild(file);
+		}
+
+		var graphs = [];
+	</script>
 
 	    
 
@@ -221,6 +228,119 @@
 				}
 			}, 150);
 		}
+	</script>
+
+	<script type="text/javascript">
+
+		var views = {},
+			tooltipHandlers = {},
+			choices = {};
+
+		function render(key, spec) {
+			
+			// Create BC property if doesn't already exist.
+
+			if (!spec.hasOwnProperty('BC')) {
+				spec.BC = {};
+			}
+
+			// Specify renderer if not already specified.
+
+			if (!spec.BC.hasOwnProperty('renderer')) {
+				spec.BC.renderer = 'svg'; // Either 'svg' or 'canvas'.
+			}
+
+			// Define desired aspect ratio.
+
+			if (spec.hasOwnProperty('width') & spec.hasOwnProperty('height')) {
+				spec.BC.aspectRatio = spec.width / spec.height;
+			} else {
+				spec.BC.aspectRatio = 1.5;
+			}
+			delete spec.width;
+			delete spec.height;
+
+			// Define threshold width between two types of graph scaling.
+				// Above this width, the graph is re-rendered to fit the space available.
+				// (eg. text will stay its specified size)
+				// Below this width, the graph is simply scaled down to fit the space available.
+				// (eg. text will be smaller than the specified size)
+			if (!spec.BC.hasOwnProperty('minWidth')) {
+				spec.BC.minWidth = 800;
+			}
+
+			// Store reference to wrapper element.
+
+			spec.BC.container = document.querySelector(`#graph-container-${key}`);
+
+			// Create the view.
+
+			let width = Math.max(spec.BC.container.offsetWidth, spec.BC.minWidth);
+			vegaEmbed(
+				`#graph-container-${key}`,
+				spec,
+				opt = {
+					renderer: spec.BC.renderer,
+					actions: false,
+					width: width,
+					height: width / spec.BC.aspectRatio
+				}
+			).then(function(result) {
+				
+				views[key] = result.view;
+
+				// Make responsive.
+
+				if (spec.BC.renderer === 'canvas') {
+					
+					spec.BC.resize = () => {
+						let width = Math.max(spec.BC.container.offsetWidth, spec.BC.minWidth);
+						views[key]
+							.width(width)
+							.height(width / spec.BC.aspectRatio)
+							.run();
+					};
+					window.addEventListener('resize', spec.BC.resize);
+				
+				} else {
+					
+					function removeWidthHeightAttributes() {
+						// Remove width/height attributes of Vega SVG and let viewBox handle the responsive behaviour.
+						let viewDom = spec.BC.container.firstElementChild;
+						viewDom.removeAttribute('width');
+						viewDom.removeAttribute('height');
+					}
+
+					spec.BC.resize = () => {
+						let width = Math.max(spec.BC.container.offsetWidth, spec.BC.minWidth);
+						views[key]
+							.width(width)
+							.height(width / spec.BC.aspectRatio)
+							.run();
+						removeWidthHeightAttributes();
+						
+					};
+					window.addEventListener('resize', spec.BC.resize);
+
+					removeWidthHeightAttributes();
+					
+				}
+
+			}).catch(console.error);
+
+			return views[key];
+
+		}
+  
+		for (let key of graphs) {
+		
+			fetch('/posts/about/graph-' + key + '.json')
+				.then(result => result.json())
+				.then(spec => render(key, spec))
+				.catch(err => console.error(err));
+
+		}
+
 	</script>
 
 	

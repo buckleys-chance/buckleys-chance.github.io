@@ -6,7 +6,7 @@
 	
 	<title>
         
-	Pandemic trade-offs | Buckley's Chance
+	Pandemic public health | Buckley's Chance
 
     </title>
 	
@@ -23,15 +23,25 @@
 	
 
 	
-		<meta charset="utf-8">
-		<script src="https://d3js.org/d3.v4.min.js"></script>
-	
 
 	
-		
-			<link rel="stylesheet" type="text/css" href="/posts/lockdown/post.css" />
-		
+		<meta charset="utf-8">
+		<script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
 	
+
+	<script type="text/javascript">
+		function loadCSS(path) { 
+			let file = document.createElement("link");
+			file.setAttribute("rel", "stylesheet");
+			file.setAttribute("type", "text/css");
+			file.setAttribute("href", path);
+			document.head.appendChild(file);
+		}
+
+		var graphs = [];
+	</script>
 
 	
 		<meta name="robots" content="noindex">
@@ -118,7 +128,7 @@
 
 		
 
-		<h1>Pandemic trade-offs</h1>
+		<h1>Pandemic public health</h1>
 
 		<h2>Restrictions stop the spread of SARS-CoV-2, but also cause other harms. Can we strike a balance?</h2>
 
@@ -134,11 +144,7 @@
 					
 						<a href="https://lukethorburn.com">Luke Thorburn</a>
 					
-						<a href="https://findanexpert.unimelb.edu.au/profile/773939-tony-blakely">Tony Blakely</a>
-					
-						<a href="https://findanexpert.unimelb.edu.au/profile/356800-nathan-grills">Nathan Grills</a>
-					
-						<a href="#">... ...</a>
+						<a >Liam Carroll</a>
 					
 				</div>
 
@@ -148,11 +154,7 @@
 					
 						<a href="https://buckleys.pub">Buckley&#39;s Chance</a>
 					
-						<a href="https://unimelb.edu.au">University of Melbourne</a>
-					
-						<a href="https://unimelb.edu.au">University of Melbourne</a>
-					
-						<a href="#">...</a>
+						<a href="https://buckleys.pub">Buckley&#39;s Chance</a>
 					
 				</div>
 
@@ -180,147 +182,26 @@
 	<article>
 	
 		
-			<p>Introduce the research.</p>
+			<figure class="c-blockquote">
+<blockquote>
+<p>There are no solutions. There are only trade-offs.</p>
+</blockquote>
+<figcaption class="c-blockquote__attribution"><strong>Thomas Sowell</strong> (1986)</figcaption>
+</figure>
+<p>Introduce the research.</p>
 <p>List side-effects of restrictions, to make concrete. Both negative and positive. Lost revenue, unemployment, depression, anxiety, suicide, domestic violence, alcohol consumption, road traffic crashes, work-life balance, lost education, deferred medical treatment / screening, family time, access to green space, …</p>
 <hr>
-<h1>Stages and Strategies</h1>
-<div class="fig outset-3">
-<table>
-	<thead>
-		<tr>
-			<th></th>
-			<th>Stage 1</th>
-			<th>Stage 2</th>
-			<th>Stage 3</th>
-			<th>Stage 4</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-		</tr>
-	</tbody>
-</table>
-</div>
-<div class="fig full-width-inset more-margin-3">
-	<nav class="strategies">
-		<button class="active">
-			<h1>Aggressive Elimination</h1>
-			<p>Aim for no community transmission, quickly.</p>
-		</button>
-		<button>
-			<h1>Moderate Elimination</h1>
-			<p>Aim for no community transmission, less quickly.</p>
-		</button>
-		<button>
-			<h1>Tight Suppression</h1>
-			<p>Aim for 1-5 new cases per million people per day.</p>
-		</button>
-		<button>
-			<h1>Loose Suppression</h1>
-			<p>Aim for 5-25 new cases per million people per day.</p>
-		</button>
-	</nav>
-	<svg id="fig-strategies">
-		<defs>
-			<linearGradient id="1-1b" x1="0" x2="0.1" y1=".1" y2=".9">
-				<stop offset="0%" stop-color="#ebf0e9" />
-				<stop offset="100%" stop-color="#d6e1d2" />
-			</linearGradient>
-			<linearGradient id="1-2" x1="0" x2="0.1" y1=".1" y2=".9">
-				<stop offset="0%" stop-color="#ebf0e9" />
-				<stop offset="100%" stop-color="#c2d2bc" />
-			</linearGradient>
-			<linearGradient id="1-3" x1="0" x2="0.1" y1=".1" y2=".9">
-				<stop offset="0%" stop-color="#ebf0e9" />
-				<stop offset="100%" stop-color="#adc3a5" />
-			</linearGradient>
-			<linearGradient id="1-4" x1="0" x2="0.1" y1=".1" y2=".9">
-				<stop offset="0%" stop-color="#ebf0e9" />
-				<stop offset="100%" stop-color="#99b48f" />
-			</linearGradient>
-			<linearGradient id="1b-2" x1="0" x2="0.1" y1=".1" y2=".9">
-				<stop offset="0%" stop-color="#d6e1d2" />
-				<stop offset="100%" stop-color="#c2d2bc" />
-			</linearGradient>
-			<linearGradient id="1b-3" x1="0" x2="0.1" y1=".1" y2=".9">
-				<stop offset="0%" stop-color="#d6e1d2" />
-				<stop offset="100%" stop-color="#adc3a5" />
-			</linearGradient>
-			<linearGradient id="1b-4" x1="0" x2="0.1" y1=".1" y2=".9">
-				<stop offset="0%" stop-color="#d6e1d2" />
-				<stop offset="100%" stop-color="#99b48f" />
-			</linearGradient>
-			<linearGradient id="2-3" x1="0" x2="0.1" y1=".1" y2=".9">
-				<stop offset="0%" stop-color="#c2d2bc" />
-				<stop offset="100%" stop-color="#adc3a5" />
-			</linearGradient>
-			<linearGradient id="2-4" x1="0" x2="0.1" y1=".1" y2=".9">
-				<stop offset="0%" stop-color="#c2d2bc" />
-				<stop offset="100%" stop-color="#99b48f" />
-			</linearGradient>
-			<linearGradient id="3-4" x1="0" x2="0.1" y1=".1" y2=".9">
-				<stop offset="0%" stop-color="#adc3a5" />
-				<stop offset="100%" stop-color="#99b48f" />
-			</linearGradient>
-			<linearGradient id="1b-1" x1=".1" x2="0" y1=".1" y2=".9">
-				<stop offset="0%" stop-color="#ebf0e9" />
-				<stop offset="100%" stop-color="#d6e1d2" />
-			</linearGradient>
-			<linearGradient id="2-1b" x1=".1" x2="0" y1=".1" y2=".9">
-				<stop offset="0%" stop-color="#d6e1d2" />
-				<stop offset="100%" stop-color="#c2d2bc" />
-			</linearGradient>
-			<linearGradient id="3-2" x1=".1" x2="0" y1=".1" y2=".9">
-				<stop offset="0%" stop-color="#c2d2bc" />
-				<stop offset="100%" stop-color="#adc3a5" />
-			</linearGradient>
-			<linearGradient id="4-3" x1=".1" x2="0" y1=".1" y2=".9">
-				<stop offset="0%" stop-color="#adc3a5" />
-				<stop offset="100%" stop-color="#99b48f" />
-			</linearGradient>
-		</defs>
-	</svg>
-</div>
-<p>Have a graph that shows where the thresholds are, present runs of the ABM in each case with the thresholds visible.</p>
-<div class="fig outset-2">
-	<img src="/img/lockdown1.png" />
-</div>
-<h4>What non-COVID consequences are included in the model? How are they quantified?</h4>
-<p>Briefly describe which consequences are included.</p>
-<p>Introduce the concept of HALYs/DALYs, and how they are estimated.</p>
-<h4>Main tool</h4>
-<p>Provide dropdowns/sliders for key assumptions:</p>
-<ul>
-<li>Effect of restrictions on each consequence</li>
-<li>In each case, default to sensible values emerging from lit review.
-<ul>
-<li>Anxiety</li>
-<li>Depression</li>
-<li>Unemployment</li>
-<li>…</li>
-</ul>
-</li>
-<li>$/HALY</li>
-<li>Perspect (health system, partial-societal)</li>
-</ul>
-<p>As assumptions are updated, update main graph of the probability each policy scenario is optimal. Can choose what the x-axis is (though $/HALY by default).</p>
-<div class="fig side-3">
-	<img src="/img/lockdown2.png" />
-</div>
-<h4>Thorny Questions</h4>
+<h1>Thorny Questions</h1>
 <ul>
 <li>What monetary value should be placed on a HALY?</li>
 </ul>
-<h4>Important considerations</h4>
+<hr>
+<h1>Important considerations</h1>
 <ul>
 <li>Regardless of policy response, there is still a pandemic. Need to compare each scenario to other ways of responding to the pandemic, not to the pre-pandemic world.</li>
 </ul>
-<h4>Limitations</h4>
+<hr>
+<h1>Limitations</h1>
 <ul>
 <li>Difficulty in estimating impacts of different restriction levels.</li>
 <li>This is just one way of approaching decision-making. Implies a particular ethical framework (~utilitarianism), which may not be correct.</li>
@@ -360,11 +241,11 @@
 
 		<h1>Citation</h1>
 		<p>In academic contexts, please cite this work using a citation similar to the following.</p>
-		<pre class="wrap">Thorburn, Blakely, Grills and ..., "Pandemic trade-offs", Buckley's Chance, 2021.</pre>
+		<pre class="wrap">Thorburn and Carroll, "Pandemic public health", Buckley's Chance, 2021.</pre>
 		<p>Here is the BibTeX entry.</p>
 <pre>@article{lockdown2021,
-  author = {Thorburn, Luke and Blakely, Tony and Grills, Nathan and ..., ...},
-  title = {Pandemic trade-offs},
+  author = {Thorburn, Luke and Carroll, Liam},
+  title = {Pandemic public health},
   journal = {Buckley's Chance},
   year = {2021},
   url = {https://buckleys.pub/lockdown}
@@ -431,10 +312,119 @@
 		}
 	</script>
 
-	
+	<script type="text/javascript">
+
+		var views = {},
+			tooltipHandlers = {},
+			choices = {};
+
+		function render(key, spec) {
+			
+			// Create BC property if doesn't already exist.
+
+			if (!spec.hasOwnProperty('BC')) {
+				spec.BC = {};
+			}
+
+			// Specify renderer if not already specified.
+
+			if (!spec.BC.hasOwnProperty('renderer')) {
+				spec.BC.renderer = 'svg'; // Either 'svg' or 'canvas'.
+			}
+
+			// Define desired aspect ratio.
+
+			if (spec.hasOwnProperty('width') & spec.hasOwnProperty('height')) {
+				spec.BC.aspectRatio = spec.width / spec.height;
+			} else {
+				spec.BC.aspectRatio = 1.5;
+			}
+			delete spec.width;
+			delete spec.height;
+
+			// Define threshold width between two types of graph scaling.
+				// Above this width, the graph is re-rendered to fit the space available.
+				// (eg. text will stay its specified size)
+				// Below this width, the graph is simply scaled down to fit the space available.
+				// (eg. text will be smaller than the specified size)
+			if (!spec.BC.hasOwnProperty('minWidth')) {
+				spec.BC.minWidth = 800;
+			}
+
+			// Store reference to wrapper element.
+
+			spec.BC.container = document.querySelector(`#graph-container-${key}`);
+
+			// Create the view.
+
+			let width = Math.max(spec.BC.container.offsetWidth, spec.BC.minWidth);
+			vegaEmbed(
+				`#graph-container-${key}`,
+				spec,
+				opt = {
+					renderer: spec.BC.renderer,
+					actions: false,
+					width: width,
+					height: width / spec.BC.aspectRatio
+				}
+			).then(function(result) {
+				
+				views[key] = result.view;
+
+				// Make responsive.
+
+				if (spec.BC.renderer === 'canvas') {
+					
+					spec.BC.resize = () => {
+						let width = Math.max(spec.BC.container.offsetWidth, spec.BC.minWidth);
+						views[key]
+							.width(width)
+							.height(width / spec.BC.aspectRatio)
+							.run();
+					};
+					window.addEventListener('resize', spec.BC.resize);
+				
+				} else {
+					
+					function removeWidthHeightAttributes() {
+						// Remove width/height attributes of Vega SVG and let viewBox handle the responsive behaviour.
+						let viewDom = spec.BC.container.firstElementChild;
+						viewDom.removeAttribute('width');
+						viewDom.removeAttribute('height');
+					}
+
+					spec.BC.resize = () => {
+						let width = Math.max(spec.BC.container.offsetWidth, spec.BC.minWidth);
+						views[key]
+							.width(width)
+							.height(width / spec.BC.aspectRatio)
+							.run();
+						removeWidthHeightAttributes();
+						
+					};
+					window.addEventListener('resize', spec.BC.resize);
+
+					removeWidthHeightAttributes();
+					
+				}
+
+			}).catch(console.error);
+
+			return views[key];
+
+		}
+  
+		for (let key of graphs) {
 		
-			<script src="/posts/lockdown/fig-strategies.js"></script>
-		
+			fetch('/posts/lockdown/graph-' + key + '.json')
+				.then(result => result.json())
+				.then(spec => render(key, spec))
+				.catch(err => console.error(err));
+
+		}
+
+	</script>
+
 	
 
 

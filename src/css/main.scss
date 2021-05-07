@@ -985,8 +985,9 @@ body.post article {
 	figure.c-blockquote {
 
 		border-left: $h solid $c1-light;
+		// margin: #{2 * $p} auto #{3 * $p} auto;
 		padding-left: $p;
-		
+
 		blockquote {
 			margin: 0 0 $h 0;
 			max-width: 100%;
@@ -1172,12 +1173,17 @@ body.post article {
 			max-width: 100%;
 		}
 
+		.vega-embed {
+			width: 100%;
+		}
+
 		svg {
 			width: 100%;
 			overflow: visible;
+		}
 
-			// background-color: #fedb4a;
-
+		canvas {
+			max-width: 100%;
 		}
 
 		table {

@@ -1,9 +1,9 @@
 ---json
 {
 	"permalink": false,
-	"templateEngineOverride": false,
+	"templateEngineOverride": "njk",
 	"tags": ["post"],
-	"title": "Generic template post",
+	"title": "Template post",
 	"date": "2021-01-02",
 	"date_updated": "2021-01-02",
 	"slug": "template",
@@ -21,9 +21,14 @@
 	],
 	"acknowledgements": "Thanks to Joe Blow and Mary Doe.",
 	"references": "template.bib",
-	"katex": true,
+	"dependencies": {
+		"katex": true,
+		"d3": true,
+		"vega": true
+	},
 	"flag": "BIT BORING",
-	"hidden": true
+	"hidden": true,
+	"draft": false
 }
 ---
 
@@ -119,6 +124,35 @@ Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
 ## Graphing libraries
 
 Example graphs using `d3.js` and either `Vega` or `Vegalite` will be placed here.
+
+{# <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" id="svg-definitions-PMSLT-HALY">
+	<defs>
+		<pattern id="HALY-pattern-black" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(45)">
+			<line x1="0" y="0" x2="0" y2="6" stroke="#000000" stroke-width="10" />
+		</pattern>
+		<pattern id="HALY-pattern-Anxiety" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(45)">
+			<line x1="0" y="0" x2="0" y2="6" stroke="#e65f4a" stroke-width="10" />
+		</pattern>
+		<pattern id="HALY-pattern-Depression" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(45)">
+			<line x1="0" y="0" x2="0" y2="6" stroke="#fdbc71" stroke-width="10" />
+		</pattern>
+		<pattern id="HALY-pattern-Self-Harm" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(45)">
+			<line x1="0" y="0" x2="0" y2="6" stroke="#fbf8b0" stroke-width="10" />
+		</pattern>
+		<pattern id="HALY-pattern-COVID-19" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(45)">
+			<line x1="0" y="0" x2="0" y2="6" stroke="#bbe4a2" stroke-width="10" />
+		</pattern>
+		<pattern id="HALY-pattern-Road-Traffic-Injury" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(45)">
+			<line x1="0" y="0" x2="0" y2="6" stroke="#5cabad" stroke-width="10" />
+		</pattern>
+	</defs>
+</svg>
+
+{% import_graph "PMSLT-HALY", slug %} #}
+
+{% import_graph "example1", slug %}
+
+Nunc interdum odio a turpis suscipit, eu varius massa lobortis. Integer pellentesque eros ac ipsum ultricies, ac dignissim felis blandit. Integer molestie diam bibendum elit congue tincidunt. Nunc faucibus nulla arcu, nec laoreet nunc porttitor a. Integer ac sapien libero. Etiam nec cursus leo. Proin cursus nec felis a pretium. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nunc faucibus ultrices lacus. Donec iaculis non tellus at gravida.
 
 <div class="collapsible collapsed"
 	data-text="Click to reveal a collapsible section.">

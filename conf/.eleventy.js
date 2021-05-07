@@ -1,5 +1,146 @@
 module.exports = function(eleventyConfig) {
 
+	// Add filter to extract toggle specification from graph specification.
+	
+	const fs = require('fs');
+	eleventyConfig.addFilter("get_graph_spec", function(name, slug) {
+
+		let spec = JSON.parse(fs.readFileSync(`../src/posts/${slug}/graph-${name}.json`).toString()),
+			BC = {};
+
+		if (spec.hasOwnProperty('BC')) {
+			BC = spec.BC;
+		}
+
+		return BC;
+
+	})
+
+	// Add shortcode to import custom elements (d3 graphs, tables etc.).
+
+	eleventyConfig.addShortcode("import_content", function(name, slug) {
+
+		let html = fs.readFileSync(`../src/posts/${slug}/${name}.html`).toString();
+
+		// Load CSS, if it exists.
+		try {
+			if (fs.existsSync(`../src/posts/${slug}/${name}.css`)) {
+				html += `<script type="text/javascript">
+					loadCSS("/posts/${slug}/${name}.css");
+				</script>`;
+			}
+		} catch(error) {
+			console.error(error);
+		}
+
+		// Load javascript, if it exists.
+		try {
+			if (fs.existsSync(`../src/posts/${slug}/${name}.js`)) {
+				html += `<script src="/posts/${ slug }/${ name }.js"></script>`
+			}
+		} catch(error) {
+			console.error(error);
+		}
+
+		return html;
+
+	})
+
+	// Add shortcode to generate Vega dashboard-style graphs.
+
+	eleventyConfig.addShortcode("import_graph", function(name, slug) {
+		
+
+		let BC = eleventyConfig.getFilter("get_graph_spec")(name, slug),
+			toggle_specs = [],
+			toggles = ``;
+
+		if (BC.hasOwnProperty('toggle-groups')) {
+			toggle_specs = BC['toggle-groups'];
+		}
+
+		for (let toggle_group of toggle_specs) {
+			
+			let toggle_group_contents = ``;
+			for (let toggle of toggle_group.toggles) {
+
+				toggle_group_contents += `<div class="toggle-box">
+				<div>
+					<div class="name">${ toggle.name }</div>
+					<div class="description">${ toggle.description }</div>
+				</div>
+				<div>`;
+
+							
+				if (toggle.type == "range") {
+					
+					toggle_group_contents += `<input type="range" name="a" id="a" min="1" max="3" step="1" value="2" autocomplete=off>`;
+					// custom input slider: https://codepen.io/trevanhetzel/pen/rOVrGK
+
+				} else if (toggle.type == "select") {
+					
+					let slug = eleventyConfig.getFilter('slug');
+
+					toggle_group_contents += `<select name="${ slug(toggle.name) }" id="select-${name}-${ slug(toggle.name) }" autocomplete=off>
+						${toggle.options.map(option => `<option value="${option.value}" ${option.default ? 'selected' : ''}>${option.label ? option.label : option.value}</option>`).join('\n')}
+					</select>`
+					// https://joshuajohnson.co.uk/Choices/
+
+				}
+				
+				if (toggle.hasOwnProperty('detailLink')) {
+					toggle_group_contents += `<a href="` + toggle.detailLink + `" class="detail-link" target="_blank" rel="noopener noreferrer"><span data-icon="info-outline" class="smaller"></span> <span>Details</span></a>`;
+				}
+
+				toggle_group_contents += `</div></div>`;
+
+			}
+
+			toggles += `<div class="toggle-group">
+				<div class="group-details">
+					<div class="group-name">${toggle_group.name}</div>
+				</div>
+				<div class="group-contents">
+					${toggle_group_contents}
+				</div>
+			</div>`;
+		}
+
+		let downloadLink = '';
+		if (BC.hasOwnProperty('data-download')) {
+			downloadLink = `<a href="${BC['data-download'].href}" class="download-link"><strong>Download data</strong> (${BC['data-download'].size})</a>`
+		}
+
+		// let html = `<div class="graph-with-toggles ${toggle_specs.length == 0 ? 'no-toggles' : ''}" id="graph-` + name + `">`;
+		// if (toggle_specs.length > 0) {
+		// 	html = html + `<aside>
+		// 		<div class="toggles">
+		// 			${toggles}
+		// 		</div>${downloadLink}
+		// 	</aside>`;
+		// }
+
+		// return html + `
+		// 	<div id="graph-settings-${name}" class="graph-settings"></div>
+		// </div>
+		// `;
+
+		let figPosition = BC.hasOwnProperty("figPosition") ? BC.figPosition : 'inset';
+
+		let html = `<div class="fig ${figPosition}">
+				<div id="graph-container-${name}" class="graph-container"></div>
+			</div>
+			<script type="text/javascript">
+				graphs.push("${name}")
+			</script>
+		`;
+
+		return html;
+	});
+
+
+
+
 
 	// Add markdown filter.
 	var options = {
@@ -149,7 +290,6 @@ module.exports = function(eleventyConfig) {
 	// Add filter to generate bibliography.
 	
 	const Cite = require('citation-js');
-	const fs = require('fs');
 	
 	eleventyConfig.addFilter("bibliography", function(referenceFile) {
 		

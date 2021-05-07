@@ -6,7 +6,7 @@
 	
 	<title>
         
-	Generic template post | Buckley's Chance
+	Template post | Buckley's Chance
 
     </title>
 	
@@ -23,8 +23,28 @@
 	
 
 	
+		<meta charset="utf-8">
+		<script src="https://d3js.org/d3.v4.min.js"></script>
+	
 
 	
+		<meta charset="utf-8">
+		<script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+	
+
+	<script type="text/javascript">
+		function loadCSS(path) { 
+			let file = document.createElement("link");
+			file.setAttribute("rel", "stylesheet");
+			file.setAttribute("type", "text/css");
+			file.setAttribute("href", path);
+			document.head.appendChild(file);
+		}
+
+		var graphs = [];
+	</script>
 
 	
 		<meta name="robots" content="noindex">
@@ -50,10 +70,6 @@
 
 	
 
-	
-		<div class="banner">
-			This page is a public draft. All content is provisional.
-		</div>
 	
 
 	<header>
@@ -111,7 +127,7 @@
 
 		
 
-		<h1>Generic template post</h1>
+		<h1>Template post</h1>
 
 		<h2>This is a template post, with which to refine the stylesheets for posts in general.</h2>
 
@@ -231,6 +247,13 @@ That’s one small step for [a] man, one giant leap for mankind.</p>
 <p>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vestibulum vitae nisi dui. Praesent tellus mauris, pellentesque eget lorem non, laoreet condimentum velit. Sed sagittis enim enim, non tincidunt nunc tempor eget. Morbi lacus nisi, accumsan ac augue ac, rhoncus mollis orci. Nullam nec imperdiet ipsum. Etiam fringilla volutpat lobortis. Ut et diam efficitur, facilisis urna in, iaculis erat. Morbi et molestie purus. Mauris interdum, mauris sed euismod cursus, ex dolor vehicula neque, at egestas dui libero tempus magna.</p>
 <h2>Graphing libraries</h2>
 <p>Example graphs using <code>d3.js</code> and either <code>Vega</code> or <code>Vegalite</code> will be placed here.</p>
+<div class="fig outset-1">
+				<div id="graph-container-example1" class="graph-container"></div>
+			</div>
+			<script type="text/javascript">
+				graphs.push("example1")
+			</script>
+<p>Nunc interdum odio a turpis suscipit, eu varius massa lobortis. Integer pellentesque eros ac ipsum ultricies, ac dignissim felis blandit. Integer molestie diam bibendum elit congue tincidunt. Nunc faucibus nulla arcu, nec laoreet nunc porttitor a. Integer ac sapien libero. Etiam nec cursus leo. Proin cursus nec felis a pretium. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nunc faucibus ultrices lacus. Donec iaculis non tellus at gravida.</p>
 <div class="collapsible collapsed"
 	data-text="Click to reveal a collapsible section.">
 <h1>Collapsible Sections</h1>
@@ -310,11 +333,11 @@ That’s one small step for [a] man, one giant leap for mankind.</p>
 
 		<h1>Citation</h1>
 		<p>In academic contexts, please cite this work using a citation similar to the following.</p>
-		<pre class="wrap">Thorburn and Carroll, "Generic template post", Buckley's Chance, 2021.</pre>
+		<pre class="wrap">Thorburn and Carroll, "Template post", Buckley's Chance, 2021.</pre>
 		<p>Here is the BibTeX entry.</p>
 <pre>@article{template2021,
   author = {Thorburn, Luke and Carroll, Liam},
-  title = {Generic template post},
+  title = {Template post},
   journal = {Buckley's Chance},
   year = {2021},
   url = {https://buckleys.pub/template}
@@ -379,6 +402,119 @@ That’s one small step for [a] man, one giant leap for mankind.</p>
 				}
 			}, 150);
 		}
+	</script>
+
+	<script type="text/javascript">
+
+		var views = {},
+			tooltipHandlers = {},
+			choices = {};
+
+		function render(key, spec) {
+			
+			// Create BC property if doesn't already exist.
+
+			if (!spec.hasOwnProperty('BC')) {
+				spec.BC = {};
+			}
+
+			// Specify renderer if not already specified.
+
+			if (!spec.BC.hasOwnProperty('renderer')) {
+				spec.BC.renderer = 'svg'; // Either 'svg' or 'canvas'.
+			}
+
+			// Define desired aspect ratio.
+
+			if (spec.hasOwnProperty('width') & spec.hasOwnProperty('height')) {
+				spec.BC.aspectRatio = spec.width / spec.height;
+			} else {
+				spec.BC.aspectRatio = 1.5;
+			}
+			delete spec.width;
+			delete spec.height;
+
+			// Define threshold width between two types of graph scaling.
+				// Above this width, the graph is re-rendered to fit the space available.
+				// (eg. text will stay its specified size)
+				// Below this width, the graph is simply scaled down to fit the space available.
+				// (eg. text will be smaller than the specified size)
+			if (!spec.BC.hasOwnProperty('minWidth')) {
+				spec.BC.minWidth = 800;
+			}
+
+			// Store reference to wrapper element.
+
+			spec.BC.container = document.querySelector(`#graph-container-${key}`);
+
+			// Create the view.
+
+			let width = Math.max(spec.BC.container.offsetWidth, spec.BC.minWidth);
+			vegaEmbed(
+				`#graph-container-${key}`,
+				spec,
+				opt = {
+					renderer: spec.BC.renderer,
+					actions: false,
+					width: width,
+					height: width / spec.BC.aspectRatio
+				}
+			).then(function(result) {
+				
+				views[key] = result.view;
+
+				// Make responsive.
+
+				if (spec.BC.renderer === 'canvas') {
+					
+					spec.BC.resize = () => {
+						let width = Math.max(spec.BC.container.offsetWidth, spec.BC.minWidth);
+						views[key]
+							.width(width)
+							.height(width / spec.BC.aspectRatio)
+							.run();
+					};
+					window.addEventListener('resize', spec.BC.resize);
+				
+				} else {
+					
+					function removeWidthHeightAttributes() {
+						// Remove width/height attributes of Vega SVG and let viewBox handle the responsive behaviour.
+						let viewDom = spec.BC.container.firstElementChild;
+						viewDom.removeAttribute('width');
+						viewDom.removeAttribute('height');
+					}
+
+					spec.BC.resize = () => {
+						let width = Math.max(spec.BC.container.offsetWidth, spec.BC.minWidth);
+						views[key]
+							.width(width)
+							.height(width / spec.BC.aspectRatio)
+							.run();
+						removeWidthHeightAttributes();
+						
+					};
+					window.addEventListener('resize', spec.BC.resize);
+
+					removeWidthHeightAttributes();
+					
+				}
+
+			}).catch(console.error);
+
+			return views[key];
+
+		}
+  
+		for (let key of graphs) {
+		
+			fetch('/posts/template/graph-' + key + '.json')
+				.then(result => result.json())
+				.then(spec => render(key, spec))
+				.catch(err => console.error(err));
+
+		}
+
 	</script>
 
 	

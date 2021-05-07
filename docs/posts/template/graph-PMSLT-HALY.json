@@ -1,0 +1,532 @@
+{
+	"$schema": "https://vega.github.io/schema/vega/v5.json",
+	"autosize": { "signal": "windowSize()[0] <= 1400 ? { type: 'pad', contains: 'padding', resize: true } : { type: 'fit', contains: 'padding', resize: true }"},
+	"background": "#ffffff",
+	"padding": 0,
+	"config": {
+		"axis": {
+			"labelFont": "Source Sans Pro, sans-serif",
+			"titleFont": "Source Sans Pro, sans-serif",
+			"titleFontSize": 20,
+			"titleColor": "#012a58",
+			"titleFontWeight": 400
+		},
+		"legend": {
+			"labelFont": "Source Sans Pro, sans-serif",
+			"titleFont": "Source Sans Pro, sans-serif",
+			"labelFontSize": 18,
+			"labelColor": "#000000",
+			"titlePadding": 15,
+			"titleFontSize": 20,
+			"titleColor": "#012a58",
+			"symbolSize": 360,
+			"labelSeparation": 10,
+			"labelOffset": 10,
+			"offset": 20,
+			"titleFontWeight": 400,
+			"layout": {
+				"margin": 30
+			}
+		},
+		"title": {
+			"font": "Source Sans Pro, sans-serif",
+			"subtitleFont": "Source Sans Pro, sans-serif",
+			"anchor": "start",
+			"color": "#012a58",
+			"fontSize": 28,
+			"fontWeight": 700,
+			"subtitleColor": "#000000",
+			"subtitleFontSize": "20",
+			"subtitleFontWeight": "400",
+			"subtitlePadding": 10,
+			"offset": 20,
+			"dx": 70
+		}
+	},
+
+	"title": {
+		"text": "Health outcomes by strategy",
+		"subtitle": "Change in HALYs relative to the 'No COVID-19' scenario, for each strategy."
+	},
+	"description": "Average HALYs gained or lost for each strategy.",
+
+	"data": [
+		{
+			"name": "selectedEffects",
+			"values": [
+				{ "value": "Anxiety" },
+				{ "value": "Depression" },
+				{ "value": "Self-Harm" },
+				{ "value": "COVID-19" },
+				{ "value": "Road Traffic Injury" }
+			],
+			"on": [
+				{"trigger": "clickedEffect", "toggle": "clickedEffect"}
+			]
+		},
+		{
+			"name": "selectedTypes",
+			"values": [
+				{ "value": "Morbidity" },
+				{ "value": "Mortality" }
+			],
+			"on": [
+				{"trigger": "clickedType", "toggle": "clickedType"}
+			]
+		},
+		{
+			"name": "source",
+			"format": {"type": "csv", "parse": "auto"},
+			"url": "/posts/template/data-HALY.csv",
+			"transform": [
+				{ "type": "filter", "expr": "datum.vUptake === VaccineUptake" },
+				{ "type": "filter", "expr": "datum.v1trans === PfizerTransmissionReduction" },
+				{ "type": "filter", "expr": "datum.v2trans === AstraZenecaTransmissionReduction" },
+				{ "type": "filter", "expr": "datum.relax === StrategyRelaxation" },
+				{ "type": "filter", "expr": "datum.R0 === R0" },
+				{ "type": "filter", "expr": "datum.timeHorizon === TimeHorizon" }
+			]
+		},
+		{
+			"name": "main",
+			"source": "source",
+			"transform": [
+				{ "type": "filter", "expr": "indata('selectedEffects', 'value', datum.effect)" },
+				{ "type": "filter", "expr": "indata('selectedTypes', 'value', datum.morbt)" },
+				{
+					"type": "stack",
+					"groupby": ["strategy"],
+					"field": "HALY",
+					"sort": {
+						"field": ["sortVar", "morbt"],
+						"order": ["descending", "ascending"]
+					}
+				},
+				{ "type": "extent", "field": "y0", "signal": "Extent0" },
+				{ "type": "extent", "field": "y1", "signal": "Extent1" }
+			]
+		},
+		{
+			"name": "netHALYs",
+			"source": "source",
+			"transform": [
+				{ "type": "filter", "expr": "indata('selectedEffects', 'value', datum.effect)" },
+				{ "type": "filter", "expr": "indata('selectedTypes', 'value', datum.morbt)" },
+				{
+					"type": "aggregate",
+					"groupby": ["strategy"],
+					"fields": ["HALY"],
+					"ops": ["sum"],
+					"as": ["netHALYs"]
+				}
+			]
+		},
+		{
+			"name": "baseline",
+			"values": [
+				{ "label": "No COVID-19 baseline" }
+			]
+		}
+	],
+
+	"signals": [
+		{
+			"name": "width",
+			"init": "windowSize()[0] <= 1400 ? max(600, containerSize()[0]) : containerSize()[0]",
+			"on": [{ "events": "window:resize", "update": "windowSize()[0] <= 1400 ? max(600, containerSize()[0]) : containerSize()[0]" }]
+		},
+		{
+			"name": "height",
+			"init": "windowSize()[0] <= 1400 ? 400 : containerSize()[1]",
+			"on": [{ "events": "window:resize", "update": "windowSize()[0] <= 1400 ? 400 : containerSize()[1]" }]
+		},
+		{
+			"name": "MaxHeight", "value": "depend on data",
+			"bind": {
+				"input": "select",
+				"name": "Set axis limits to",
+				"options": ["depend on data", "be fixed"],
+				"element": "#graph-settings-PMSLT-HALY"
+			}
+		},
+		{
+			"name": "clickedEffect", "value": null,
+			"on": [
+				{
+					"events": "@effectLegendSymbol:click, @effectLegendLabel:click",
+					"update": "{value: datum.value}",
+					"force":  true
+				}
+			]
+		},
+		{
+			"name": "clickedType", "value": null,
+			"on": [
+				{
+					"events": "@typeLegendSymbol:click, @typeLegendLabel:click",
+					"update": "{value: datum.value}",
+					"force":  true
+				}
+			]
+		},
+		{
+			"name": "PfizerTransmissionReduction",
+			"update": "75",
+			"on": [
+				{
+					"events": {
+						"source": "#select-PMSLT-HALY-phase-1-vaccine-efficacy",
+						"type": "change"
+					},
+					"update": "toNumber(event.target.value)"
+				}
+			]
+		},
+		{
+			"name": "AstraZenecaTransmissionReduction",
+			"update": "75",
+			"on": [
+				{
+					"events": {
+						"source": "#select-PMSLT-HALY-phase-2-and-3-vaccine-efficacy",
+						"type": "change"
+					},
+					"update": "toNumber(event.target.value)"
+				}
+			]
+		},
+		{
+			"name": "VaccineUptake",
+			"update": "75",
+			"on": [
+				{
+					"events": {
+						"source": "#select-PMSLT-HALY-vaccine-uptake",
+						"type": "change"
+					},
+					"update": "toNumber(event.target.value)"
+				}
+			]
+		},
+		{
+			"name": "StrategyRelaxation",
+			"update": "0",
+			"on": [
+				{
+					"events": {
+						"source": "#select-PMSLT-HALY-strategy-relaxation",
+						"type": "change"
+					},
+					"update": "toNumber(event.target.value)"
+				}
+			]
+		},
+		{
+			"name": "R0",
+			"update": "3.125",
+			"on": [
+				{
+					"events": {
+						"source": "#select-PMSLT-HALY-unmitigated-reproduction-rate",
+						"type": "change"
+					},
+					"update": "toNumber(event.target.value)"
+				}
+			]
+		},
+		{
+			"name": "TimeHorizon",
+			"update": "'Y1'",
+			"on": [
+				{
+					"events": {
+						"source": "#select-PMSLT-HALY-time-horizon",
+						"type": "change"
+					},
+					"update": "event.target.value"
+				}
+			]
+		}
+	],
+
+	"scales": [
+		{
+			"name": "x",
+			"type": "band",
+			"range": "width",
+			"domain": ["Aggressive Elimination", "Moderate Elimination", "Tight Suppression", "Loose Suppression"],
+			"padding": 0.25
+		},
+		{
+			"name": "y",
+			"type": "linear",
+			"range": "height",
+			"domain": { "signal": "MaxHeight === 'depend on data' ? [min(Extent0[0]-50, Extent1[0]-50, -2000), max(Extent0[1]+50, Extent1[1]+50, 500)] : [-8000, 500]" }
+		},
+		{
+			"name": "colour",
+			"type": "ordinal",
+			"range": {"scheme": "spectral"},
+			"domain": ["Anxiety", "Depression", "Self-Harm", "COVID-19", "Road Traffic Injury"]
+		},
+		{
+			"name": "hashing",
+			"type": "ordinal",
+			"range": ["#000000", "url(#HALY-pattern-black)"],
+			"domain": ["Morbidity", "Mortality"]
+		},
+		{
+			"name": "parameters",
+			"type": "ordinal",
+			"domain": ["Input 1", "Input 2", "Input 3"],
+			"domain": { "signal": "['Vaccine Uptake: ' + VaccineUptake, 'Strategy Relaxation: ' + StrategyRelaxation, 'Vaccine Efficacy (1): ' + PfizerTransmissionReduction, 'Vaccine Efficacy (2): ' + AstraZenecaTransmissionReduction, 'R_0: ' + R0]"},
+			"range": ["#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff"]
+		}
+	],
+
+	"axes": [
+		{
+			"orient": "bottom",
+			"scale": "x",
+			"title": "Strategy",
+			"titleY": 50,
+			"zindex": 100,
+			"labelFontSize": 14
+		},
+		{
+			"orient": "left",
+			"scale": "y",
+			"title": "Change in health outcomes (HALYs)",
+			"titleX": -50,
+				"grid": true,
+			"gridColor": "#012a58",
+			"gridWidth": 1,
+			"gridOpacity": 0.1,
+			"zindex": 0
+		}
+	],
+
+	"legends": [
+		{
+			"fill": "colour",
+			"labelLimit": 200,
+			"title": ["Diseases and", "Conditions"],
+			"encode": {
+				"symbols": {
+					"name": "effectLegendSymbol",
+					"interactive": true,
+					"update": {
+						"opacity": [
+							{"test": "indata('selectedEffects', 'value', datum.value)", "value": 1},
+							{"value": 0.15}
+						],
+						"cursor": {"value": "pointer"}
+					}
+				},
+				"labels": {
+					"name": "effectLegendLabel",
+					"interactive": true,
+					"update": {
+						"opacity": [
+							{"test": "indata('selectedEffects', 'value', datum.value)", "value": 1},
+							{"value": 0.25}
+						],
+						"cursor": {"value": "pointer"}
+					}
+				}
+			}
+		},
+		{
+			"fill": "hashing",
+			"labelLimit": 200,
+			"title": "Type",
+			"encode": {
+				"symbols": {
+					"name": "typeLegendSymbol",
+					"interactive": true,
+					"update": {
+						"opacity": [
+							{"test": "indata('selectedTypes', 'value', datum.value)", "value": 1},
+							{"value": 0.15}
+						],
+						"cursor": {"value": "pointer"}
+					}
+				},
+				"labels": {
+					"name": "typeLegendLabel",
+					"interactive": true,
+					"update": {
+						"opacity": [
+							{"test": "indata('selectedTypes', 'value', datum.value)", "value": 1},
+							{"value": 0.25}
+						],
+						"cursor": {"value": "pointer"}
+					}
+				}
+			}
+		}
+	],
+
+	"marks": [
+		{
+			"type": "rect",
+			"from": {"data": "main"},
+			"encode" : {
+				"enter": {
+					"x": {"scale": "x", "field": "strategy"},
+					"width": {"scale": "x", "band": 1, "offset": -1},
+					"y": {"scale": "y", "field": "y0"},
+					"y2": {"scale": "y", "field": "y1"},
+					"fill": {"signal": "datum.morbt == 'Morbidity' ? scale('colour', datum.effect) : 'url(#HALY-pattern-' + replace(datum.effect, ' ', '-') + ')'"},
+					"zindex": 10,
+					"tooltip": { "signal": "{ title: datum.effect + ' (' + datum.morbt + ')', 'Change in HALYs': round(100*datum.HALY)/100 }" }
+				},
+				"update": {
+					"x": {"scale": "x", "field": "strategy"},
+					"width": {"scale": "x", "band": 1, "offset": -1},
+					"fillOpacity": {"value": 1},
+					"y": {"scale": "y", "field": "y0"},
+					"y2": {"scale": "y", "field": "y1"},
+					"fill": {"signal": "datum.morbt == 'Morbidity' ? scale('colour', datum.effect) : 'url(#HALY-pattern-' + replace(datum.effect, / /g, '-') + ')'"}
+				},
+				"hover": {
+					"fillOpacity": {"value": 0.5}
+				}
+			}
+		},
+		{
+			"type": "rule",
+			"from": { "data": "baseline" },
+			"encode": {
+				"enter": {
+					"x": {"signal": "range('x')[0]"},
+					"x2": {"signal": "range('x')[1]"},
+					"y": {"scale": "y", "value": -5},
+					"strokeWidth": {"value": 3},
+					"stroke": {"value": "#000000"}
+				},
+				"update": {
+					"x": {"signal": "range('x')[0]"},
+					"x2": {"signal": "range('x')[1]"},
+					"y": {"scale": "y", "value": -5},
+					"y": {"scale": "y", "value": -5}
+				}
+			}
+		},
+		{
+			"type": "text",
+			"from": { "data": "baseline" },
+			"encode": {
+				"enter": {
+					"x": {"signal": "range('x')[0]"},
+					"y": {"scale": "y", "value": 0},
+					"text": {"signal": "datum.label"},
+					"baseline": {"value": "top"},
+					"align": {"value": "left"},
+					"dy": {"value": 7.5},
+					"dx": {"value": 7.5},
+					"fill": {"value": "#000000"},
+					"fontWeight": {"value": "bold"}	
+				},
+				"update": {
+					"x": {"signal": "range('x')[0]"},
+					"y": {"scale": "y", "value": 0},
+					"y": {"scale": "y", "value": 0}
+				}
+			}
+		},
+		{
+			"type": "text",
+			"from": { "data": "netHALYs" },
+			"encode": {
+				"enter": {
+					"x": { "scale": "x", "field": "strategy", "band": 0.5 },
+					"y": { "signal": "range('y')[0] - 20" },
+					"text": { "signal": "'Net ' + round(datum.netHALYs) + ' HALYs'" },
+					"align": {"value": "center"},
+					"fill": {"value": "#012a58"},
+					"fontSize": {"value": 14},
+					"fontWeight": {"value": "bold"}
+				},
+				"update": {
+					"x": { "scale": "x", "field": "strategy", "band": 0.5 },
+					"y": { "signal": "range('y')[0] - 20" },
+					"text": { "signal": "'Net ' + round(datum.netHALYs) + ' HALYs'" }
+				}
+			}
+		}
+	],
+
+	"BC": {
+		"data-download": {
+			"href": "/posts/pandemic-trade-offs/data-HALY-tidy.csv",
+			"size": "0.3 MB"
+		},
+		"toggle-groups": [
+			{
+				"name": "Government & Public Response",
+				"toggles": [
+					{
+						"name": "Vaccine Uptake",
+						"description": "Percentage of people who accept vaccination when they are offered it.",
+						"detailLink": "/pandemic-trade-offs-detail/#uptake",
+						"type": "select",
+						"options": [
+							{ "value": 60, "label": "60%" },
+							{ "value": 75, "label": "75%", "default": true },
+							{ "value": 90, "label": "90%" }
+						]
+					},
+					{
+						"name": "Strategy Relaxation",
+						"description": "Whether to relax stage triggers as vaccination progresses.",
+						"detailLink": "/pandemic-trade-offs-detail/#strategy-relaxation",
+						"type": "select",
+						"options": [
+							{ "value": 0, "label": "Off", "default": true },
+							{ "value": 1, "label": "On" }
+						]
+					}
+				]
+			},
+			{
+				"name": "Infectivity",
+				"toggles": [
+					{
+						"name": "Phase 1 Vaccine Efficacy",
+						"description": "Percentage by which the vaccine administered in phase 1 would reduce transmission in a fully vaccinated population.",
+						"detailLink": "/pandemic-trade-offs-detail/#effectiveness",
+						"type": "select",
+						"options": [
+							{ "value": 50, "label": "50%" },
+							{ "value": 75, "label": "75%", "default": true },
+							{ "value": 90, "label": "90%" }
+						]
+					},
+					{
+						"name": "Phase 2 & 3 Vaccine Efficacy",
+						"description": "Percentage by which the vaccine administered in phases 2 and beyond would reduce transmission in a fully vaccinated population.",
+						"detailLink": "/pandemic-trade-offs-detail/#effectiveness",
+						"type": "select",
+						"options": [
+							{ "value": 50, "label": "50%" },
+							{ "value": 75, "label": "75%", "default": true },
+							{ "value": 90, "label": "90%" }
+						]
+					},
+					{
+						"name": "Unmitigated Reproduction Rate",
+						"description": "Average number of people each infected person infects with no interventions, such as masks, physical distancing, case isolation, and vaccination.",
+						"detailLink": "/pandemic-trade-offs-detail/#reproduction",
+						"type": "select",
+						"options": [
+							{ "value": 2.5 },
+							{ "value": 3.125, "default": true },
+							{ "value": 3.75 }
+						]
+					}
+				]
+			}
+		]
+	}
+}

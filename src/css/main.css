@@ -809,9 +809,15 @@ body.post article .fig img {
   width: 100%;
   max-width: 100%;
 }
+body.post article .fig .vega-embed {
+  width: 100%;
+}
 body.post article .fig svg {
   width: 100%;
   overflow: visible;
+}
+body.post article .fig canvas {
+  max-width: 100%;
 }
 body.post article .fig table {
   width: 100%;
