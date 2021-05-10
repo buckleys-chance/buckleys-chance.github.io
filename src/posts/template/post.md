@@ -123,7 +123,7 @@ Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
 
 ## Graphing libraries
 
-Example graphs using `d3.js` and either `Vega` or `Vegalite` will be placed here.
+Non-bespoke graphs are created using `Vega`, such as the one below. Soon, we will also support arbitrary visualisations produced in `d3`.
 
 {# <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" id="svg-definitions-PMSLT-HALY">
 	<defs>
@@ -152,16 +152,22 @@ Example graphs using `d3.js` and either `Vega` or `Vegalite` will be placed here
 
 {% import_graph "example1", slug %}
 
+Graphs can also have interactive toggles, which are generated using an extension of the Vega graph specification. An example of such toggles is below.
+
+{% import_graph "example2", slug %}
+
 Nunc interdum odio a turpis suscipit, eu varius massa lobortis. Integer pellentesque eros ac ipsum ultricies, ac dignissim felis blandit. Integer molestie diam bibendum elit congue tincidunt. Nunc faucibus nulla arcu, nec laoreet nunc porttitor a. Integer ac sapien libero. Etiam nec cursus leo. Proin cursus nec felis a pretium. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nunc faucibus ultrices lacus. Donec iaculis non tellus at gravida.
 
-<div class="collapsible collapsed"
+---
+
+{# <div class="collapsible collapsed"
 	data-text="Click to reveal a collapsible section.">
 
 # Collapsible Sections
 
 It can be helpful to have more technical sections collapsed by default so that they don't deter more casual readers. This is one such section.
 
-</div>
+</div> #}
 
 # Formulae
 

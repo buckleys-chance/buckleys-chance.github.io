@@ -246,19 +246,44 @@ That’s one small step for [a] man, one giant leap for mankind.</p>
 <div class="placeholder fig side-3">.fig .side-3</div>
 <p>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vestibulum vitae nisi dui. Praesent tellus mauris, pellentesque eget lorem non, laoreet condimentum velit. Sed sagittis enim enim, non tincidunt nunc tempor eget. Morbi lacus nisi, accumsan ac augue ac, rhoncus mollis orci. Nullam nec imperdiet ipsum. Etiam fringilla volutpat lobortis. Ut et diam efficitur, facilisis urna in, iaculis erat. Morbi et molestie purus. Mauris interdum, mauris sed euismod cursus, ex dolor vehicula neque, at egestas dui libero tempus magna.</p>
 <h2>Graphing libraries</h2>
-<p>Example graphs using <code>d3.js</code> and either <code>Vega</code> or <code>Vegalite</code> will be placed here.</p>
-<div class="fig outset-1">
-				<div id="graph-container-example1" class="graph-container"></div>
-			</div>
+<p>Non-bespoke graphs are created using <code>Vega</code>, such as the one below. Soon, we will also support arbitrary visualisations produced in <code>d3</code>.</p>
+<div class="fig outset-1 increase-margin-2">
+				<div id="graph-container-example1" class="graph-container"></div></div>
 			<script type="text/javascript">
 				graphs.push("example1")
 			</script>
+<p>Graphs can also have interactive toggles, which are generated using an extension of the Vega graph specification. An example of such toggles is below.</p>
+<div class="fig outset-3 increase-margin-2">
+				<div id="graph-container-example2" class="graph-container"></div><div class="toggles"><div class="toggle-group">
+				<div class="group-contents">
+					<div class="toggle-box">
+				<div>
+					<div class="name">Colour Scheme</div>
+					<div class="description">The colour scheme used by the stacked bars.</div>
+				</div>
+				<div><select name="ColourScheme" id="select-example2-ColourScheme" autocomplete=off>
+						<option value="greys" selected>greys</option>
+<option value="viridis" >viridis</option>
+<option value="inferno" >inferno</option>
+					</select></div></div><div class="toggle-box">
+				<div>
+					<div class="name"># Categories</div>
+					<div class="description">The number of categories plotted.</div>
+				</div>
+				<div><select name="nCategories" id="select-example2-nCategories" autocomplete=off>
+						<option value="0" >0</option>
+<option value="1" >1</option>
+<option value="2" >2</option>
+<option value="3" >3</option>
+<option value="4" selected>4</option>
+					</select></div></div>
+				</div>
+			</div></div></div>
+			<script type="text/javascript">
+				graphs.push("example2")
+			</script>
 <p>Nunc interdum odio a turpis suscipit, eu varius massa lobortis. Integer pellentesque eros ac ipsum ultricies, ac dignissim felis blandit. Integer molestie diam bibendum elit congue tincidunt. Nunc faucibus nulla arcu, nec laoreet nunc porttitor a. Integer ac sapien libero. Etiam nec cursus leo. Proin cursus nec felis a pretium. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nunc faucibus ultrices lacus. Donec iaculis non tellus at gravida.</p>
-<div class="collapsible collapsed"
-	data-text="Click to reveal a collapsible section.">
-<h1>Collapsible Sections</h1>
-<p>It can be helpful to have more technical sections collapsed by default so that they don’t deter more casual readers. This is one such section.</p>
-</div>
+<hr>
 <h1>Formulae</h1>
 <p>You can include formulae using LaTeX notation. We use the <a href="https://katex.org/">KaTeX</a> library to render equations.</p>
 <p>$$ \frac{1}{\Bigl(\sqrt{\phi \sqrt{5}}-\phi\Bigr) e^{\frac25 \pi}} = 1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}} {1+\frac{e^{-8\pi}} {1+\cdots} } } } $$</p>
@@ -412,6 +437,52 @@ That’s one small step for [a] man, one giant leap for mankind.</p>
 
 		function render(key, spec) {
 			
+			// Add default graph config.
+
+			let defaultConfig = {
+				axis: {
+					labelFont: "Roboto, Helvetica, Arial, sans-serif",
+					titleFont: "Roboto, Helvetica, Arial, sans-serif",
+					titleFontSize: 20,
+					titleFontWeight: 400,
+					titleColor: "#33691e"
+				},
+				legend: {
+					labelFont: "Roboto, Helvetica, Arial, sans-serif",
+					titleFont: "Roboto, Helvetica, Arial, sans-serif",
+					labelFontSize: 18,
+					labelColor: "#000000",
+					titlePadding: 15,
+					titleFontSize: 16,
+					symbolSize: 360,
+					labelSeparation: 10,
+					labelOffset: 10,
+					offset: 20,
+					titleFontWeight: 400,
+					layout: {
+						margin: 30
+					}
+				},
+				title: {
+					font: "Roboto, Helvetica, Arial, sans-serif",
+					subtitleFont: "Roboto, Helvetica, Arial, sans-serif",
+					fontSize: 22,
+					fontWeight: 500,
+					color: "#33691e",
+					subtitleFontSize: 20,
+					subtitleFontWeight: 300,
+					subtitlePadding: 12,
+					offset: 30
+				}
+			};
+			if (spec.hasOwnProperty('config')) {
+				spec.config.axis = { ...defaultConfig.axis, ...spec.config.axis };
+				spec.config.legend = { ...defaultConfig.legend, ...spec.config.legend };
+				spec.config.title = { ...defaultConfig.title, ...spec.config.title };
+			} else {
+				spec.config = defaultConfig;
+			}
+
 			// Create BC property if doesn't already exist.
 
 			if (!spec.hasOwnProperty('BC')) {
@@ -441,6 +512,29 @@ That’s one small step for [a] man, one giant leap for mankind.</p>
 				// (eg. text will be smaller than the specified size)
 			if (!spec.BC.hasOwnProperty('minWidth')) {
 				spec.BC.minWidth = 800;
+			}
+
+			// Generate signals for specified toggles.
+
+			if (!spec.hasOwnProperty('signals')) {
+				spec.signals = [];
+			}
+			if (spec.BC.hasOwnProperty('toggle-groups')) {
+				for (let toggleGroup of spec.BC['toggle-groups']) {
+					for (let toggle of toggleGroup.toggles) {
+						spec.signals.push({
+							name: toggle.signalName,
+							update: `'${toggle.options.filter(d => d.default)[0].value}'`,
+							on: [{
+								events: {
+									source: `#select-${key}-${toggle.signalName}`,
+									type: "change"
+								},
+								update: "event.target.value"
+							}]
+						})
+					}
+				}
 			}
 
 			// Store reference to wrapper element.

@@ -793,15 +793,15 @@ body.post article .fig.side-3 {
   margin-right: calc((100% - 600px) / 2 - 200px);
   width: 400px;
 }
-body.post article .fig.more-margin-1 {
+body.post article .fig.increase-margin-1 {
   margin-top: 2.8rem;
   margin-bottom: 2.8rem;
 }
-body.post article .fig.more-margin-2 {
+body.post article .fig.increase-margin-2 {
   margin-top: 5.6rem;
   margin-bottom: 5.6rem;
 }
-body.post article .fig.more-margin-3 {
+body.post article .fig.increase-margin-3 {
   margin-top: 11.2rem;
   margin-bottom: 11.2rem;
 }
@@ -818,6 +818,56 @@ body.post article .fig svg {
 }
 body.post article .fig canvas {
   max-width: 100%;
+}
+body.post article .fig .toggles {
+  width: auto;
+  margin: 1.4rem auto 0 auto;
+  display: flex;
+}
+body.post article .fig .toggles .toggle-group {
+  width: auto;
+  margin: 0 auto;
+}
+body.post article .fig .toggles .toggle-group .group-details {
+  width: auto;
+  margin-bottom: 0.35rem;
+}
+body.post article .fig .toggles .toggle-group .group-details .group-name {
+  color: #33691e;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+  display: inline;
+}
+body.post article .fig .toggles .toggle-group .group-contents {
+  display: flex;
+}
+body.post article .fig .toggles .toggle-group .group-contents .toggle-box {
+  padding: 0.7rem;
+  margin-right: 0.7rem;
+  background-color: #f1f8e9;
+  max-width: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+body.post article .fig .toggles .toggle-group .group-contents .toggle-box .name {
+  font-weight: 500;
+  color: #33691e;
+}
+body.post article .fig .toggles .toggle-group .group-contents .toggle-box .description {
+  font-weight: 300;
+  margin-bottom: 0.35rem;
+}
+body.post article .fig .toggles .toggle-group .group-contents .toggle-box select {
+  width: 100%;
+  border: 1px solid #33691e;
+  background-color: #e6f2d8;
+  padding: 0.35rem;
+}
+body.post article .fig .toggles .toggle-group .group-contents .toggle-box select:focus {
+  outline: none;
 }
 body.post article .fig table {
   width: 100%;

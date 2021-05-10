@@ -214,6 +214,52 @@
 
 		function render(key, spec) {
 			
+			// Add default graph config.
+
+			let defaultConfig = {
+				axis: {
+					labelFont: "Roboto, Helvetica, Arial, sans-serif",
+					titleFont: "Roboto, Helvetica, Arial, sans-serif",
+					titleFontSize: 20,
+					titleFontWeight: 400,
+					titleColor: "#33691e"
+				},
+				legend: {
+					labelFont: "Roboto, Helvetica, Arial, sans-serif",
+					titleFont: "Roboto, Helvetica, Arial, sans-serif",
+					labelFontSize: 18,
+					labelColor: "#000000",
+					titlePadding: 15,
+					titleFontSize: 16,
+					symbolSize: 360,
+					labelSeparation: 10,
+					labelOffset: 10,
+					offset: 20,
+					titleFontWeight: 400,
+					layout: {
+						margin: 30
+					}
+				},
+				title: {
+					font: "Roboto, Helvetica, Arial, sans-serif",
+					subtitleFont: "Roboto, Helvetica, Arial, sans-serif",
+					fontSize: 22,
+					fontWeight: 500,
+					color: "#33691e",
+					subtitleFontSize: 20,
+					subtitleFontWeight: 300,
+					subtitlePadding: 12,
+					offset: 30
+				}
+			};
+			if (spec.hasOwnProperty('config')) {
+				spec.config.axis = { ...defaultConfig.axis, ...spec.config.axis };
+				spec.config.legend = { ...defaultConfig.legend, ...spec.config.legend };
+				spec.config.title = { ...defaultConfig.title, ...spec.config.title };
+			} else {
+				spec.config = defaultConfig;
+			}
+
 			// Create BC property if doesn't already exist.
 
 			if (!spec.hasOwnProperty('BC')) {
@@ -243,6 +289,29 @@
 				// (eg. text will be smaller than the specified size)
 			if (!spec.BC.hasOwnProperty('minWidth')) {
 				spec.BC.minWidth = 800;
+			}
+
+			// Generate signals for specified toggles.
+
+			if (!spec.hasOwnProperty('signals')) {
+				spec.signals = [];
+			}
+			if (spec.BC.hasOwnProperty('toggle-groups')) {
+				for (let toggleGroup of spec.BC['toggle-groups']) {
+					for (let toggle of toggleGroup.toggles) {
+						spec.signals.push({
+							name: toggle.signalName,
+							update: `'${toggle.options.filter(d => d.default)[0].value}'`,
+							on: [{
+								events: {
+									source: `#select-${key}-${toggle.signalName}`,
+									type: "change"
+								},
+								update: "event.target.value"
+							}]
+						})
+					}
+				}
 			}
 
 			// Store reference to wrapper element.

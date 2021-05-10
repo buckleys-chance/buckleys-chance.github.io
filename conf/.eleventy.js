@@ -66,7 +66,7 @@ module.exports = function(eleventyConfig) {
 
 				toggle_group_contents += `<div class="toggle-box">
 				<div>
-					<div class="name">${ toggle.name }</div>
+					<div class="name">${ toggle.title }</div>
 					<div class="description">${ toggle.description }</div>
 				</div>
 				<div>`;
@@ -81,55 +81,40 @@ module.exports = function(eleventyConfig) {
 					
 					let slug = eleventyConfig.getFilter('slug');
 
-					toggle_group_contents += `<select name="${ slug(toggle.name) }" id="select-${name}-${ slug(toggle.name) }" autocomplete=off>
+					toggle_group_contents += `<select name="${ toggle.signalName }" id="select-${name}-${ toggle.signalName }" autocomplete=off>
 						${toggle.options.map(option => `<option value="${option.value}" ${option.default ? 'selected' : ''}>${option.label ? option.label : option.value}</option>`).join('\n')}
 					</select>`
 					// https://joshuajohnson.co.uk/Choices/
 
 				}
 				
-				if (toggle.hasOwnProperty('detailLink')) {
-					toggle_group_contents += `<a href="` + toggle.detailLink + `" class="detail-link" target="_blank" rel="noopener noreferrer"><span data-icon="info-outline" class="smaller"></span> <span>Details</span></a>`;
-				}
-
 				toggle_group_contents += `</div></div>`;
 
 			}
 
-			toggles += `<div class="toggle-group">
-				<div class="group-details">
+			toggles += `<div class="toggle-group">${toggle_group.hasOwnProperty('name') ? `<div class="group-details">
 					<div class="group-name">${toggle_group.name}</div>
-				</div>
+				</div>` : ``}
 				<div class="group-contents">
 					${toggle_group_contents}
 				</div>
 			</div>`;
 		}
 
-		let downloadLink = '';
-		if (BC.hasOwnProperty('data-download')) {
-			downloadLink = `<a href="${BC['data-download'].href}" class="download-link"><strong>Download data</strong> (${BC['data-download'].size})</a>`
-		}
-
-		// let html = `<div class="graph-with-toggles ${toggle_specs.length == 0 ? 'no-toggles' : ''}" id="graph-` + name + `">`;
-		// if (toggle_specs.length > 0) {
-		// 	html = html + `<aside>
-		// 		<div class="toggles">
-		// 			${toggles}
-		// 		</div>${downloadLink}
-		// 	</aside>`;
+		// let downloadLink = '';
+		// if (BC.hasOwnProperty('data-download')) {
+		// 	downloadLink = `<a href="${BC['data-download'].href}" class="download-link"><strong>Download data</strong> (${BC['data-download'].size})</a>`
 		// }
 
-		// return html + `
-		// 	<div id="graph-settings-${name}" class="graph-settings"></div>
-		// </div>
-		// `;
+		if (toggle_specs.length > 0) {
+			toggles = `<div class="toggles">${toggles}</div>`;
+		}
 
-		let figPosition = BC.hasOwnProperty("figPosition") ? BC.figPosition : 'inset';
+		let figPosition = BC.hasOwnProperty("figPosition") ? BC.figPosition : 'inset',
+			increaseMargin = BC.hasOwnProperty("increaseMargin") ? BC.increaseMargin : 1;
 
-		let html = `<div class="fig ${figPosition}">
-				<div id="graph-container-${name}" class="graph-container"></div>
-			</div>
+		let html = `<div class="fig ${figPosition} increase-margin-${increaseMargin}">
+				<div id="graph-container-${name}" class="graph-container"></div>${toggles}</div>
 			<script type="text/javascript">
 				graphs.push("${name}")
 			</script>
