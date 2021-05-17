@@ -775,6 +775,7 @@ body.post header {
 		font-weight: 400;
 		font-size: 1rem;
 		text-align: center;
+		width: 500px;
 	}
 
 	hr {
@@ -1213,12 +1214,16 @@ body.post article {
 				.group-contents {
 					
 					display: flex;
+					flex-wrap: wrap;
+					justify-content: center;
 					
 					.toggle-box {
 						padding: $h;
 						margin-right: $h;
+						margin-bottom: $h;
 						background-color: $c1-light;
-						max-width: 250px;
+						max-width: 300px;
+						min-width: 200px;
 
 						display: flex;
 						flex-direction: column;
@@ -1231,7 +1236,9 @@ body.post article {
 
 						.description {
 							font-weight: 300;
-							margin-bottom: $q;
+							font-size: .9rem;
+							line-height: 1.1rem;
+							margin-bottom: $h;
 						}
 
 						select {
@@ -1239,6 +1246,7 @@ body.post article {
 							border: 1px solid $c1-dark;
 							background-color: $c1-light-tone;
 							padding: $q;
+							font-size: 1rem;
 
 							&:focus {
 								outline: none;

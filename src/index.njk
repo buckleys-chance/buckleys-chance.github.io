@@ -90,7 +90,7 @@
 				<h1>{{ post.data.title }}</h1>
 				
 				<div class="description">
-					{{ post.data.description }}
+					{{ post.data.description | safe }}
 				</div>
 
 				<div class="metadata">

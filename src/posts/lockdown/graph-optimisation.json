@@ -1,0 +1,294 @@
+{
+	"$schema": "https://vega.github.io/schema/vega/v5.20.2.json",
+	"description": "A basic stacked bar chart example.",
+	"padding": 0,
+	"width": 600,
+	"height": 250,
+	
+	"BC": {
+		"figPosition": "outset-4",
+		"increaseMargin": 2,
+		"minWidth": 900,
+		"toggle-groups": [
+			{
+				"toggles": [
+					{
+						"title": "Vaccine Uptake",
+						"description": "Percentage of people who accept vaccination when they are offered it.",
+						"type": "select",
+						"options": [
+							{ "value": 60, "label": "60%" },
+							{ "value": 75, "label": "75%", "default": true },
+							{ "value": 90, "label": "90%" }
+						],
+						"signalName": "VaccineUptake"
+					},
+					{
+						"title": "Unmitigated Reproduction Rate $R_0$",
+						"description": "Average number of people each infected person infects with no interventions, such as masks, physical distancing, case isolation, and vaccination.",
+						"type": "select",
+						"options": [
+							{ "value": 2.5 },
+							{ "value": 3.125, "default": true },
+							{ "value": 3.75 }
+						],
+						"signalName": "R0"
+					},
+					{
+						"title": "Phase 1 Vaccine Efficacy",
+						"description": "Percentage by which the vaccine administered in phase 1 would reduce transmission in a fully vaccinated population.",
+						"type": "select",
+						"options": [
+							{ "value": 50, "label": "50%" },
+							{ "value": 75, "label": "75%", "default": true },
+							{ "value": 90, "label": "90%" }
+						],
+						"signalName": "VaccineEfficacy1"
+					},
+					{
+						"title": "Phase 2 Vaccine Efficacy",
+						"description": "Percentage by which the vaccine administered in phase 2 and beyond would reduce transmission in a fully vaccinated population.",
+						"type": "select",
+						"options": [
+							{ "value": 50, "label": "50%" },
+							{ "value": 75, "label": "75%", "default": true },
+							{ "value": 90, "label": "90%" }
+						],
+						"signalName": "VaccineEfficacy2"
+					}
+				]
+			}
+		]
+	},
+
+	"title": {
+		"text": "Simulated public health outcomes by strategy",
+		"subtitle": "Within each strategy, each dot represents a simulated outcome that is equally likely."
+	},
+
+	"data": [
+		{
+			"name": "grid",
+			"url": "/posts/lockdown/data-isoharms.csv",
+			"format": { "type": "csv" },
+			"transform": [
+				{
+					"type": "filter",
+					"expr": "datum.sum <= yMax + xMax"
+				}
+			]
+		},
+		{
+			"name": "main",
+			"url": "/posts/lockdown/data-optimisation.csv",
+			"format": { "type": "csv" },
+			"transform": [
+				{ "type": "filter", "expr": "datum.vUptake === VaccineUptake" },
+				{ "type": "filter", "expr": "datum.R0 === R0" },
+				{ "type": "filter", "expr": "datum.v1trans === VaccineEfficacy1" },
+				{ "type": "filter", "expr": "datum.v2trans === VaccineEfficacy2" }
+			]
+		},
+		{
+			"name": "density",
+			"source": "main",
+			"transform": [
+				{
+					"type": "kde2d",
+					"size": [ { "signal": "width" }, { "signal": "height" } ],
+					"x": { "expr": "scale('x', datum.virus)" },
+					"y": { "expr": "scale('y', datum.other)" },
+					"groupby": ["strategy"],
+					"bandwidth": [20, 20]
+				}
+			]
+		},
+		{
+			"name": "contours",
+			"source": "density",
+			"transform": [
+				{
+					"type": "isocontour",
+					"field": "grid",
+					"resolve": "shared",
+					"levels": 3
+				}
+			]
+		},
+		{
+			"name": "annotations",
+			"values": [
+				{ "text": "⟵ LESS HARM • MORE HARM ⟶" }
+			]
+		}
+	],
+
+	"signals": [
+		{
+			"name": "yMax",
+			"value": 700
+		},
+		{
+			"name": "xMax",
+			"value": 5000
+		},
+		{
+			"name": "exponent",
+			"value": 0.45
+		}
+	],
+
+	"scales": [
+		{
+			"name": "x",
+			"type": "pow",
+			"exponent": { "signal": "exponent" },
+			"domain": { "signal": "[0, xMax]" },
+			"range": "width",
+			"bins": [0, 100, 200, 300, 400, 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000]
+		},
+		{
+			"name": "y",
+			"type": "pow",
+			"exponent": { "signal": "exponent" },
+			"domain": { "signal": "[0, yMax]" },
+			"range": "height",
+			"bins": [0, 100, 200, 300, 400, 500]
+		},
+		{
+			"name": "colour",
+			"type": "ordinal",
+			"domain": ["Aggressive Elimination", "Moderate Elimination", "Tight Suppression", "Loose Suppression"],
+			"range": { "scheme": "viridis" }
+		}
+	],
+
+	"legends": [
+		{
+			"fill": "colour",
+			"orient": "top-right",
+			"columns": 1,
+			"labelLimit": 200,
+			"fillColor": "#ffffff99",
+			"padding": 20,
+			"strokeColor": "#cdcdcd",
+			"title": "Strategies",
+			"titleAnchor": "middle"
+		}
+	],
+
+	"axes": [
+		{
+			"orient": "bottom",
+			"scale": "x",
+			"zindex": 1,
+			"title": "Life-years lost due to COVID-19 (HALYs)",
+			"titleY": 50,
+			"zIndex": 1
+		},
+		{
+			"orient": "left",
+			"scale": "y",
+			"zindex": 1,
+			"title": "Net life-years lost due to restrictions (HALYs)",
+			"titleX": -50,
+			"tickCount": 2,
+			"zIndex": 1
+		}
+	],
+
+	"marks": [
+		{
+			"type": "group",
+			"from": {
+				"facet": {
+					"name": "isoharms",
+					"data": "grid",
+					"groupby": "sum"
+				}
+			},
+			"clip": true,
+			"marks": [
+				{
+					"type": "line",
+					"from": { "data": "isoharms" },
+					"encode": {
+						"update": {
+							"x": { "scale": "x", "field": "x" },
+							"y": { "scale": "y", "field": "y" },
+							"strokeWidth": { "value": 1 },
+							"strokeCap": { "value": "round" },
+							"stroke": { "value": "#cdcdcd" }
+						}
+					}
+				}
+			]
+		},
+		{
+			"type": "symbol",
+			"from": { "data": "main" },
+			"clip": true,
+			"encode": {
+				"update": {
+					"x": { "scale": "x", "field": "virus" },
+					"y": { "scale": "y", "field": "other" },
+					"fill": { "scale": "colour", "field": "strategy" },
+					"opacity": { "value": 1 },
+					"size": { "value": 9 }
+				}
+			}
+		},
+		{
+			"type": "image",
+			"from": { "data": "density" },
+			"encode": {
+				"update": {
+					"x": { "value": 0 },
+					"y": { "value": 0 },
+					"width": { "signal": "width" },
+					"height": { "signal": "height" },
+					"aspect": { "value": false },
+					"opacity": { "value": 0.4 }
+				}
+			},
+			"transform": [
+				{
+					"type": "heatmap",
+					"field": "datum.grid",
+					"resolve": "shared",
+					"color": { "expr": "scale('colour', datum.datum.strategy)" }
+				}
+			]
+		},
+		{
+			"type": "path",
+			"clip": true,
+			"from": { "data": "contours" },
+			"encode": {
+				"enter": {
+					"strokeWidth": { "value": 1 },
+					"strokeOpacity": { "value": 1 },
+					"stroke": { "scale": "colour", "field": "strategy" }
+				}
+			},
+			"transform": [
+				{ "type": "geopath", "field": "datum.contour" }
+			]
+		},
+		{
+			"type": "text",
+			"from": { "data": "annotations" },
+			"encode": {
+				"update": {
+					"align": { "value": "center" },
+					"angle": { "value": -40 },
+					"x": { "scale": "x", "value": 460 },
+					"y": { "scale": "y", "value": 250 },
+					"text": { "signal": "datum.text" },
+					"fontSize": { "value": 14 }
+
+				}
+			}
+		}
+	]
+}

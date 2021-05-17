@@ -8,7 +8,9 @@
 	"date_updated": "2021-01-02",
 	"slug": "about",
 	"hidden": false,
-	"katex": true
+	"dependencies": {
+		"katex": true
+	}
 }
 ---
 
