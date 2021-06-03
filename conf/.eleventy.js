@@ -79,8 +79,6 @@ module.exports = function(eleventyConfig) {
 
 				} else if (toggle.type == "select") {
 					
-					let slug = eleventyConfig.getFilter('slug');
-
 					toggle_group_contents += `<select name="${ toggle.signalName }" id="select-${name}-${ toggle.signalName }" autocomplete=off>
 						${toggle.options.map(option => `<option value="${option.value}" ${option.default ? 'selected' : ''}>${option.label ? option.label : option.value}</option>`).join('\n')}
 					</select>`

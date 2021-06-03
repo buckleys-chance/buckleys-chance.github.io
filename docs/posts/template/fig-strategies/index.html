@@ -1,0 +1,28 @@
+<div class="fig outset-4 more-margin-2">
+	<div class="graph-title">Strategies</div>
+	<div class="graph-subtitle">Choose a strategy, then hover over the graph to explore the rules for when to tighten or ease restrictions.</div>
+	<nav class="strategies">
+		<div class="active" data-value="Aggressive Elimination" onmouseenter="updateStrategy(this)">
+			<div class="button-title">Aggressive Elimination</div>
+			<div class="button-description">Aim for no community transmission, quickly.</div>
+			<div class="button-examples">Victoria (Australia); New Zealand</div>
+		</div>
+		<div data-value="Moderate Elimination" onmouseenter="updateStrategy(this)">
+			<div class="button-title">Moderate Elimination</div>
+			<div class="button-description">Aim for no community transmission, less quickly.</div>
+			<div class="button-examples">New South Wales (Australia)</div>
+		</div>
+		<div data-value="Tight Suppression" onmouseenter="updateStrategy(this)">
+			<div class="button-title">Tight Suppression</div>
+			<div class="button-description">Aim for 1-5 new cases per million people per day.</div>
+			<div class="button-examples">South Korea, Singapore</div>
+		</div>
+		<div data-value="Loose Suppression" onmouseenter="updateStrategy(this)">
+			<div class="button-title">Loose Suppression</div>
+			<div class="button-description">Aim for 5-25 new cases per million people per day.</div>
+			<div class="button-examples">Continental Europe during 2020</div>
+		</div>
+	</nav>
+	<svg id="fig-strategies">
+	</svg>
+</div>

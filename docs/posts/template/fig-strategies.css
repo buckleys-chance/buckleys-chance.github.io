@@ -1,0 +1,94 @@
+
+svg g.row-hover-targets path {
+	cursor: ns-resize;
+}
+
+svg path.hover-target {
+	cursor: e-resize;
+}
+
+svg g.logic text.false, svg g.triggers text.false {
+	text-decoration: line-through;
+	opacity: .4;
+}
+
+svg g.logic text.upcoming, svg g.triggers text.upcoming {
+	opacity: .4;
+}
+
+nav.strategies {
+	display: grid;
+	grid-template-columns: repeat(4, .25fr);
+	grid-column-gap: 10px;
+	width: calc(100% - 240px);
+	margin: 0 auto 20px auto;
+}
+
+nav.strategies > div {
+	background-color: #f6f6f6;
+	border: 1px solid var(--c1-light);
+	padding: 10px;
+	transition: border-color .25s;
+	cursor: pointer;
+}
+
+nav.strategies > div:hover {
+	/*background-color: var(--c1-light);*/
+	border: 1px solid var(--c1-dark);
+}
+
+nav.strategies > div.active {
+	border: 1px solid var(--c1-dark);
+}
+
+nav.strategies > div .button-title {
+	color: var(--c1-darker);
+	font-weight: 600;
+	margin-bottom: 5px;
+	line-height: 1.1rem;
+}
+
+nav.strategies > div .button-description {
+	color: #000;
+	font-weight: 400;
+	line-height: 1.1rem;
+	margin-bottom: 5px;
+}
+
+nav.strategies > div .button-examples {
+	color: #000;
+	font-weight: 300;
+	line-height: 1.1rem;
+	font-style: italic;
+	margin: 0;
+}
+
+nav.strategies > div .button-examples::before {
+	color: var(--c1-darker);
+	font-weight: 600;
+	line-height: 1.1rem;
+	content: 'EG';
+	font-size: .8rem;
+	font-style: normal;
+	padding-right: 5px;
+	margin: 0;
+}
+
+div.graph-title, div.graph-subtitle {
+	width: calc(600px + 44.8rem - 240px);
+	margin: 0 auto;
+}
+
+div.graph-title {
+	font-size: 28px;
+	font-weight: 700;
+	color: var(--c1-darker);
+	margin-bottom: 0px;
+}
+
+div.graph-subtitle {
+	font-size: 20px;
+	color: #000;
+	font-weight: 400;
+	margin-bottom: 20px;
+}

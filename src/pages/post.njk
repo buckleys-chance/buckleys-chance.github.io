@@ -38,7 +38,7 @@ permalink: /{{ post.data.slug }}/
 
 	{% if post.data.dependencies.d3 %}
 		<meta charset="utf-8">
-		<script src="https://d3js.org/d3.v4.min.js"></script>
+		<script src="https://d3js.org/d3.v6.min.js"></script>
 	{% endif %}
 
 	{% if post.data.dependencies.vega %}
@@ -313,9 +313,7 @@ permalink: /{{ post.data.slug }}/
 
 	<script type="text/javascript">
 
-		var views = {},
-			tooltipHandlers = {},
-			choices = {};
+		var views = {};
 
 		function render(key, spec) {
 			
@@ -328,7 +326,7 @@ permalink: /{{ post.data.slug }}/
 					titleFontSize: 20,
 					titleFontWeight: 400,
 					titleColor: "#33691e"
-				},
+				}, 
 				legend: {
 					labelFont: "Roboto, Helvetica, Arial, sans-serif",
 					titleFont: "Roboto, Helvetica, Arial, sans-serif",
@@ -468,8 +466,10 @@ permalink: /{{ post.data.slug }}/
 						views[key]
 							.width(width)
 							.height(width / spec.BC.aspectRatio)
-							.run();
-						removeWidthHeightAttributes();
+							.runAsync()
+							.then(vw => {
+								removeWidthHeightAttributes();
+							});
 						
 					};
 					window.addEventListener('resize', spec.BC.resize);
@@ -494,7 +494,5 @@ permalink: /{{ post.data.slug }}/
 		}
 
 	</script>
-
-	{# TODO - make more responsive: https://bl.ocks.org/donghaoren/023b2246569e8f0615017507b473e55e #}
 
 {% endblock %}

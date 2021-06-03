@@ -208,9 +208,7 @@
 
 	<script type="text/javascript">
 
-		var views = {},
-			tooltipHandlers = {},
-			choices = {};
+		var views = {};
 
 		function render(key, spec) {
 			
@@ -223,7 +221,7 @@
 					titleFontSize: 20,
 					titleFontWeight: 400,
 					titleColor: "#33691e"
-				},
+				}, 
 				legend: {
 					labelFont: "Roboto, Helvetica, Arial, sans-serif",
 					titleFont: "Roboto, Helvetica, Arial, sans-serif",
@@ -363,8 +361,10 @@
 						views[key]
 							.width(width)
 							.height(width / spec.BC.aspectRatio)
-							.run();
-						removeWidthHeightAttributes();
+							.runAsync()
+							.then(vw => {
+								removeWidthHeightAttributes();
+							});
 						
 					};
 					window.addEventListener('resize', spec.BC.resize);
@@ -389,8 +389,6 @@
 		}
 
 	</script>
-
-	
 
 
 

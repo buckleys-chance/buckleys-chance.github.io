@@ -123,38 +123,17 @@ Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
 
 ## Graphing libraries
 
-Non-bespoke graphs are created using `Vega`, such as the one below. Soon, we will also support arbitrary visualisations produced in `d3`.
-
-{# <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" id="svg-definitions-PMSLT-HALY">
-	<defs>
-		<pattern id="HALY-pattern-black" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(45)">
-			<line x1="0" y="0" x2="0" y2="6" stroke="#000000" stroke-width="10" />
-		</pattern>
-		<pattern id="HALY-pattern-Anxiety" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(45)">
-			<line x1="0" y="0" x2="0" y2="6" stroke="#e65f4a" stroke-width="10" />
-		</pattern>
-		<pattern id="HALY-pattern-Depression" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(45)">
-			<line x1="0" y="0" x2="0" y2="6" stroke="#fdbc71" stroke-width="10" />
-		</pattern>
-		<pattern id="HALY-pattern-Self-Harm" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(45)">
-			<line x1="0" y="0" x2="0" y2="6" stroke="#fbf8b0" stroke-width="10" />
-		</pattern>
-		<pattern id="HALY-pattern-COVID-19" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(45)">
-			<line x1="0" y="0" x2="0" y2="6" stroke="#bbe4a2" stroke-width="10" />
-		</pattern>
-		<pattern id="HALY-pattern-Road-Traffic-Injury" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(45)">
-			<line x1="0" y="0" x2="0" y2="6" stroke="#5cabad" stroke-width="10" />
-		</pattern>
-	</defs>
-</svg>
-
-{% import_graph "PMSLT-HALY", slug %} #}
+Non-bespoke graphs are created using `Vega`, such as the one below.
 
 {% import_graph "example1", slug %}
 
-Graphs can also have interactive toggles, which are generated using an extension of the Vega graph specification. An example of such toggles is below.
+Graphs can also have interactive toggles, which are generated using an extension of the `Vega` graph specification. An example of such toggles is below.
 
 {% import_graph "example2", slug %}
+
+You can also import arbitrary content from a HTML file, with (optionally) associated CSS stylesheets or JS scripts. This might be useful for separating out a cumbersome HTML table definition from the main content, or for importing arbitrary graphs that use a different (non-`Vega`) graphing library, such as `d3`.
+
+{% import_content "graph-d3-example", slug %}
 
 Nunc interdum odio a turpis suscipit, eu varius massa lobortis. Integer pellentesque eros ac ipsum ultricies, ac dignissim felis blandit. Integer molestie diam bibendum elit congue tincidunt. Nunc faucibus nulla arcu, nec laoreet nunc porttitor a. Integer ac sapien libero. Etiam nec cursus leo. Proin cursus nec felis a pretium. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nunc faucibus ultrices lacus. Donec iaculis non tellus at gravida.
 
